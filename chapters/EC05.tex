@@ -1,0 +1,173 @@
+\ECchapter{05}{Energy Storage}{Why is energy storage essential to the energy transition?}{ECPurple}
+
+\ECObjectives{
+\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=1pt]
+\item Explain why electrical grids need storage and flexibility.
+\item Distinguish power, stored energy and discharge duration.
+\item Compare storage technologies using efficiency, response time, lifetime and scale.
+\item Select a suitable storage mix for a given engineering problem.
+\end{itemize}}
+
+\begin{multicols}{2}
+
+\begin{engineeringnews}
+As solar and wind generation expands, grid operators are deploying batteries,
+pumped-storage plants and other flexible resources. The objective is not to find one
+universal storage device, but to combine technologies operating over seconds, hours, days
+and seasons.
+\end{engineeringnews}
+
+\begin{ecarticle}
+Electricity networks must keep production and consumption balanced at every instant. A
+sudden mismatch changes grid frequency and may damage equipment or trigger automatic
+disconnections. Storage systems absorb energy when production is greater than demand and
+return it when the system requires additional power.
+
+Engineers distinguish \textbf{power} from \textbf{energy}. Power, measured in watts,
+describes how quickly a system can charge or discharge. Stored energy, measured in
+watt-hours or joules, describes how long that power can be maintained. Their ratio gives an
+approximate discharge duration:
+\[
+t=\frac{E}{P}.
+\]
+A 20~MW battery containing 40~MWh can therefore operate at full power for about two hours.
+
+Lithium-ion batteries respond in fractions of a second and have a high round-trip
+efficiency. They are suitable for frequency control, electric vehicles and shifting solar
+energy from midday to the evening. Their limitations include ageing, fire protection, cost
+and the supply of raw materials.
+
+Pumped-storage hydroelectricity stores much larger amounts of energy. Water is pumped to an
+upper reservoir and later released through a reversible turbine. Such plants can operate for
+many decades, but they require suitable terrain and major civil-engineering works.
+
+Compressed air, thermal storage and hydrogen can address longer durations. Hydrogen is
+produced by electrolysis, stored, and later used in a fuel cell or turbine. Its round-trip
+efficiency is lower because several energy conversions are required. It may nevertheless be
+useful when storage duration and capacity matter more than efficiency, especially for
+seasonal balancing.
+
+No storage option is optimal for every task. A resilient low-carbon grid combines storage
+with interconnections, demand response, controllable generation and accurate forecasting.
+\end{ecarticle}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
+A highly efficient storage system can still be unsuitable if its response time, discharge
+duration, lifetime, safety requirements or location do not match the service required.
+\end{tcolorbox}
+
+\columnbreak
+
+\begin{engineeringfocus}
+\textbf{Pumped-storage hydroelectricity}
+
+\begin{center}
+\begin{tikzpicture}[scale=.68,transform shape,>=Latex,font=\scriptsize]
+\fill[ECBlue!18] (0,2.7) rectangle (2.4,3.35);
+\fill[ECBlue!18] (5.2,.1) rectangle (7.8,.75);
+\draw[thick] (0,2.7) rectangle (2.4,3.35) node[midway]{upper reservoir};
+\draw[thick] (5.2,.1) rectangle (7.8,.75) node[midway]{lower reservoir};
+\node[draw=ECBlue,fill=ECLightBlue,rounded corners,minimum width=20mm,minimum height=9mm] (m) at (3.8,1.65) {motor--generator};
+\node[draw=ECGreen,fill=ECGreen!10,rounded corners,minimum width=17mm,minimum height=9mm] (t) at (3.8,.65) {pump--turbine};
+\draw[very thick,ECBlue] (2.4,3.0) -- (3.8,2.0) -- (t.north);
+\draw[very thick,ECBlue] (t.east) -- (5.2,.45);
+\draw[<->,very thick,ECOrange] (m) -- (t);
+\draw[->,very thick,ECGreen] (2.8,2.35) -- node[above,sloped]{generation} (4.7,1.0);
+\draw[->,very thick,ECPurple] (4.8,.82) -- node[below,sloped]{pumping} (2.7,2.2);
+\end{tikzpicture}
+\end{center}
+
+During low demand, electrical energy drives the pump and raises water. During high demand,
+the water flows downhill and drives the turbine. The stored gravitational energy is
+$E=mgh$.
+\end{engineeringfocus}
+
+\begin{keyfigures}
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+Lithium-ion round-trip efficiency & 85--95\%\\
+Pumped-storage hydro & 70--85\%\\
+Hydrogen power-to-power & 30--45\%\\
+Typical battery duration & 1--8 h\\
+Seasonal storage & weeks--months
+\end{tabularx}
+\end{keyfigures}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Storage technologies compared,colback=white,colframe=ECBlue]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=\linewidth,height=47mm,
+xbar,bar width=5pt,
+xmin=0,xmax=100,
+xlabel={Representative round-trip efficiency (\%)},
+symbolic y coords={Hydrogen,Compressed air,Pumped hydro,Flywheel,Lithium-ion},
+ytick=data,
+yticklabel style={font=\scriptsize},
+xticklabel style={font=\scriptsize},
+label style={font=\scriptsize},
+grid=major]
+\addplot[fill=ECBlue] table[x=efficiency,y=technology,col sep=comma]
+{data/EC05/storage_comparison.csv};
+\end{axis}
+\end{tikzpicture}
+
+{\scriptsize Representative values only: actual performance depends on design and operating
+conditions.}
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Engineering Insight,colback=white,colframe=ECOrange]
+Storage sizing requires two independent decisions. The power rating must cover the largest
+instantaneous imbalance, while the energy capacity must cover the required duration. A
+system can have enough power but run empty too soon, or contain enough energy but deliver it
+too slowly.
+\end{tcolorbox}
+
+\begin{vocabulary}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+round-trip efficiency & rendement aller-retour\\
+charge / discharge & charge / décharge\\
+storage duration & durée de stockage\\
+reservoir & réservoir\\
+flywheel & volant d'inertie\\
+demand response & effacement de consommation\\
+grid frequency & fréquence du réseau
+\end{tabularx}
+\end{vocabulary}
+
+\begin{questions}
+\item Why must electricity production and consumption remain balanced?
+\item Distinguish power from stored energy.
+\item A 12~MW system stores 48~MWh. What is its full-power discharge duration?
+\item Why are batteries suitable for rapid grid services?
+\item Explain the operating cycle of a pumped-storage plant.
+\item Why can hydrogen be useful despite its lower efficiency?
+\item Which criteria should engineers consider besides efficiency?
+\end{questions}
+
+\begin{challenge}
+A remote island has a 12~MW peak demand, a 20~MW wind farm and a 10~MW solar farm.
+Propose a storage strategy for frequency control, night-time supply and a five-day period of
+weak wind. Select at least two technologies and justify their power, energy capacity,
+duration, efficiency, safety and environmental impact. Present a block diagram and a table
+of design choices.
+\end{challenge}
+
+\begin{applicationexercise}
+A pumped-storage plant transfers $5.0\times10^6$~m$^3$ of water through a vertical height of
+420~m. Estimate the stored gravitational energy using $E=\rho Vgh$, with
+$\rho=1000~\mathrm{kg\,m^{-3}}$. Express the result in GWh, then estimate the recoverable
+energy for a round-trip efficiency of 78\%. Finally, calculate how long the plant could
+supply 1.0~GW at constant power.
+\end{applicationexercise}
+
+\begin{speaking}
+In teams, defend one storage technology in a three-minute technical pitch. Explain where it
+performs well, then identify one service for which it would be a poor choice.
+\end{speaking}
+
+\end{multicols}
+
+\subsection*{Sources and further reading}
+\ECsource{IEA -- Grid-scale storage}{https://www.iea.org/energy-system/electricity/grid-scale-storage}
+\quad
+\ECsource{NREL -- Energy storage}{https://www.nrel.gov/grid/energy-storage.html}
