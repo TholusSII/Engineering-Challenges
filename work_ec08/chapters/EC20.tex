@@ -17,7 +17,7 @@ product, module or component remains in use with the least possible transformati
 
 \begin{ecarticle}
 The traditional linear model follows a simple sequence: extract resources, manufacture a product,
-use it and discard it. This model loses materials, energy and technical value at the end of each life.
+use it and discard it. This model discards materials, embodied energy and technical value at the end of each product life.
 A circular economy aims to keep products and materials useful for longer through maintenance, reuse,
 repair, refurbishment, remanufacturing and, finally, recycling.
 
@@ -34,13 +34,13 @@ performance and industrial constraints.
 Remanufacturing restores a used product to a defined level of performance. Components are inspected,
 cleaned, repaired or replaced and then tested. This can preserve more value than material recycling,
 but it requires traceability and a predictable return flow. Digital product passports can record
-materials, maintenance and previous use, helping operators choose the correct recovery route.
+materials, maintenance history and previous use, helping operators choose the most suitable recovery route.
 
 Life-cycle assessment prevents misleading solutions. A heavier product may last longer but require
 more material and transport energy. A replaceable battery can extend product life, yet the sealing
 system must still meet safety requirements. Engineers compare resource use, energy, emissions and
-service life across the complete system boundary. The objective is not simply to close a loop, but to
-reduce total environmental impact while providing the required service.
+service life across the complete system boundary. The objective is not merely to close a loop, but to
+reduce the total environmental impact while still providing the required service.
 \end{ecarticle}
 
 \begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
@@ -51,6 +51,7 @@ component. Repair and reuse usually preserve more value when they are technicall
 \begin{engineeringfocus}
 \textbf{Circular design hierarchy}
 \begin{center}
+\resizebox{\linewidth}{!}{%
 \begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=3.2mm]
 \node[draw=ECGreen,fill=ECGreen!10,rounded corners,align=center] (use) {use and\\maintain};
 \node[draw=ECBlue,fill=ECLightBlue,rounded corners,align=center,right=of use] (rep) {repair and\\upgrade};
@@ -59,7 +60,8 @@ component. Repair and reuse usually preserve more value when they are technicall
 \node[draw=ECRed,fill=ECRed!8,rounded corners,align=center,below=of rep] (loss) {energy recovery\\or disposal};
 \draw[->,thick] (use)--(rep); \draw[->,thick] (rep)--(ref); \draw[->,thick] (ref)--(rec);
 \draw[->,thick] (rec)--(loss); \draw[->,thick,dashed] (ref.north) to[bend left=28] (use.north);
-\end{tikzpicture}
+\end{tikzpicture}%
+}
 \end{center}
 Short loops usually preserve more product value and require less transformation.
 \end{engineeringfocus}
@@ -77,7 +79,7 @@ Decision tool & life-cycle assessment
 \begin{tcolorbox}[title=\sffamily\bfseries Relative life-cycle impact,colback=white,colframe=ECRed]
 \begin{center}
 \begin{tikzpicture}
-\begin{axis}[xbar,width=\linewidth,height=50mm,xlabel={Relative impact index},xmin=0,xmax=110,
+\begin{axis}[xbar,width=0.97\linewidth,height=50mm,xlabel={Relative impact index},xmin=0,xmax=110,
 symbolic y coords={Reuse,Remanufacture,Refurbishment,Repair,Linear use},
 ytick=data,grid=major,ticklabel style={font=\scriptsize},nodes near coords]
 \addplot table[x=impact,y=strategy,col sep=comma]{data/EC20/lifecycle.csv};
@@ -102,6 +104,20 @@ product passport & passeport produit\\
 life-cycle assessment & analyse du cycle de vie
 \end{tabularx}
 \end{vocabulary}
+
+
+\begin{applicationexercise}
+A company compares two strategies for providing 1,000 hours of service. A linear product lasts 500 h
+and has an impact index of 100 per product. A repairable version lasts 1,000 h and has an initial
+impact index of 125; one repair adds an impact index of 15.
+\begin{enumerate}
+\item Determine how many linear products are required to provide 1,000 h of service.
+\item Calculate the total impact index of the linear strategy.
+\item Calculate the total impact index of the repairable strategy, including one repair.
+\item Determine the percentage reduction achieved by the repairable strategy.
+\item Give one reason why this simplified comparison might not predict the real life-cycle result.
+\end{enumerate}
+\end{applicationexercise}
 
 \begin{questions}
 \item Why does repair usually preserve more value than recycling?
