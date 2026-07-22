@@ -1,0 +1,177 @@
+\ECchapter{04}{Nuclear Energy}{Can nuclear power support a low-carbon future?}{ECBlue}
+
+\ECObjectives{
+\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=1pt]
+\item Explain nuclear fission and a controlled chain reaction.
+\item Identify the energy and fluid flows in a pressurised water reactor (PWR).
+\item Explain why residual heat must be removed after shutdown.
+\item Interpret lifecycle-emission data and discuss the role of nuclear power.
+\end{itemize}}
+
+\begin{multicols}{2}
+
+\begin{engineeringnews}
+Several countries are considering new reactors, lifetime extensions and Small Modular
+Reactors (SMRs). The main engineering questions concern construction time, financing,
+safety, fuel supply, waste management and operation within an electricity system that also
+contains variable renewable generation.
+\end{engineeringnews}
+
+\begin{ecarticle}
+A nuclear power station converts energy released by \textbf{nuclear fission} into electricity.
+When a uranium-235 nucleus absorbs a neutron, it may split into two lighter nuclei. This
+reaction releases energy and additional neutrons, which can trigger further fissions. In a
+reactor, the number of fissions is controlled so that power remains stable.
+
+In a pressurised water reactor, fuel assemblies are placed inside the reactor vessel. Water
+in the primary circuit flows through the core and removes heat. It is kept at high pressure
+so that it remains liquid at about 300~$^{\circ}$C. In the steam generator, the primary water
+transfers heat to a physically separate secondary circuit.
+
+The secondary water boils and produces steam. The steam drives a turbine connected to an
+electrical generator. After the turbine, a condenser turns the steam back into liquid water.
+A third circuit carries waste heat towards a river, the sea or a cooling tower. The three
+circuits are separated because they have different functions and different operating
+conditions.
+
+Reactor power is adjusted by controlling neutron absorption. Control rods contain materials
+that absorb neutrons, while soluble boron can also be added to the primary water. Even after
+the chain reaction stops, radioactive decay continues to release \textbf{residual heat}.
+Cooling must therefore remain available after shutdown.
+
+Safety is based on defence in depth: prevention, monitoring, automatic protection, backup
+systems and several physical barriers. Engineers also study component ageing, extreme
+weather, human factors, cybersecurity and long-term waste management.
+\end{ecarticle}
+
+\columnbreak
+
+\begin{engineeringfocus}
+\textbf{Energy conversion in a PWR}
+
+\begin{center}
+\begin{tikzpicture}[scale=.54,transform shape,>=Latex,font=\scriptsize]
+\tikzset{block/.style={draw=ECBlue,thick,rounded corners,fill=ECLightBlue,
+minimum width=21mm,minimum height=10mm,align=center}}
+\node[block] (core) {reactor\\core};
+\node[block,right=9mm of core] (sg) {steam\\generator};
+\node[block,right=9mm of sg] (turbine) {turbine};
+\node[block,below=10mm of turbine] (cond) {condenser};
+\node[block,below=10mm of core] (cool) {cooling\\source};
+\draw[->,very thick,ECOrange] (core) -- node[above]{primary water} (sg);
+\draw[->,very thick,ECOrange] (sg) to[bend left=22] node[below]{return} (core);
+\draw[->,very thick,ECGreen] (sg) -- node[above]{steam} (turbine);
+\draw[->,very thick,ECGreen] (turbine) -- (cond);
+\draw[->,very thick,ECGreen] (cond) -| node[pos=.25,below]{feedwater} (sg);
+\draw[->,very thick,ECBlue] (cool) -| (cond);
+\draw[->,very thick,ECBlue] (cond) -| node[pos=.25,right]{warm water} (cool);
+\draw[->,very thick] (turbine) -- ++(15mm,0) node[right]{generator};
+\end{tikzpicture}
+\end{center}
+
+The primary circuit transports nuclear heat, the secondary circuit produces steam, and the
+cooling circuit rejects unused heat. A PWR is therefore both a nuclear system and a thermal
+power plant.
+\end{engineeringfocus}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
+Stopping fission does not stop heat production immediately. Residual heat decreases rapidly,
+but cooling remains essential for hours, days and longer after shutdown.
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Key Figures,colback=ECLightBlue,colframe=ECBlue]
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+Typical French PWR output & 900--1450 MW\\
+Primary-water temperature & about 300~$^{\circ}$C\\
+Primary pressure & about 155 bar\\
+Typical capacity factor & 70--90\%\\
+Operating life & several decades
+\end{tabularx}
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Indicative lifecycle emissions,
+colback=white,colframe=ECBlue]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=\linewidth,height=48mm,
+ybar,bar width=7pt,
+ymin=0,ymax=900,
+ylabel={g CO$_2$-eq/kWh},
+symbolic x coords={Nuclear,Wind,Solar PV,Natural gas,Coal},
+xtick=data,x tick label style={rotate=35,anchor=east,font=\scriptsize},
+yticklabel style={font=\scriptsize},ylabel style={font=\scriptsize},
+grid=major]
+\addplot+[fill=ECBlue!45,draw=ECBlue] table[x=source,y=emissions,col sep=comma]
+{data/EC04/lifecycle_emissions.csv};
+\end{axis}
+\end{tikzpicture}
+
+{\scriptsize Indicative median lifecycle values based on IPCC assessments. Actual values
+vary with technology, location and methodology.}
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Engineering Insight,colback=white,colframe=ECOrange]
+A power station must remove more thermal energy than it converts into electricity. This is
+why condenser performance and access to a cooling source strongly influence plant design,
+site selection and output during heat waves.
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Fission and fusion,colback=white,colframe=ECBlue]
+\textbf{Fission} splits heavy nuclei and is used in current commercial reactors.
+\textbf{Fusion} combines light nuclei and powers the Sun. Fusion research is active, but
+fusion is not yet a commercial source of electricity.
+\end{tcolorbox}
+
+\begin{vocabulary}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+chain reaction & réaction en chaîne\\
+reactor vessel & cuve du réacteur\\
+fuel assembly & assemblage combustible\\
+control rod & barre de contrôle\\
+steam generator & générateur de vapeur\\
+containment & enceinte de confinement\\
+residual heat & puissance résiduelle\\
+spent fuel & combustible usé
+\end{tabularx}
+\end{vocabulary}
+
+\begin{questions}
+\item What happens during nuclear fission?
+\item Why must the primary water remain under high pressure?
+\item Explain the function of each of the three water circuits.
+\item How do control rods modify reactor power?
+\item Why is cooling required after shutdown?
+\item Use the graph to compare nuclear power with fossil-fuel generation.
+\item Why can high air or river temperatures reduce the output of a power station?
+\end{questions}
+
+\begin{challenge}
+A region must replace 8~GW of fossil-fuelled generation while reducing lifecycle CO$_2$
+emissions and maintaining supply during winter evenings. Propose a balanced mix using
+nuclear, wind, solar, storage, interconnections and demand response. Justify installed
+capacity, expected availability, flexibility, environmental constraints, construction
+sequence and major risks. Present the result as a two-page engineering recommendation.
+\end{challenge}
+
+\begin{applicationexercise}
+A 1.3~GW nuclear unit operates with a capacity factor of 88\%. Estimate its annual electrical
+production in TWh. Then determine how many 3~MW wind turbines operating at a 32\% capacity
+factor would produce the same annual energy. Explain why equal annual production does not
+mean that the two systems provide electricity in the same way.
+\end{applicationexercise}
+
+\begin{speaking}
+Debate: ``Europe should build new nuclear power stations.'' Use evidence about safety,
+climate, cost, waste, construction time and security of supply. Each team must answer one
+technical objection from the opposing side.
+\end{speaking}
+
+\end{multicols}
+
+\subsection*{Sources and further reading}
+\ECsource{IAEA -- Nuclear Power Reactors}{https://www.iaea.org/topics/nuclear-power-reactors}
+\quad
+\ECsource{OECD Nuclear Energy Agency}{https://www.oecd-nea.org}
+\quad
+\ECsource{IPCC -- Energy Systems}{https://www.ipcc.ch}
