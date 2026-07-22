@@ -5,50 +5,55 @@
 \begin{itemize}
 \item Compare tidal, wave and offshore energy technologies.
 \item Explain the mechanical and environmental design constraints.
-\item Analyse energy yield and maintenance trade-offs.
+\item Estimate power, annual energy yield and capacity factor.
 \end{itemize}}
 
 \begin{multicols}{2}
 \begin{engineeringnews}
-Oceans contain large renewable energy resources. Offshore wind is already deployed at commercial
-scale, while tidal-stream and wave-energy devices continue to develop. Marine systems benefit from
-strong resources but face difficult installation and maintenance conditions.
+Oceans contain major renewable energy resources. Offshore wind is already deployed at commercial scale,
+whereas tidal-stream and wave-energy devices are still developing. Marine systems benefit from strong,
+partly predictable resources but face demanding installation, grid-connection and maintenance conditions.
 \end{engineeringnews}
 
 \begin{ecarticle}
 Marine renewable energy includes offshore wind, tidal barrages, tidal-stream turbines and wave-energy
-converters. Each technology extracts energy from a different physical phenomenon and therefore needs a
-different structure, control system and maintenance strategy.
+converters. Each technology extracts energy from a different physical phenomenon and therefore requires a
+different structure, control strategy and maintenance plan.
 
-Tidal-stream turbines operate like underwater wind turbines. Water density is much greater than air
-density, so a relatively slow current can produce significant force. The available power is
-proportional to fluid density, swept area and the cube of flow speed. Tides are highly predictable, but
-suitable sites are limited and the equipment must resist strong cyclic loads.
+Tidal-stream turbines operate like underwater wind turbines. Because water is roughly 800 times denser
+than air, even a moderate current can exert large forces. The available kinetic power can be estimated by
+\[
+P_{\mathrm{avail}}=\frac{1}{2}\rho A v^3,
+\]
+where $\rho$ is water density, $A$ the swept area and $v$ the current speed. The useful electrical power is
+lower because the rotor, generator and converter have limited efficiencies. Tides are highly predictable,
+but suitable sites are limited and the equipment must withstand strong cyclic loads.
 
 Wave-energy converters use the relative motion between waves and a floating or fixed structure. Some
-devices use oscillating water columns, while others use hinged bodies or hydraulic power take-off
-systems. Wave direction, period and height change continuously, making efficient control difficult.
-Storm survival is often more demanding than normal power production.
+devices use oscillating water columns, while others use hinged bodies or hydraulic power take-off systems.
+Wave direction, period and height vary continuously, so the controller must adapt while preventing excessive
+motion. Survival during an extreme storm is often more demanding than normal energy production.
 
-The marine environment accelerates corrosion and biological growth. Salt water attacks materials,
-while barnacles and algae change surface properties and increase drag. Seals, cables and bearings must
-operate for long periods with limited access. Retrieving a device for repair may require specialised
-ships and suitable weather, so reliability strongly affects the cost of energy.
+The marine environment accelerates corrosion and biological growth. Salt water attacks materials, while
+barnacles and algae modify surface properties and increase drag. Seals, cables and bearings must operate for
+long periods with limited access. Retrieving a device for repair may require a specialised vessel and a calm
+weather window, so reliability strongly affects the levelised cost of energy.
 
 Engineers must also consider navigation, fishing, underwater noise and marine ecosystems. Environmental
-monitoring is required before and after installation. Grid connection can be expensive because subsea
-cables and offshore substations are needed. The best design is therefore not simply the device with the
-highest peak power, but the system that delivers reliable energy over its complete life cycle.
+monitoring is required before and after installation. Subsea cables and offshore substations can make grid
+connection expensive. The best design is therefore not simply the device with the highest peak power, but
+the system that delivers dependable energy over its complete life cycle.
 \end{ecarticle}
 
 \begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
-Because tidal motion is driven by astronomical cycles, its timing can be predicted years in advance.
-This makes tidal energy variable but highly predictable.
+Because tidal motion is driven by astronomical cycles, its timing can be predicted years in advance. Tidal
+energy is variable, but far more predictable than wind or solar generation.
 \end{tcolorbox}
 
 \begin{engineeringfocus}
 \textbf{Tidal-stream conversion chain}
 \begin{center}
+\resizebox{0.96\linewidth}{!}{%
 \begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=3mm]
 \node[draw=ECBlue,fill=ECLightBlue,rounded corners] (flow) {tidal current};
 \node[draw=ECGreen,fill=ECGreen!10,rounded corners,right=of flow] (rotor) {rotor};
@@ -57,7 +62,7 @@ This makes tidal energy variable but highly predictable.
 \node[draw=ECRed,fill=ECRed!8,rounded corners,below=of gen] (grid) {subsea cable and grid};
 \draw[->,thick] (flow)--(rotor); \draw[->,thick] (rotor)--(gen); \draw[->,thick] (gen)--(conv);
 \draw[->,thick] (conv)--(grid);
-\end{tikzpicture}
+\end{tikzpicture}}
 \end{center}
 \end{engineeringfocus}
 
@@ -74,14 +79,25 @@ Grid connection & subsea cable
 \begin{tcolorbox}[title=\sffamily\bfseries Illustrative capacity factors,colback=white,colframe=ECBlue]
 \begin{center}
 \begin{tikzpicture}
-\begin{axis}[xbar,width=\linewidth,height=50mm,xlabel={Capacity factor (\%)},xmin=0,xmax=55,
+\begin{axis}[xbar,width=0.96\linewidth,height=48mm,xlabel={Capacity factor (\%)},xmin=0,xmax=55,
 symbolic y coords={Tidal barrage,Offshore wind,Wave energy,Tidal stream},ytick=data,
 grid=major,ticklabel style={font=\scriptsize},nodes near coords]
 \addplot table[x=factor,y=technology,col sep=comma]{data/EC25/capacity.csv};
 \end{axis}
 \end{tikzpicture}
 \end{center}
-\footnotesize Values are illustrative; real performance depends strongly on site and technology maturity.
+\footnotesize Values are illustrative; real performance depends strongly on the site and technology maturity.
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Quantitative application,colback=ECBlue!4,colframe=ECBlue]
+A tidal turbine has a rotor diameter of $18\,\mathrm{m}$ in a current of $2.5\,\mathrm{m\,s^{-1}}$.
+Take $\rho=1025\,\mathrm{kg\,m^{-3}}$, a power coefficient $C_p=0.40$ and an electrical efficiency of
+$90\%$.
+\begin{enumerate}
+\item Calculate the swept area.
+\item Estimate the electrical power produced at this current speed.
+\item If the device operates at an average capacity factor of $35\%$, estimate its annual energy output.
+\end{enumerate}
 \end{tcolorbox}
 
 \begin{vocabulary}
@@ -100,9 +116,9 @@ storm survival & tenue en tempête
 \end{vocabulary}
 
 \begin{questions}
-\item Why can slow seawater flows produce large forces?
+\item Why can relatively slow seawater flows produce large forces?
 \item What makes wave-energy control difficult?
-\item Why does maintenance dominate marine energy costs?
+\item Why does maintenance strongly influence marine energy costs?
 \item Give two environmental impacts that must be monitored.
 \item Why is peak power insufficient for comparing devices?
 \end{questions}
