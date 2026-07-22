@@ -3,9 +3,9 @@
 
 \ECObjectives{
 \begin{itemize}
-\item Explain how measurements update a digital model.
-\item Distinguish simulation, monitoring and prediction.
-\item Identify the limits of a digital twin.
+\item Explain how measurements continuously update a digital model.
+\item Distinguish simulation, monitoring, diagnosis and prediction.
+\item Identify the limits and uncertainties of a digital twin.
 \end{itemize}}
 
 \begin{multicols}{2}
@@ -18,38 +18,39 @@ predict degradation and test operating strategies without disturbing the real as
 \begin{ecarticle}
 A digital twin is a virtual representation of a physical system that is regularly updated with real
 measurements. Unlike a static CAD model, it evolves with the asset. Sensors measure quantities such as
-temperature, vibration, force, pressure or electrical current. These data are filtered and compared
-with a mathematical model that describes how the system should behave.
+temperature, vibration, force, pressure or electrical current. These data are filtered, time-stamped
+and compared with a mathematical model that describes how the system should behave.
 
 The model may be physics-based, data-driven or hybrid. A physics-based model uses conservation laws,
 material properties and geometry. A data-driven model learns relationships from historical data. A
 hybrid twin combines both approaches: physics constrains the solution while machine learning corrects
 unknown effects or accelerates computation.
 
-Engineers use twins for three main purposes. First, monitoring compares measured and expected
-behaviour. A growing difference can reveal sensor drift, wear or an incorrect model. Second,
-prediction estimates future states, for example remaining bearing life or battery temperature during
-a demanding mission. Third, optimisation allows engineers to test control settings, maintenance dates
-or production schedules before applying them to the real system.
+Engineers use twins for several linked purposes. Monitoring compares measured and expected behaviour.
+A growing difference can reveal sensor drift, wear or an incorrect model. Diagnosis tries to identify
+the cause of that difference. Prediction estimates future states, for example the remaining life of a
+bearing or the battery temperature during a demanding mission. Optimisation allows engineers to test
+control settings, maintenance dates or production schedules before applying them to the real system.
 
-A useful twin depends on data quality. Measurements must be time-stamped, calibrated and transmitted
+A useful twin depends on data quality. Measurements must be calibrated, synchronised and transmitted
 reliably. The model must also be validated over the full operating range. A twin that performs well at
-nominal speed may fail during start-up, overload or extreme weather. Uncertainty must therefore be
+nominal speed may fail during start-up, overload or extreme weather. Its uncertainty must therefore be
 reported rather than hidden.
 
-Digital twins do not replace physical tests. They help engineers decide which tests are most useful
-and interpret measurements more effectively. Their value comes from the continuous loop between the
-real asset, the data platform and the model.
+Digital twins do not replace physical tests. They help engineers decide which tests are most useful and
+interpret measurements more effectively. Their value comes from the continuous loop between the real
+asset, the data platform and the model.
 \end{ecarticle}
 
 \begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
 A model becomes a true digital twin only when information flows repeatedly between the physical asset
-and its virtual representation. Without this update loop, it is simply a simulation model.
+and its virtual representation. Without this update loop, it remains a simulation model.
 \end{tcolorbox}
 
 \begin{engineeringfocus}
 \textbf{Information loop}
 \begin{center}
+\resizebox{\linewidth}{!}{%
 \begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=4mm]
 \node[draw=ECBlue,fill=ECLightBlue,rounded corners,align=center] (asset) {physical\\asset};
 \node[draw=ECGreen,fill=ECGreen!10,rounded corners,align=center,right=of asset] (data) {sensors and\\data platform};
@@ -59,7 +60,8 @@ and its virtual representation. Without this update loop, it is simply a simulat
 \draw[->,thick] (data)-- node[above]{updates} (twin);
 \draw[->,thick] (twin)--(decision);
 \draw[->,thick] (decision)--(asset);
-\end{tikzpicture}
+\end{tikzpicture}%
+}
 \end{center}
 \end{engineeringfocus}
 
@@ -76,7 +78,7 @@ Validation method & test comparison
 \begin{tcolorbox}[title=\sffamily\bfseries Prediction error over time,colback=white,colframe=ECBlue]
 \begin{center}
 \begin{tikzpicture}
-\begin{axis}[width=\linewidth,height=48mm,xlabel={Time (days)},ylabel={Error (\%)},grid=major,
+\begin{axis}[width=0.96\linewidth,height=46mm,xlabel={Time (days)},ylabel={Error (\%)},grid=major,
 ticklabel style={font=\scriptsize}]
 \addplot[thick,mark=*] table[x=time,y=error,col sep=comma]{data/EC21/prediction.csv};
 \end{axis}
@@ -84,6 +86,16 @@ ticklabel style={font=\scriptsize}]
 \end{center}
 \footnotesize A rising residual may indicate wear, a changing environment or an outdated model.
 \end{tcolorbox}
+
+\begin{applicationexercise}{Bearing health indicator}
+A digital twin predicts a bearing vibration level of $2.4\,\mathrm{mm\,s^{-1}}$, while the sensor
+measures $3.0\,\mathrm{mm\,s^{-1}}$.
+\begin{enumerate}
+\item Calculate the absolute residual.
+\item Calculate the relative residual as a percentage of the predicted value.
+\item The warning threshold is $20\%$. Decide whether maintenance should be investigated.
+\end{enumerate}
+\end{applicationexercise}
 
 \begin{vocabulary}
 \begin{tabularx}{\linewidth}{@{}lX@{}}
@@ -105,7 +117,7 @@ validation & validation
 \item What is the role of sensors in the update loop?
 \item Compare physics-based and data-driven models.
 \item Why must a twin be validated outside nominal operation?
-\item What can cause the prediction error to increase?
+\item What can cause prediction error to increase?
 \end{questions}
 
 \begin{engineeringchallenge}
