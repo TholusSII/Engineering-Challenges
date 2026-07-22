@@ -16,12 +16,12 @@ modelling and testing rather than simply copying the appearance of an organism.
 \end{engineeringnews}
 
 \begin{ecarticle}
-Biomimetics studies biological functions and transfers useful principles to engineered systems. The
-process normally begins with a technical problem such as reducing drag, gripping a surface or
+Biomimetics examines biological functions and transfers useful principles to engineered systems. The
+process usually begins with a technical problem such as reducing drag, gripping a surface or
 building a lightweight structure. Engineers then search for organisms that solve a comparable
 functional problem under similar constraints.
 
-The biological solution must be understood at the correct scale. A bird wing is not only a curved
+The biological solution must be understood at the relevant scale. A bird wing is not only a curved
 surface; its performance depends on flexible feathers, muscles, sensing and active control. Directly
 copying its shape may therefore fail. Engineers abstract the underlying principle, create a model and
 adapt it to available materials and manufacturing methods.
@@ -32,7 +32,7 @@ the hierarchical structure without using glue. Shark skin has rib-like textures 
 flow close to the surface. Similar riblets can reduce friction drag in selected conditions, although
 their benefit depends on size, orientation and cleanliness.
 
-Nature also inspires structures. Bone combines a dense outer layer with a porous interior, giving a
+Nature also inspires structures. Bone combines a dense outer layer with a porous interior, and achieves a
 high stiffness-to-mass ratio. Additive manufacturing can produce lattice structures that use the same
 principle. Honeycomb panels and branching networks similarly offer efficient ways to distribute
 loads or fluids.
@@ -40,8 +40,8 @@ loads or fluids.
 A biomimetic design is not automatically sustainable. Manufacturing a complex microstructure may
 consume large amounts of energy or use materials that are difficult to recycle. Engineers must compare
 the complete life cycle, durability and maintenance requirements with a conventional solution.
-Biomimetics is most valuable when the biological analogy leads to a measurable improvement and not
-only to an attractive product story.
+Biomimetics is most valuable when the biological analogy leads to a measurable improvement rather
+than merely providing an attractive product story.
 \end{ecarticle}
 
 \begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
@@ -52,6 +52,7 @@ The invention reproduced the attachment principle, not the complete plant struct
 \begin{engineeringfocus}
 \textbf{From biological observation to engineering validation}
 \begin{center}
+\resizebox{\linewidth}{!}{%
 \begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=3.3mm]
 \node[draw=ECPurple,fill=ECPurple!10,rounded corners,align=center] (p) {define the\\technical function};
 \node[draw=ECGreen,fill=ECGreen!10,rounded corners,align=center,right=of p] (b) {observe a\\biological strategy};
@@ -60,7 +61,8 @@ The invention reproduced the attachment principle, not the complete plant struct
 \node[draw=ECRed,fill=ECRed!8,rounded corners,align=center,below=of b] (v) {test performance\\and life cycle};
 \draw[->,thick] (p)--(b); \draw[->,thick] (b)--(a); \draw[->,thick] (a)--(m);
 \draw[->,thick] (m)--(v); \draw[->,thick,dashed] (v)--(p);
-\end{tikzpicture}
+\end{tikzpicture}%
+}
 \end{center}
 Iteration is essential because biological materials and manufacturing constraints are very different.
 \end{engineeringfocus}
@@ -78,7 +80,7 @@ Final proof & measured validation
 \begin{tcolorbox}[title=\sffamily\bfseries Illustrative drag comparison,colback=white,colframe=ECPurple]
 \begin{center}
 \begin{tikzpicture}
-\begin{axis}[xbar,width=\linewidth,height=49mm,xlabel={Relative drag index},xmin=0,xmax=110,
+\begin{axis}[xbar,width=0.97\linewidth,height=49mm,xlabel={Relative drag index},xmin=0,xmax=110,
 symbolic y coords={Optimised riblets,Shark-inspired coating,Riblet texture,Smooth reference},
 ytick=data,grid=major,ticklabel style={font=\scriptsize},nodes near coords]
 \addplot table[x=drag,y=surface,col sep=comma]{data/EC19/drag.csv};
@@ -102,6 +104,20 @@ stiffness-to-mass ratio & rapport rigidité/masse\\
 life cycle & cycle de vie
 \end{tabularx}
 \end{vocabulary}
+
+
+\begin{applicationexercise}
+A smooth reference surface has a drag index of 100. A biomimetic riblet surface has an index of 82,
+but its manufacture increases the component mass from 12.0 kg to 12.6 kg.
+\begin{enumerate}
+\item Calculate the percentage reduction in drag index.
+\item Calculate the percentage increase in mass.
+\item A design team assigns equal importance to drag reduction and mass increase. Compare the two
+percentages and decide whether the riblet solution appears favourable according to this simplified
+criterion.
+\item State two tests that would be required before approving the design for real service.
+\end{enumerate}
+\end{applicationexercise}
 
 \begin{questions}
 \item Why is direct imitation often insufficient?
