@@ -1,0 +1,6 @@
+mode,current
+Continuous Wi-Fi,100
+Wi-Fi duty cycle,42
+LoRaWAN,18
+BLE advertising,10
+Deep sleep,2

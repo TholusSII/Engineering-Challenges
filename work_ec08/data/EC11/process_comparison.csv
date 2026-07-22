@@ -1,0 +1,4 @@
+process,time,material,complexity
+Machining,5,45,55
+Casting,7,75,65
+Additive manufacturing,9,92,95

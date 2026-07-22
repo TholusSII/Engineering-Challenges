@@ -1,0 +1,163 @@
+\phantomsection\addcontentsline{toc}{section}{Future Transport}
+\ECchapter{15}{Future Transport}{How will people and goods move tomorrow?}{ECOrange}
+
+\ECObjectives{
+\begin{itemize}
+\item Compare transport modes using energy, capacity and infrastructure criteria.
+\item Explain the perception--decision--action chain of an autonomous vehicle.
+\item Evaluate a multimodal solution rather than a single vehicle technology.
+\end{itemize}}
+
+\begin{multicols}{2}
+\begin{engineeringnews}
+Battery buses, hydrogen trains, autonomous shuttles and electric aircraft are being tested around
+the world. The largest environmental gains, however, may come from combining efficient vehicles
+with public transport, active mobility and better use of existing infrastructure.
+\end{engineeringnews}
+
+\begin{ecarticle}
+Transport engineering must move people and goods safely, reliably and with limited energy and land
+use. Because journey length, passenger capacity and infrastructure differ, no propulsion technology
+is ideal for every application.
+
+Battery-electric vehicles are efficient because electric motors convert a large proportion of the stored
+energy into motion and can recover energy during braking. They are well suited to urban buses, cars
+and delivery vehicles that return regularly to a charging point. Long-distance freight requires
+larger batteries, faster charging or another energy carrier. Hydrogen fuel cells may reduce vehicle
+mass for some heavy applications, but producing, compressing and converting hydrogen introduces
+additional energy losses.
+
+Rail carries many passengers or large freight loads with low rolling resistance. Electrified trains
+can use energy directly from the grid and do not need to carry a large energy store. High-speed rail
+can replace some short-haul flights when stations connect city centres and total door-to-door time
+is competitive.
+
+Autonomous vehicles add a digital engineering challenge. Cameras provide detailed images, radar
+measures distance and relative speed, and lidar creates a three-dimensional representation. Sensor
+fusion combines these signals. Software then identifies objects, predicts their motion, plans a safe
+trajectory and commands steering and braking. Adverse weather, unusual road layouts and human
+behaviour make validation difficult.
+
+Future mobility is therefore a system-level problem. A journey may combine walking, bicycle, train and an
+on-demand shuttle. Ticketing, timetables and physical interchanges must work together. Engineers
+must also consider accessibility, affordability, charging networks, vehicle manufacture and the
+carbon intensity of the energy supply. Replacing every conventional car with another type of car would not, by itself, eliminate congestion
+or the demand for parking space.
+\end{ecarticle}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
+The energy efficiency of a vehicle is only one part of transport efficiency. Occupancy is equally
+important: a nearly empty heavy vehicle may consume more energy per passenger than a fuller one.
+\end{tcolorbox}
+
+\begin{engineeringfocus}
+\textbf{Autonomous driving control chain}
+
+\begin{center}
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=3.5mm]
+\node[draw=ECBlue,fill=ECLightBlue,rounded corners,align=center] (sen) {camera, radar,\\lidar, GNSS};
+\node[draw=ECPurple,fill=ECPurple!10,rounded corners,align=center,right=of sen] (per) {sensor fusion\\and perception};
+\node[draw=ECOrange,fill=ECOrange!10,rounded corners,align=center,right=of per] (plan) {prediction and\\trajectory planning};
+\node[draw=ECGreen,fill=ECGreen!10,rounded corners,align=center,below=of plan] (act) {steering, motor\\and brakes};
+\node[draw=ECRed,fill=ECRed!8,rounded corners,align=center,below=of per] (veh) {vehicle and\\road environment};
+\draw[->,thick] (sen)--(per); \draw[->,thick] (per)--(plan); \draw[->,thick] (plan)--(act);
+\draw[->,thick] (act)--(veh); \draw[->,thick,dashed] (veh)--(sen);
+\end{tikzpicture}%
+}
+\end{center}
+
+The loop must continue safely even when a sensor is degraded. Redundancy, plausibility checks and a
+minimum-risk manoeuvre are therefore central design features.
+\end{engineeringfocus}
+
+\begin{keyfigures}
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+Electric motor efficiency & high\\
+Rail rolling resistance & low\\
+Autonomous control cycle & repeated continuously\\
+Important system metric & passenger-km\\
+Main urban constraint & limited space
+\end{tabularx}
+\end{keyfigures}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Illustrative operational emissions,colback=white,colframe=ECOrange]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[xbar,width=.93\linewidth,height=53mm,xlabel={Relative emissions per passenger-km},xmin=0,xmax=135,
+symbolic y coords={Bicycle,Electric rail,Rail,Coach,Car},ytick=data,
+ticklabel style={font=\scriptsize},grid=major]
+\addplot table[x=emissions,y=mode,col sep=comma]{data/EC15/transport_emissions.csv};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\footnotesize Illustrative comparison only. Actual emissions depend strongly on occupancy, vehicle,
+energy source, route and lifecycle boundaries.
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Multimodal journey,colback=white,colframe=ECBlue]
+\begin{center}
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=4mm]
+\node[draw,rounded corners,fill=ECGreen!10] (home) {home};
+\node[draw,rounded corners,fill=ECGreen!10,right=of home] (bike) {walking / bicycle};
+\node[draw,rounded corners,fill=ECBlue!10,right=of bike] (rail) {rail};
+\node[draw,rounded corners,fill=ECOrange!10,right=of rail] (shut) {shared shuttle};
+\node[draw,rounded corners,fill=ECPurple!10,right=of shut] (dest) {destination};
+\draw[->,thick] (home)--(bike); \draw[->,thick] (bike)--(rail); \draw[->,thick] (rail)--(shut); \draw[->,thick] (shut)--(dest);
+\end{tikzpicture}%
+}
+\end{center}
+A successful system minimises waiting, transfer distance and uncertainty between modes.
+\end{tcolorbox}
+
+\begin{vocabulary}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+freight & fret\\
+short-haul flight & vol court-courrier\\
+rolling resistance & résistance au roulement\\
+sensor fusion & fusion de capteurs\\
+trajectory planning & planification de trajectoire\\
+minimum-risk manoeuvre & manœuvre de risque minimal\\
+shared mobility & mobilité partagée\\
+interchange & pôle d'échanges\\
+occupancy rate & taux de remplissage\\
+passenger-kilometre & voyageur-kilomètre
+\end{tabularx}
+\end{vocabulary}
+
+
+\begin{applicationexercise}
+A class of 30 students travels 18 km to a science museum. Compare two options using the illustrative
+values in the graph: five cars carrying six students each, or one coach carrying all 30 students.
+\begin{enumerate}
+\item Calculate the total passenger-kilometres for the trip.
+\item Estimate the operational emissions for each option in relative units.
+\item By what factor does the coach reduce emissions compared with the cars?
+\item Give two reasons why a real engineering comparison should also include lifecycle emissions.
+\end{enumerate}
+\end{applicationexercise}
+
+\begin{questions}
+\item Why is no propulsion technology suitable for every journey?
+\item Give one advantage of electrified rail over battery vehicles.
+\item Describe the autonomous perception--decision--action loop.
+\item Why is vehicle occupancy important when comparing transport modes?
+\item Which features make a multimodal journey attractive to users?
+\end{questions}
+
+\begin{engineeringchallenge}
+Propose a low-carbon transport plan between a suburban school and a city centre. Compare at least
+three modes using capacity, journey time, energy, accessibility and infrastructure. Include one
+solution for the first and last kilometre.
+\end{engineeringchallenge}
+
+\begin{speaking}
+Should city centres restrict private cars? Defend a position using technical, environmental and
+social arguments, and propose one realistic alternative.
+\end{speaking}
+\end{multicols}
+
+\subsection*{Sources}
+\ECsource{International Energy Agency -- Transport}{https://www.iea.org/energy-system/transport}
+\ECsource{European Commission -- Mobility and Transport}{https://transport.ec.europa.eu/index_en}

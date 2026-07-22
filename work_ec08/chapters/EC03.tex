@@ -1,0 +1,154 @@
+\ECchapter{03}{Wind Energy}{How do engineers harvest the wind?}{ECGreen}
+
+\ECObjectives{
+\begin{itemize}[leftmargin=*]
+\item Explain how aerodynamic lift produces rotor torque.
+\item Identify the main subsystems of a modern wind turbine.
+\item Interpret a wind-turbine power curve.
+\item Compare onshore, fixed-bottom offshore and floating offshore solutions.
+\end{itemize}}
+
+\begin{multicols}{2}
+
+\begin{engineeringnews}
+Modern offshore wind turbines now reach ratings above 15 MW. Floating foundations
+make it possible to exploit deep-water sites where winds are stronger and more
+regular, but they also introduce new challenges in mooring, maintenance and grid
+connection.
+\end{engineeringnews}
+
+\begin{ecarticle}
+A wind turbine converts the kinetic energy of moving air into electrical energy.
+The blades are shaped like aerofoils. As air flows around a blade, a pressure
+difference creates lift. The tangential component of this force produces a torque
+on the rotor.
+
+The available power in the wind is
+\[
+P_{\mathrm{wind}}=\frac{1}{2}\rho A v^3,
+\]
+where $\rho$ is air density, $A$ the swept area and $v$ wind speed. The cubic term
+explains why site selection is critical: a small increase in average wind speed can
+produce a large increase in annual energy output.
+
+The rotor drives either a gearbox and a high-speed generator or a direct-drive
+generator. Power electronics convert the variable-frequency output into electricity
+compatible with the grid. Pitch control adjusts the blade angle, while yaw control
+rotates the nacelle so that the rotor faces the wind.
+\end{ecarticle}
+
+\begin{engineeringfocus}
+\textbf{Main subsystems}
+\begin{enumerate}[leftmargin=*]
+\item Rotor, blades and hub;
+\item Main shaft and bearings;
+\item Gearbox or direct-drive generator;
+\item Converter and transformer;
+\item Pitch and yaw actuators;
+\item Tower, foundations and monitoring system.
+\end{enumerate}
+\end{engineeringfocus}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=orange!70!black]
+No turbine can capture all the power in the wind. The theoretical maximum is the
+\textbf{Betz limit}: 59.3\% of the kinetic power crossing the rotor area.
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Key Figures,colback=blue!5,colframe=ECBlue]
+\begin{tabular}{lr}
+Rotor diameter & 120--250 m\\
+Rated power & 3--18 MW\\
+Cut-in speed & 3--4 m/s\\
+Rated speed & 11--15 m/s\\
+Cut-out speed & 20--25 m/s\\
+Capacity factor & 30--60\%
+\end{tabular}
+\end{tcolorbox}
+
+\columnbreak
+
+\begin{tcolorbox}[title=\sffamily\bfseries Wind-turbine architecture,colback=white,colframe=ECBlue]
+\centering
+\begin{tikzpicture}[scale=.72,transform shape,>=Latex]
+\draw[very thick,ECGreen] (0,0) -- (0,3.4);
+\draw[fill=ECGray,draw=ECBlue,thick] (-.7,3.4) rectangle (1.8,4.1);
+\draw[fill=ECBlue!10,draw=ECBlue,thick] (1.8,3.52) rectangle (2.8,3.98);
+\draw[thick] (-.7,3.75)--(-1.45,3.75);
+\filldraw[ECOrange] (-1.45,3.75) circle (.12);
+\foreach \a in {0,120,240}{
+  \draw[very thick,ECGreen,rotate around={\a:(-1.45,3.75)}]
+  (-1.45,3.75)--(-1.45,5.0);
+}
+\draw[->,thick] (2.9,3.75)--(4.1,3.75) node[right]{electricity};
+\node[align=center] at (.55,3.75){gearbox /\\generator};
+\node[align=center] at (0,-.35){tower and\\foundation};
+\node[left] at (-1.5,4.7){blades};
+\node[above] at (.55,4.1){nacelle};
+\end{tikzpicture}
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Typical power curve,colback=white,colframe=ECGreen]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+width=\linewidth,height=5.0cm,
+xlabel={Wind speed (m/s)},ylabel={Power (MW)},
+xmin=0,xmax=26,ymin=0,ymax=3.3,
+grid=major,tick label style={font=\scriptsize},
+label style={font=\scriptsize},
+]
+\addplot[very thick,ECBlue,smooth] table[x=wind,y=power,col sep=comma]
+{data/EC03/wind_power_curve.csv};
+\addplot[dashed,ECOrange] coordinates {(3,0) (3,3.2)};
+\addplot[dashed,ECOrange] coordinates {(15,0) (15,3.2)};
+\addplot[dashed,ECOrange] coordinates {(25,0) (25,3.2)};
+\end{axis}
+\end{tikzpicture}
+\small Cut-in, rated and cut-out regions determine how the turbine operates safely.
+\end{tcolorbox}
+
+\begin{vocabulary}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+blade & pale\\
+hub & moyeu\\
+gearbox & multiplicateur\\
+yaw & orientation de la nacelle\\
+pitch & calage des pales\\
+swept area & surface balayée\\
+capacity factor & facteur de charge
+\end{tabularx}
+\end{vocabulary}
+
+\begin{questions}
+\item Why does wind power depend on the cube of wind speed?
+\item What is the purpose of pitch control?
+\item What is the purpose of yaw control?
+\item Interpret the three regions of the power curve.
+\item Compare onshore and offshore wind farms.
+\end{questions}
+
+\begin{challenge}
+A coastal region plans a 500 MW wind farm. Compare an onshore solution, a
+fixed-bottom offshore solution and a floating offshore solution. Consider energy
+yield, foundations, maintenance, grid connection, environmental impact and public
+acceptance. Present a justified recommendation.
+\end{challenge}
+
+\begin{applicationexercise}
+A wind turbine has a rotor diameter of 100~m and operates in air of density
+$1.225~\mathrm{kg\,m^{-3}}$ at a wind speed of 10~m/s. Using
+$P=\tfrac12\rho A v^3 C_p$ with $C_p=0.44$, estimate the aerodynamic power captured by the
+rotor. Compare the coefficient with the Betz limit and identify two additional conversion
+losses before electricity reaches the grid.
+\end{applicationexercise}
+
+\begin{speaking}
+Debate the statement: ``Large wind farms should be built mainly offshore.'' Use
+technical, economic and environmental arguments.
+\end{speaking}
+
+\end{multicols}
+
+\subsection*{Sources}
+\ECsource{Global Wind Energy Council}{https://gwec.net}\quad
+\ECsource{IEA Wind}{https://www.iea.org/energy-system/renewables/wind}

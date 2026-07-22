@@ -1,0 +1,124 @@
+\phantomsection\addcontentsline{toc}{section}{Autonomous Vehicles}
+\ECchapter{23}{Autonomous Vehicles}{Engineering safe autonomous mobility}{ECOrange}
+
+\ECObjectives{
+\begin{itemize}
+\item Describe perception, localisation, planning and control.
+\item Explain why sensor redundancy is necessary.
+\item Analyse stopping distance and operational limits.
+\end{itemize}}
+
+\begin{multicols}{2}
+\begin{engineeringnews}
+Autonomous driving systems are being tested in passenger cars, shuttles, mines, ports and warehouses.
+Progress is rapid in controlled environments, but safe operation on public roads remains difficult
+because weather, human behaviour and unusual situations are highly variable.
+\end{engineeringnews}
+
+\begin{ecarticle}
+An autonomous vehicle must perceive its environment, estimate its position, predict how other road
+users may move, plan a safe path and control steering, braking and propulsion. These functions operate
+continuously and must meet strict timing and safety requirements.
+
+Perception combines cameras, radar, lidar and ultrasonic sensors. Cameras provide colour and detailed
+shapes but can be affected by darkness, glare or fog. Radar measures distance and relative speed and
+works well in poor visibility. Lidar creates accurate three-dimensional point clouds but may be costly
+and sensitive to rain or contamination. Sensor fusion combines their strengths and detects
+inconsistencies.
+
+Localisation uses satellite positioning, inertial sensors, wheel odometry and maps. No single source
+is sufficient everywhere: GNSS signals can be blocked in tunnels, while wheel slip creates odometry
+errors. Redundant estimates allow the system to remain safe when one measurement becomes unreliable.
+
+The planner selects a manoeuvre and generates a trajectory that respects road geometry, traffic rules,
+vehicle dynamics and comfort. The controller then follows this trajectory. Braking distance increases
+approximately with the square of speed because kinetic energy is proportional to $v^2$. Wet roads,
+tyre condition and reaction delays increase the total stopping distance.
+
+A safe system also needs an operational design domain: the conditions in which automation is allowed.
+These conditions may specify road type, speed, weather and map quality. When the vehicle reaches the
+boundary of this domain, it must request human control or perform a minimal-risk manoeuvre. Safety
+therefore depends not only on intelligence, but also on clear limits and predictable fallback behaviour.
+\end{ecarticle}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
+A vehicle may correctly detect an object yet still choose an unsafe action. Verification must therefore
+cover the complete chain from sensing to decision and control.
+\end{tcolorbox}
+
+\begin{engineeringfocus}
+\textbf{Autonomous driving pipeline}
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=3mm]
+\node[draw=ECBlue,fill=ECLightBlue,rounded corners] (sense) {sensors};
+\node[draw=ECGreen,fill=ECGreen!10,rounded corners,right=of sense] (per) {perception};
+\node[draw=ECPurple,fill=ECPurple!10,rounded corners,right=of per] (plan) {planning};
+\node[draw=ECOrange,fill=ECOrange!10,rounded corners,right=of plan] (ctrl) {control};
+\node[draw=ECRed,fill=ECRed!8,rounded corners,below=of plan] (safe) {safety monitor};
+\draw[->,thick] (sense)--(per); \draw[->,thick] (per)--(plan); \draw[->,thick] (plan)--(ctrl);
+\draw[->,thick,dashed] (safe)--(ctrl); \draw[->,thick,dashed] (per)--(safe);
+\end{tikzpicture}
+\end{center}
+\end{engineeringfocus}
+
+\begin{keyfigures}
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+Camera strength & detailed images\\
+Radar strength & relative speed\\
+Lidar output & 3D point cloud\\
+Critical principle & redundancy\\
+Safe fallback & minimal-risk manoeuvre
+\end{tabularx}
+\end{keyfigures}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Illustrative braking distance,colback=white,colframe=ECOrange]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[width=\linewidth,height=48mm,xlabel={Speed (km/h)},ylabel={Braking distance (m)},grid=major,
+legend style={font=\scriptsize,at={(0.5,-0.2)},anchor=north,legend columns=2},ticklabel style={font=\scriptsize}]
+\addplot[thick,mark=*] table[x=speed,y=dry,col sep=comma]{data/EC23/stopping.csv};
+\addplot[thick,mark=square*] table[x=speed,y=wet,col sep=comma]{data/EC23/stopping.csv};
+\legend{Dry road,Wet road}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{tcolorbox}
+
+\begin{vocabulary}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+sensor fusion & fusion de capteurs\\
+point cloud & nuage de points\\
+localisation & localisation\\
+trajectory & trajectoire\\
+fallback & solution de repli\\
+operational design domain & domaine opérationnel\\
+wheel slip & glissement des roues\\
+blind spot & angle mort\\
+braking distance & distance de freinage\\
+redundancy & redondance
+\end{tabularx}
+\end{vocabulary}
+
+\begin{questions}
+\item What functions form the autonomous driving chain?
+\item Why are several sensor technologies combined?
+\item How can localisation fail in a tunnel?
+\item Why does braking distance rise rapidly with speed?
+\item What is an operational design domain?
+\end{questions}
+
+\begin{engineeringchallenge}
+Design an autonomous shuttle for a closed university campus. Define its sensors, maximum speed,
+operational design domain, emergency strategy and verification tests for pedestrians, rain and GNSS
+loss.
+\end{engineeringchallenge}
+
+\begin{speaking}
+Who should be responsible after an autonomous vehicle accident: the passenger, manufacturer,
+software provider or road operator? Defend a position.
+\end{speaking}
+\end{multicols}
+
+\subsection*{Sources}
+\ECsource{SAE International -- Automated Driving}{https://www.sae.org/standards/content/j3016_202104/}
+\ECsource{NHTSA -- Automated Vehicles}{https://www.nhtsa.gov/vehicle-safety/automated-vehicles-safety}

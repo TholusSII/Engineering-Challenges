@@ -1,0 +1,124 @@
+\phantomsection\addcontentsline{toc}{section}{Marine Renewable Energy}
+\ECchapter{25}{Marine Renewable Energy}{Power from oceans}{ECBlue}
+
+\ECObjectives{
+\begin{itemize}
+\item Compare tidal, wave and offshore energy technologies.
+\item Explain the mechanical and environmental design constraints.
+\item Analyse energy yield and maintenance trade-offs.
+\end{itemize}}
+
+\begin{multicols}{2}
+\begin{engineeringnews}
+Oceans contain large renewable energy resources. Offshore wind is already deployed at commercial
+scale, while tidal-stream and wave-energy devices continue to develop. Marine systems benefit from
+strong resources but face difficult installation and maintenance conditions.
+\end{engineeringnews}
+
+\begin{ecarticle}
+Marine renewable energy includes offshore wind, tidal barrages, tidal-stream turbines and wave-energy
+converters. Each technology extracts energy from a different physical phenomenon and therefore needs a
+different structure, control system and maintenance strategy.
+
+Tidal-stream turbines operate like underwater wind turbines. Water density is much greater than air
+density, so a relatively slow current can produce significant force. The available power is
+proportional to fluid density, swept area and the cube of flow speed. Tides are highly predictable, but
+suitable sites are limited and the equipment must resist strong cyclic loads.
+
+Wave-energy converters use the relative motion between waves and a floating or fixed structure. Some
+devices use oscillating water columns, while others use hinged bodies or hydraulic power take-off
+systems. Wave direction, period and height change continuously, making efficient control difficult.
+Storm survival is often more demanding than normal power production.
+
+The marine environment accelerates corrosion and biological growth. Salt water attacks materials,
+while barnacles and algae change surface properties and increase drag. Seals, cables and bearings must
+operate for long periods with limited access. Retrieving a device for repair may require specialised
+ships and suitable weather, so reliability strongly affects the cost of energy.
+
+Engineers must also consider navigation, fishing, underwater noise and marine ecosystems. Environmental
+monitoring is required before and after installation. Grid connection can be expensive because subsea
+cables and offshore substations are needed. The best design is therefore not simply the device with the
+highest peak power, but the system that delivers reliable energy over its complete life cycle.
+\end{ecarticle}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
+Because tidal motion is driven by astronomical cycles, its timing can be predicted years in advance.
+This makes tidal energy variable but highly predictable.
+\end{tcolorbox}
+
+\begin{engineeringfocus}
+\textbf{Tidal-stream conversion chain}
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=3mm]
+\node[draw=ECBlue,fill=ECLightBlue,rounded corners] (flow) {tidal current};
+\node[draw=ECGreen,fill=ECGreen!10,rounded corners,right=of flow] (rotor) {rotor};
+\node[draw=ECPurple,fill=ECPurple!10,rounded corners,right=of rotor] (gen) {generator};
+\node[draw=ECOrange,fill=ECOrange!10,rounded corners,right=of gen] (conv) {converter};
+\node[draw=ECRed,fill=ECRed!8,rounded corners,below=of gen] (grid) {subsea cable and grid};
+\draw[->,thick] (flow)--(rotor); \draw[->,thick] (rotor)--(gen); \draw[->,thick] (gen)--(conv);
+\draw[->,thick] (conv)--(grid);
+\end{tikzpicture}
+\end{center}
+\end{engineeringfocus}
+
+\begin{keyfigures}
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+Predictable resource & tides\\
+Main material threat & corrosion\\
+Common surface issue & biofouling\\
+Major cost driver & offshore maintenance\\
+Grid connection & subsea cable
+\end{tabularx}
+\end{keyfigures}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Illustrative capacity factors,colback=white,colframe=ECBlue]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[xbar,width=\linewidth,height=50mm,xlabel={Capacity factor (\%)},xmin=0,xmax=55,
+symbolic y coords={Tidal barrage,Offshore wind,Wave energy,Tidal stream},ytick=data,
+grid=major,ticklabel style={font=\scriptsize},nodes near coords]
+\addplot table[x=factor,y=technology,col sep=comma]{data/EC25/capacity.csv};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\footnotesize Values are illustrative; real performance depends strongly on site and technology maturity.
+\end{tcolorbox}
+
+\begin{vocabulary}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+tidal stream & courant de marée\\
+wave period & période de vague\\
+power take-off & système de conversion d'énergie\\
+cyclic load & charge cyclique\\
+corrosion & corrosion\\
+biofouling & encrassement biologique\\
+subsea cable & câble sous-marin\\
+capacity factor & facteur de charge\\
+mooring & amarrage\\
+storm survival & tenue en tempête
+\end{tabularx}
+\end{vocabulary}
+
+\begin{questions}
+\item Why can slow seawater flows produce large forces?
+\item What makes wave-energy control difficult?
+\item Why does maintenance dominate marine energy costs?
+\item Give two environmental impacts that must be monitored.
+\item Why is peak power insufficient for comparing devices?
+\end{questions}
+
+\begin{engineeringchallenge}
+Choose a tidal-stream site and propose a 1 MW device. Estimate the required rotor area for an assumed
+current speed, select corrosion protection, define a maintenance strategy and identify two ecological
+monitoring measures.
+\end{engineeringchallenge}
+
+\begin{speaking}
+Should marine renewable projects be prioritised in protected coastal areas when they reduce carbon
+emissions? Discuss biodiversity, energy security, local jobs and precaution.
+\end{speaking}
+\end{multicols}
+
+\subsection*{Sources}
+\ECsource{International Energy Agency -- Ocean Power}{https://www.iea.org/energy-system/renewables/ocean-power}
+\ECsource{European Marine Energy Centre}{https://www.emec.org.uk/}

@@ -1,0 +1,177 @@
+\phantomsection\addcontentsline{toc}{section}{Additive Manufacturing}
+\ECchapter{11}{Additive Manufacturing}{Can 3D printing transform industrial production?}{ECOrange}
+
+\ECObjectives{
+\begin{itemize}
+\item Explain the digital chain from CAD model to finished part.
+\item Compare additive manufacturing with machining and casting.
+\item Identify the main design rules, benefits and limitations of metal 3D printing.
+\end{itemize}}
+
+\begin{multicols}{2}
+\begin{engineeringnews}
+Additive manufacturing is now used for rocket engines, aircraft components, medical implants and
+industrial tooling. Its main advantage is not simply that it prints parts: it allows engineers to
+produce geometries that conventional processes cannot easily manufacture.
+\end{engineeringnews}
+
+\begin{ecarticle}
+Additive manufacturing creates a component layer by layer from a digital model. The process begins
+with a three-dimensional CAD file. Slicing software divides the geometry into thin horizontal
+sections and generates the machine instructions. Depending on the technology, a nozzle deposits a
+molten polymer, a laser melts metal powder, or light solidifies a liquid resin.
+
+This manufacturing route changes the designer's freedom. Internal cooling channels, lattice
+structures and organic shapes can be integrated into a single component. Topology optimisation can
+remove material from low-stress zones while preserving load paths. In aerospace engineering, this
+can reduce mass and therefore fuel consumption. In medicine, a porous implant can be adapted to a
+patient and encourage bone growth.
+
+The process also has constraints. Overhanging zones may require temporary supports. These supports
+consume material and must be removed after printing. Thermal gradients can create residual stress,
+warping or cracks, especially in metal parts. Build orientation affects surface quality, printing
+time and mechanical properties. The engineer must therefore design both the part and its
+manufacturing strategy.
+
+A printed component is rarely ready for immediate use. Powder removal, heat treatment, support
+removal, machining and inspection may be required. Non-destructive testing can detect internal
+porosity, while dimensional measurement verifies that the geometry is within tolerance. Because mechanical properties may vary with the build direction, qualification is essential for safety-critical parts.
+
+Additive manufacturing is particularly effective for prototypes, customised products, spare parts
+and low-volume high-value components. It is less competitive for millions of simple identical
+parts. The best industrial solution is often hybrid: printing creates the complex near-net shape,
+then conventional machining produces accurate interfaces and smooth functional surfaces.
+\end{ecarticle}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
+A component redesigned for additive manufacturing can combine several conventional parts into one.
+This reduces assembly operations, fasteners and possible leakage points, but it can make inspection
+and repair more difficult.
+\end{tcolorbox}
+
+\begin{engineeringfocus}
+\textbf{Digital manufacturing chain}
+
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=3.2mm,scale=.92,transform shape]
+\tikzset{am/.style={draw=ECOrange,fill=ECOrange!9,rounded corners,align=center,
+minimum width=22mm,minimum height=10mm}}
+\node[am] (cad) {CAD model};
+\node[am,right=of cad] (slice) {slicing and\\supports};
+\node[am,right=of slice] (build) {layer-by-layer\\build};
+\node[am,below=of build] (post) {post-processing};
+\node[am,left=of post] (inspect) {inspection and\\qualification};
+\node[draw=ECGreen,fill=ECGreen!10,rounded corners,align=center,left=of inspect,
+minimum width=22mm,minimum height=10mm] (part) {finished part};
+\draw[->,thick] (cad) -- (slice);
+\draw[->,thick] (slice) -- (build);
+\draw[->,thick] (build) -- (post);
+\draw[->,thick] (post) -- (inspect);
+\draw[->,thick] (inspect) -- (part);
+\draw[->,dashed,ECBlue] (inspect.north) |- (cad.south);
+\end{tikzpicture}
+\end{center}
+
+Inspection may lead to a design or parameter change. The chain is therefore iterative rather than
+strictly linear.
+\end{engineeringfocus}
+
+\begin{keyfigures}
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+Typical polymer layer & 0.10--0.30 mm\\
+Typical metal layer & 0.02--0.08 mm\\
+Main input & 3D CAD model\\
+Frequent post-processes & heat treatment, machining\\
+Best production range & low volume / high value
+\end{tabularx}
+\end{keyfigures}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Comparing manufacturing routes,colback=white,colframe=ECOrange]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+width=.88\linewidth,height=47mm,
+ybar,bar width=7pt,
+ymin=0,ymax=105,
+ylabel={Relative score},
+symbolic x coords={Machining,Casting,Additive manufacturing},
+xtick=data,x tick label style={font=\tiny,rotate=18,anchor=east},
+yticklabel style={font=\scriptsize},
+legend style={font=\fontsize{4.5}{5}\selectfont,at={(0.5,1.02)},anchor=south,legend columns=3},
+grid=major]
+\addplot table[x=process,y=time,col sep=comma]{data/EC11/process_comparison.csv};
+\addplot table[x=process,y=material,col sep=comma]{data/EC11/process_comparison.csv};
+\addplot table[x=process,y=complexity,col sep=comma]{data/EC11/process_comparison.csv};
+\legend{Speed,Material efficiency,Geometric freedom}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\footnotesize Illustrative comparison. The most suitable process depends on quantity, material,
+tolerance, geometry and total lifecycle cost.
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Designing a lightweight bracket,colback=white,colframe=ECBlue]
+\begin{center}
+\begin{tikzpicture}[scale=.82]
+\draw[very thick,ECBlue,rounded corners=3pt] (0,0) rectangle (4.8,2.6);
+\fill[white] (.9,.8) circle (.38); \draw[thick] (.9,.8) circle (.38);
+\fill[white] (3.9,.8) circle (.38); \draw[thick] (3.9,.8) circle (.38);
+\fill[white] (2.4,1.9) circle (.42); \draw[thick] (2.4,1.9) circle (.42);
+\foreach \x/\y in {1.55/.75,2.4/.75,3.25/.75,1.75/1.45,3.05/1.45}{
+  \draw[ECOrange,thick] (\x,\y) -- ++(.42,.34) -- ++(-.42,.34) -- ++(-.42,-.34) -- cycle;}
+\draw[->,thick,ECRed] (2.4,3.35) -- (2.4,2.45) node[midway,right]{load};
+\node[font=\scriptsize,align=center] at (2.4,-.45) {material kept around interfaces\\and principal load paths};
+\end{tikzpicture}
+\end{center}
+Topology optimisation must be followed by checks on minimum wall thickness, support removal,
+powder evacuation and machinable reference surfaces.
+\end{tcolorbox}
+
+\begin{vocabulary}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+additive manufacturing & fabrication additive\\
+slicing & découpage en couches\\
+powder bed & lit de poudre\\
+nozzle & buse\\
+support structure & structure de support\\
+build orientation & orientation de fabrication\\
+warping & déformation / gauchissement\\
+porosity & porosité\\
+post-processing & post-traitement\\
+topology optimisation & optimisation topologique
+\end{tabularx}
+\end{vocabulary}
+
+\begin{questions}
+\item What information does slicing software generate?
+\item Why does build orientation influence a printed part?
+\item Give two examples of post-processing operations.
+\item Why can mechanical properties be anisotropic?
+\item When is additive manufacturing more suitable than mass production?
+\end{questions}
+
+\begin{applicationexercise}
+A metal part is 120 mm high and is printed with a layer thickness of 0.04 mm. Each layer takes
+18 seconds to scan and recoating adds no extra time in this simplified model.
+\begin{enumerate}
+\item Calculate the number of layers.
+\item Estimate the ideal build time in hours.
+\item Add 25\% for calibration and interruptions. Estimate the total production time.
+\end{enumerate}
+\end{applicationexercise}
+
+\begin{engineeringchallenge}
+Redesign an aluminium bracket for metal additive manufacturing. Define the loads and interfaces,
+propose a lighter geometry and select a build orientation. Identify the required supports, two
+inspection methods and the surfaces to machine after printing.
+\end{engineeringchallenge}
+
+\begin{speaking}
+Will additive manufacturing replace conventional factories? Give a balanced three-minute answer
+with examples of suitable and unsuitable products.
+\end{speaking}
+\end{multicols}
+
+\subsection*{Sources}
+\ECsource{NIST -- Additive Manufacturing}{https://www.nist.gov/additive-manufacturing}
+\ECsource{NASA -- Additive Manufacturing}{https://www.nasa.gov/centers-and-facilities/marshall/additive-manufacturing/}

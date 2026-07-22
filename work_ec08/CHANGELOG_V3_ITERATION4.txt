@@ -1,0 +1,17 @@
+Engineering Challenges - V3 Iteration 4 (EC17-EC18)
+
+EC17 - Internet of Things
+- Refined several English formulations.
+- Resized the system architecture diagram for safer column fitting.
+- Reduced the communication-current chart width to avoid overflow.
+- Added a quantitative application exercise on average current and ideal battery life.
+
+EC18 - Drones
+- Refined English relating to fault conditions and position estimation.
+- Resized the nested-control-loop diagram for safer column fitting.
+- Added a quantitative application exercise on flight-time reserve and inspection time.
+
+Verification
+- Full pdfLaTeX compilation completed successfully.
+- Final manual length: 64 pages.
+- Pages for EC17 and EC18 visually inspected after rendering.

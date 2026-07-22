@@ -1,0 +1,148 @@
+\phantomsection\addcontentsline{toc}{section}{Smart Cities}
+\ECchapter{13}{Smart Cities}{Can connected systems make cities more sustainable?}{ECGreen}
+
+\ECObjectives{
+\begin{itemize}
+\item Describe the architecture of a connected urban service.
+\item Explain how sensing, communication and control can reduce resource consumption.
+\item Discuss interoperability, privacy, resilience and social inclusion.
+\end{itemize}}
+
+\begin{multicols}{2}
+\begin{engineeringnews}
+Cities are installing connected lighting, traffic and environmental-monitoring systems. The most
+successful projects do not simply collect data: they convert measurements into useful decisions
+while protecting citizens and keeping essential services available during failures.
+\end{engineeringnews}
+
+\begin{ecarticle}
+A smart city uses sensors, communication networks and software to improve urban services. A typical
+system begins with distributed devices that measure traffic flow, air quality, noise, temperature,
+water level or electricity consumption. Data are transmitted to a local controller or digital platform, where algorithms detect trends,
+identify abnormal conditions and select an appropriate action.
+
+Street lighting provides a simple example. Conventional lamps operate at full power for most of the
+night. An adaptive system can combine a light sensor, a motion detector and a timetable. The lamps
+dim when streets are empty and return to a safe level when a pedestrian or vehicle is detected.
+Energy savings are possible, but minimum illumination, reaction time and failure behaviour must be
+specified carefully.
+
+Traffic management is more complex. Cameras, induction loops and connected vehicles estimate queue
+lengths. A controller can modify signal timing to reduce waiting time and emissions. The local
+optimisation of one junction, however, may create congestion elsewhere. Engineers therefore model
+the complete network and define priorities for buses, emergency vehicles, cyclists and pedestrians.
+
+Smart buildings and smart grids can also cooperate. Occupancy sensors adjust heating and
+ventilation, while a district energy manager coordinates photovoltaic generation, batteries and
+electric-vehicle charging. This requires devices from different manufacturers to exchange data.
+Interoperability and open communication standards are therefore essential. Edge computing can also
+process urgent data close to the sensors, reducing latency and dependence on a distant platform.
+
+Connectivity also creates risks. Location or camera data may reveal personal behaviour. A network
+failure must not stop traffic lights, water pumps or emergency systems. Good design separates critical functions, stores only necessary data, applies cybersecurity measures
+and includes redundant local fallback modes. Finally, a city is
+not truly smart if services are inaccessible to people without smartphones or digital skills.
+\end{ecarticle}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
+A digital twin is a computer model linked to measurements from the real city. Engineers can use it
+to compare traffic, energy or flood-management scenarios before changing physical infrastructure.
+\end{tcolorbox}
+
+\begin{engineeringfocus}
+\textbf{Architecture of an adaptive lighting service}
+
+\begin{center}
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=4mm]
+\node[draw=ECGreen,fill=ECGreen!10,rounded corners,align=center] (s) {motion and\\light sensors};
+\node[draw=ECBlue,fill=ECLightBlue,rounded corners,align=center,right=of s] (n) {wireless\\network};
+\node[draw=ECPurple,fill=ECPurple!10,rounded corners,align=center,right=of n] (c) {local\\controller};
+\node[draw=ECOrange,fill=ECOrange!10,rounded corners,align=center,below=of c] (l) {LED street\\lamps};
+\node[draw=ECRed,fill=ECRed!8,rounded corners,align=center,below=of n] (p) {supervision and\\maintenance platform};
+\draw[->,thick] (s)--(n); \draw[->,thick] (n)--(c); \draw[->,thick] (c)--(l);
+\draw[<->,thick,dashed] (n)--(p); \draw[->,thick,dashed] (l.west)-| (s.south);
+\end{tikzpicture}%
+}
+\end{center}
+
+The essential control loop is local: sensing, decision and lighting remain available even if the
+central platform is disconnected.
+\end{engineeringfocus}
+
+\begin{keyfigures}
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+Connected devices & thousands per district\\
+Useful lamp response time & a few seconds\\
+Important design property & interoperability\\
+Critical service requirement & fallback mode\\
+Main ethical concern & privacy
+\end{tabularx}
+\end{keyfigures}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Lighting power profile,colback=white,colframe=ECGreen]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[width=\linewidth,height=48mm,xlabel={Time of day (h)},ylabel={Rated power (\%)},xmin=0,xmax=24,
+ymin=0,ymax=110,grid=major,legend style={font=\scriptsize,at={(.5,-.28)},anchor=north,legend columns=2},
+ticklabel style={font=\scriptsize}]
+\addplot[very thick,mark=*] table[x=hour,y=conventional,col sep=comma]{data/EC13/lighting_profile.csv};
+\addlegendentry{Conventional}
+\addplot[very thick,mark=square*] table[x=hour,y=adaptive,col sep=comma]{data/EC13/lighting_profile.csv};
+\addlegendentry{Adaptive}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\footnotesize Illustrative daily profiles. The adaptive system lowers the power demand during quiet
+periods while restoring a higher level when activity is detected.
+\end{tcolorbox}
+
+\begin{vocabulary}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+sensor network & réseau de capteurs\\
+traffic flow & flux de circulation\\
+street lighting & éclairage public\\
+occupancy & occupation / présence\\
+interoperability & interopérabilité\\
+digital twin & jumeau numérique\\
+fallback mode & mode de repli\\
+outage & panne / interruption\\
+privacy & vie privée\\
+urban planning & urbanisme
+\end{tabularx}
+\end{vocabulary}
+
+\begin{questions}
+\item Describe the data path in a smart-city system.
+\item How can adaptive lighting save energy without reducing safety?
+\item Why can local traffic optimisation be insufficient?
+\item What does interoperability mean in this context?
+\item Give two ways to make a connected urban service resilient.
+\end{questions}
+
+\begin{applicationexercise}
+A district operates 1,200 LED street lamps rated at 80 W. The conventional system runs at full
+power for 12 hours each night. An adaptive strategy uses full power for 5 hours and 35\% power for
+the remaining 7 hours.
+\begin{enumerate}
+\item Calculate the nightly energy consumption of the conventional system.
+\item Calculate the nightly energy consumption of the adaptive system.
+\item Determine the energy saved per night and the percentage reduction.
+\end{enumerate}
+\end{applicationexercise}
+
+\begin{engineeringchallenge}
+Design a smart energy-management system for a school district. Select sensors and controlled
+equipment, draw the information flow, define one energy-saving rule and describe the safe fallback
+mode. Explain how personal data will be minimised.
+\end{engineeringchallenge}
+
+\begin{speaking}
+Should a city use cameras and connected sensors to reduce congestion? Present one technical benefit,
+one privacy risk and one condition for public acceptance.
+\end{speaking}
+\end{multicols}
+
+\subsection*{Sources}
+\ECsource{European Commission -- Smart Cities}{https://commission.europa.eu/eu-regional-and-urban-development/topics/cities-and-urban-development/city-initiatives/smart-cities_en}
+\ECsource{NIST -- Smart Connected Systems}{https://www.nist.gov/ctl/smart-connected-systems-division}

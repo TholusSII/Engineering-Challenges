@@ -1,0 +1,128 @@
+\phantomsection\addcontentsline{toc}{section}{Biomimetics}
+\ECchapter{19}{Biomimetics}{How can engineering learn from living systems?}{ECPurple}
+
+\ECObjectives{
+\begin{itemize}
+\item Distinguish inspiration from direct imitation of a biological model.
+\item Explain how structure, surface and control principles can be transferred to engineering.
+\item Evaluate a biomimetic solution using measurable performance and life-cycle criteria.
+\end{itemize}}
+
+\begin{multicols}{2}
+\begin{engineeringnews}
+Biomimetic research is influencing adhesives, lightweight structures, ventilation systems and robot
+locomotion. Nature provides useful strategies, but engineering success requires abstraction,
+modelling and testing rather than simply copying the appearance of an organism.
+\end{engineeringnews}
+
+\begin{ecarticle}
+Biomimetics studies biological functions and transfers useful principles to engineered systems. The
+process normally begins with a technical problem such as reducing drag, gripping a surface or
+building a lightweight structure. Engineers then search for organisms that solve a comparable
+functional problem under similar constraints.
+
+The biological solution must be understood at the correct scale. A bird wing is not only a curved
+surface; its performance depends on flexible feathers, muscles, sensing and active control. Directly
+copying its shape may therefore fail. Engineers abstract the underlying principle, create a model and
+adapt it to available materials and manufacturing methods.
+
+Surface engineering provides many examples. Gecko feet adhere through millions of microscopic hairs
+that create weak intermolecular forces over a large contact area. Artificial dry adhesives reproduce
+the hierarchical structure without using glue. Shark skin has rib-like textures that influence the
+flow close to the surface. Similar riblets can reduce friction drag in selected conditions, although
+their benefit depends on size, orientation and cleanliness.
+
+Nature also inspires structures. Bone combines a dense outer layer with a porous interior, giving a
+high stiffness-to-mass ratio. Additive manufacturing can produce lattice structures that use the same
+principle. Honeycomb panels and branching networks similarly offer efficient ways to distribute
+loads or fluids.
+
+A biomimetic design is not automatically sustainable. Manufacturing a complex microstructure may
+consume large amounts of energy or use materials that are difficult to recycle. Engineers must compare
+the complete life cycle, durability and maintenance requirements with a conventional solution.
+Biomimetics is most valuable when the biological analogy leads to a measurable improvement and not
+only to an attractive product story.
+\end{ecarticle}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
+The hook-and-loop fastener was inspired by burrs that attached themselves to animal fur and clothing.
+The invention reproduced the attachment principle, not the complete plant structure.
+\end{tcolorbox}
+
+\begin{engineeringfocus}
+\textbf{From biological observation to engineering validation}
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=3.3mm]
+\node[draw=ECPurple,fill=ECPurple!10,rounded corners,align=center] (p) {define the\\technical function};
+\node[draw=ECGreen,fill=ECGreen!10,rounded corners,align=center,right=of p] (b) {observe a\\biological strategy};
+\node[draw=ECBlue,fill=ECLightBlue,rounded corners,align=center,right=of b] (a) {abstract the\\working principle};
+\node[draw=ECOrange,fill=ECOrange!10,rounded corners,align=center,below=of a] (m) {model and\\prototype};
+\node[draw=ECRed,fill=ECRed!8,rounded corners,align=center,below=of b] (v) {test performance\\and life cycle};
+\draw[->,thick] (p)--(b); \draw[->,thick] (b)--(a); \draw[->,thick] (a)--(m);
+\draw[->,thick] (m)--(v); \draw[->,thick,dashed] (v)--(p);
+\end{tikzpicture}
+\end{center}
+Iteration is essential because biological materials and manufacturing constraints are very different.
+\end{engineeringfocus}
+
+\begin{keyfigures}
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+Primary objective & functional transfer\\
+Common scale & microstructure\\
+Typical benefit & low mass or drag\\
+Necessary step & abstraction\\
+Final proof & measured validation
+\end{tabularx}
+\end{keyfigures}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Illustrative drag comparison,colback=white,colframe=ECPurple]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[xbar,width=\linewidth,height=49mm,xlabel={Relative drag index},xmin=0,xmax=110,
+symbolic y coords={Optimised riblets,Shark-inspired coating,Riblet texture,Smooth reference},
+ytick=data,grid=major,ticklabel style={font=\scriptsize},nodes near coords]
+\addplot table[x=drag,y=surface,col sep=comma]{data/EC19/drag.csv};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\footnotesize Illustrative values showing that geometry must be optimised for the operating flow.
+\end{tcolorbox}
+
+\begin{vocabulary}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+biomimetics & biomimétisme\\
+living system & système vivant\\
+working principle & principe de fonctionnement\\
+hierarchical structure & structure hiérarchique\\
+riblet & micro-rainure\\
+adhesion & adhérence\\
+porous & poreux\\
+lattice structure & structure en treillis\\
+stiffness-to-mass ratio & rapport rigidité/masse\\
+life cycle & cycle de vie
+\end{tabularx}
+\end{vocabulary}
+
+\begin{questions}
+\item Why is direct imitation often insufficient?
+\item Explain how gecko feet inspire dry adhesives.
+\item What engineering benefit can be obtained from bone-like structures?
+\item Why must operating scale be considered for riblets?
+\item How can a biomimetic product have a poor environmental performance?
+\end{questions}
+
+\begin{engineeringchallenge}
+Choose a biological strategy that could improve a small wind turbine, robot gripper or protective
+helmet. Identify the function, abstract the principle, propose a manufacturable concept and define
+two experiments that compare it with a conventional design.
+\end{engineeringchallenge}
+
+\begin{speaking}
+Is nature always the best engineer? Discuss optimisation, evolution, materials, manufacturing and the
+need for measurable evidence.
+\end{speaking}
+\end{multicols}
+
+\subsection*{Sources}
+\ECsource{AskNature -- Biomimicry examples}{https://asknature.org/}
+\ECsource{Biomimicry Institute}{https://biomimicry.org/}

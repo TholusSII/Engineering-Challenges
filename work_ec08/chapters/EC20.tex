@@ -1,0 +1,128 @@
+\phantomsection\addcontentsline{toc}{section}{Circular Economy}
+\ECchapter{20}{Circular Economy}{How can products remain useful for longer?}{ECRed}
+
+\ECObjectives{
+\begin{itemize}
+\item Compare linear and circular product life cycles.
+\item Explain design for durability, repair, disassembly and remanufacturing.
+\item Use life-cycle reasoning to avoid shifting environmental impacts.
+\end{itemize}}
+
+\begin{multicols}{2}
+\begin{engineeringnews}
+Manufacturers are developing repairable products, component take-back schemes and remanufacturing
+lines. Circularity is not achieved by recycling alone: the highest value is often preserved when a
+product, module or component remains in use with the least possible transformation.
+\end{engineeringnews}
+
+\begin{ecarticle}
+The traditional linear model follows a simple sequence: extract resources, manufacture a product,
+use it and discard it. This model loses materials, energy and technical value at the end of each life.
+A circular economy aims to keep products and materials useful for longer through maintenance, reuse,
+repair, refurbishment, remanufacturing and, finally, recycling.
+
+Engineering decisions made during design strongly influence these options. A durable product needs
+components that resist expected loads and environments. A repairable product needs accessible
+fasteners, diagnostic information and available spare parts. Modular architecture allows a failed or
+obsolete function to be replaced without discarding the complete system.
+
+Disassembly must also be considered. Permanent adhesives and mixed materials may simplify production
+but make separation difficult. Screws, clips and clearly identified polymers can improve recovery,
+although they may add cost, mass or assembly time. Engineers therefore balance circularity with safety,
+performance and industrial constraints.
+
+Remanufacturing restores a used product to a defined level of performance. Components are inspected,
+cleaned, repaired or replaced and then tested. This can preserve more value than material recycling,
+but it requires traceability and a predictable return flow. Digital product passports can record
+materials, maintenance and previous use, helping operators choose the correct recovery route.
+
+Life-cycle assessment prevents misleading solutions. A heavier product may last longer but require
+more material and transport energy. A replaceable battery can extend product life, yet the sealing
+system must still meet safety requirements. Engineers compare resource use, energy, emissions and
+service life across the complete system boundary. The objective is not simply to close a loop, but to
+reduce total environmental impact while providing the required service.
+\end{ecarticle}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
+Recycling is important, but it often destroys much of the manufacturing value already invested in a
+component. Repair and reuse usually preserve more value when they are technically possible.
+\end{tcolorbox}
+
+\begin{engineeringfocus}
+\textbf{Circular design hierarchy}
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=3.2mm]
+\node[draw=ECGreen,fill=ECGreen!10,rounded corners,align=center] (use) {use and\\maintain};
+\node[draw=ECBlue,fill=ECLightBlue,rounded corners,align=center,right=of use] (rep) {repair and\\upgrade};
+\node[draw=ECPurple,fill=ECPurple!10,rounded corners,align=center,right=of rep] (ref) {refurbish or\\remanufacture};
+\node[draw=ECOrange,fill=ECOrange!10,rounded corners,align=center,below=of ref] (rec) {recycle\\materials};
+\node[draw=ECRed,fill=ECRed!8,rounded corners,align=center,below=of rep] (loss) {energy recovery\\or disposal};
+\draw[->,thick] (use)--(rep); \draw[->,thick] (rep)--(ref); \draw[->,thick] (ref)--(rec);
+\draw[->,thick] (rec)--(loss); \draw[->,thick,dashed] (ref.north) to[bend left=28] (use.north);
+\end{tikzpicture}
+\end{center}
+Short loops usually preserve more product value and require less transformation.
+\end{engineeringfocus}
+
+\begin{keyfigures}
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+Highest-value strategy & continued use\\
+Repair enabler & accessibility\\
+Upgrade enabler & modularity\\
+Recovery enabler & disassembly\\
+Decision tool & life-cycle assessment
+\end{tabularx}
+\end{keyfigures}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Relative life-cycle impact,colback=white,colframe=ECRed]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[xbar,width=\linewidth,height=50mm,xlabel={Relative impact index},xmin=0,xmax=110,
+symbolic y coords={Reuse,Remanufacture,Refurbishment,Repair,Linear use},
+ytick=data,grid=major,ticklabel style={font=\scriptsize},nodes near coords]
+\addplot table[x=impact,y=strategy,col sep=comma]{data/EC20/lifecycle.csv};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\footnotesize Illustrative comparison for the same delivered service; real results depend on transport,
+energy mix, product lifetime and replacement parts.
+\end{tcolorbox}
+
+\begin{vocabulary}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+linear economy & économie linéaire\\
+durability & durabilité\\
+repairability & réparabilité\\
+disassembly & démontage\\
+spare part & pièce détachée\\
+refurbishment & reconditionnement\\
+remanufacturing & remise à neuf industrielle\\
+traceability & traçabilité\\
+product passport & passeport produit\\
+life-cycle assessment & analyse du cycle de vie
+\end{tabularx}
+\end{vocabulary}
+
+\begin{questions}
+\item Why does repair usually preserve more value than recycling?
+\item Give three design choices that improve repairability.
+\item What is the difference between refurbishment and remanufacturing?
+\item Why can permanent adhesive create an end-of-life problem?
+\item How does life-cycle assessment prevent impact shifting?
+\end{questions}
+
+\begin{engineeringchallenge}
+Redesign a cordless drill, laptop or coffee machine for a longer useful life. Define a modular
+architecture, select reversible joining methods, identify replaceable components and propose a
+collection and remanufacturing process. State one trade-off created by your design.
+\end{engineeringchallenge}
+
+\begin{speaking}
+Should manufacturers be legally required to provide spare parts and repair information? Discuss cost,
+safety, innovation, ownership and environmental impact.
+\end{speaking}
+\end{multicols}
+
+\subsection*{Sources}
+\ECsource{European Commission -- Circular Economy Action Plan}{https://environment.ec.europa.eu/strategy/circular-economy-action-plan_en}
+\ECsource{Ellen MacArthur Foundation -- Circular Economy}{https://www.ellenmacarthurfoundation.org/topics/circular-economy-introduction/overview}

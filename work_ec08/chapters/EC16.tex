@@ -1,0 +1,163 @@
+\phantomsection\addcontentsline{toc}{section}{Cybersecurity}
+\ECchapter{16}{Cybersecurity}{How can engineers protect connected systems?}{ECBlue}
+
+\ECObjectives{
+\begin{itemize}
+\item Distinguish confidentiality, integrity and availability.
+\item Explain defence in depth for a connected engineering system.
+\item Analyse technical risk using threats, vulnerabilities and consequences.
+\end{itemize}}
+
+\begin{multicols}{2}
+\begin{engineeringnews}
+Industrial systems, vehicles, hospitals and energy networks increasingly depend on connected
+software. Cybersecurity is therefore a safety and business-continuity issue as well as an information-technology
+issue: a digital attack can produce physical consequences.
+\end{engineeringnews}
+
+\begin{ecarticle}
+A connected engineering system contains sensors, controllers, software, communication links and
+actuators. Each interface can become an entry point for accidental failure or malicious action.
+Cybersecurity aims to preserve three central properties: confidentiality prevents unauthorised
+disclosure, integrity prevents unauthorised modification, and availability keeps the service usable.
+
+Risk depends on more than the mere existence of a threat. Engineers identify valuable assets, possible
+attackers, vulnerabilities and consequences. A weak password on a non-critical display is not the
+same risk as an unprotected remote command to a water-treatment pump. Safety analysis and cyber-risk
+analysis must therefore be coordinated.
+
+No single protection is sufficient. Defence in depth combines several independent layers. Devices
+should authenticate users and other devices. Communications can be encrypted, software should be
+updated, and networks should be segmented so that an office computer cannot directly control a
+critical machine. Access rights follow the principle of least privilege: each account receives only
+the permissions required for its task.
+
+Monitoring is also necessary. Logs, alarms and anomaly detection can reveal unexpected traffic or
+commands. When an incident occurs, operators need a prepared response: isolate affected equipment,
+maintain a safe physical state, restore trusted software and verify operation. Offline backups help
+recovery, but they must be tested rather than merely stored.
+
+Security creates engineering trade-offs. Encryption and authentication use processing time and
+energy. Updates may interrupt production, while legacy equipment may not support modern protocols.
+A secure design therefore begins with requirements and threat modelling rather than with a protective
+tool added at the end. Human factors matter too: clear procedures and training reduce errors and social
+engineering attacks.
+\end{ecarticle}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
+Safety and cybersecurity can conflict. An emergency door should open quickly for evacuation, yet
+access control should prevent intrusion. The final design must satisfy both requirements.
+\end{tcolorbox}
+
+\begin{engineeringfocus}
+\textbf{Defence-in-depth architecture}
+
+\begin{center}
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=3.5mm]
+\node[draw=ECBlue,fill=ECLightBlue,rounded corners,align=center] (user) {authorised\\user};
+\node[draw=ECGreen,fill=ECGreen!10,rounded corners,align=center,right=of user] (auth) {identity and\\authentication};
+\node[draw=ECPurple,fill=ECPurple!10,rounded corners,align=center,right=of auth] (gate) {firewall and\\segmentation};
+\node[draw=ECOrange,fill=ECOrange!10,rounded corners,align=center,below=of gate] (ctrl) {industrial\\controller};
+\node[draw=ECRed,fill=ECRed!8,rounded corners,align=center,left=of ctrl] (plant) {physical process\\safe state};
+\node[draw=ECBlue,fill=ECLightBlue,rounded corners,align=center,left=of plant] (mon) {logging and\\monitoring};
+\draw[->,thick] (user)--(auth); \draw[->,thick] (auth)--(gate); \draw[->,thick] (gate)--(ctrl);
+\draw[->,thick] (ctrl)--(plant); \draw[->,thick,dashed] (plant)--(mon); \draw[->,thick,dashed] (mon)-| (auth.south);
+\end{tikzpicture}%
+}
+\end{center}
+
+If one layer fails, another should still reduce the probability or consequence of compromise.
+\end{engineeringfocus}
+
+\begin{keyfigures}
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+Core security objectives & 3\\
+Preferred access principle & least privilege\\
+Critical architecture measure & segmentation\\
+Recovery requirement & tested backup\\
+Essential lifecycle activity & updates
+\end{tabularx}
+\end{keyfigures}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Effect of layered safeguards,colback=white,colframe=ECBlue]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[ybar,width=\linewidth,height=51mm,ylabel={Residual risk index},ymin=0,ymax=110,
+symbolic x coords={No protection,Strong passwords,Updates,Network segmentation,Monitoring,Backup and recovery},xtick=data,
+x tick label style={rotate=42,anchor=east,font=\scriptsize},yticklabel style={font=\scriptsize},grid=major]
+\addplot table[x=measure,y=risk,col sep=comma]{data/EC16/risk_reduction.csv};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\footnotesize Illustrative risk reduction: safeguards are cumulative, but risk never becomes exactly
+zero and each layer must be maintained.
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Risk reasoning,colback=white,colframe=ECRed]
+\begin{center}
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=5mm]
+\node[draw,rounded corners,fill=ECRed!8] (t) {threat};
+\node[draw,rounded corners,fill=ECOrange!10,right=of t] (v) {vulnerability};
+\node[draw,rounded corners,fill=ECPurple!10,right=of v] (e) {unwanted event};
+\node[draw,rounded corners,fill=ECBlue!10,right=of e] (c) {consequence};
+\draw[->,thick] (t)--(v); \draw[->,thick] (v)--(e); \draw[->,thick] (e)--(c);
+\end{tikzpicture}%
+}
+\end{center}
+Safeguards may reduce the likelihood of the event, limit its consequences, or improve detection and
+recovery.
+\end{tcolorbox}
+
+\begin{vocabulary}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+confidentiality & confidentialité\\
+integrity & intégrité\\
+availability & disponibilité\\
+threat & menace\\
+vulnerability & vulnérabilité\\
+authentication & authentification\\
+encryption & chiffrement\\
+network segmentation & segmentation du réseau\\
+least privilege & moindre privilège\\
+backup & sauvegarde
+\end{tabularx}
+\end{vocabulary}
+
+
+\begin{applicationexercise}
+The graph assigns a residual-risk index of 100 to an unprotected system and 11 after all listed
+safeguards have been introduced.
+\begin{enumerate}
+\item Calculate the percentage reduction in residual risk.
+\item Which safeguard produces the largest absolute reduction between two consecutive bars?
+\item Explain why the final index is not zero.
+\item A greenhouse must continue watering crops during a network outage. Propose one local fail-safe
+mode and one method for recording the incident.
+\end{enumerate}
+\end{applicationexercise}
+
+\begin{questions}
+\item Define confidentiality, integrity and availability.
+\item Why should cyber risk be linked to physical consequences?
+\item Give four layers of a defence-in-depth strategy.
+\item What is the purpose of network segmentation?
+\item Why must backups and incident procedures be tested?
+\end{questions}
+
+\begin{engineeringchallenge}
+Secure a connected greenhouse containing temperature sensors, an irrigation pump and remote access.
+Identify assets, one threat and one vulnerability. Propose authentication, segmentation, monitoring
+and a safe local mode if the network is unavailable.
+\end{engineeringchallenge}
+
+\begin{speaking}
+Is a fully connected system always better than an isolated one? Compare functionality, maintenance,
+security and resilience using one engineering example.
+\end{speaking}
+\end{multicols}
+
+\subsection*{Sources}
+\ECsource{NIST -- Cybersecurity Framework}{https://www.nist.gov/cyberframework}
+\ECsource{European Union Agency for Cybersecurity}{https://www.enisa.europa.eu/}

@@ -1,0 +1,100 @@
+\phantomsection\addcontentsline{toc}{section}{High-Speed Transportation}
+\ECchapter{30}{High-Speed Transportation}{Moving faster with less energy}{ECBlue}
+
+\ECObjectives{
+\begin{itemize}
+\item Explain the main physical and engineering principles.
+\item Interpret measurements, models and performance trade-offs.
+\item Identify safety, environmental and validation constraints.
+\end{itemize}}
+
+\begin{multicols}{2}
+\begin{engineeringnews}
+High-speed rail, magnetic-levitation systems and evacuated-tube concepts seek to reduce journey times between cities. At high speed, aerodynamic drag, infrastructure quality, safety and energy supply become dominant engineering constraints.
+\end{engineeringnews}
+
+\begin{ecarticle}
+High-speed transportation is a system problem rather than simply a faster vehicle. Track geometry, propulsion, signalling, stations, maintenance and emergency procedures must be designed together. A train travelling at 300 km/h covers more than 80 metres each second, so small errors can rapidly become critical.
+
+Aerodynamic drag increases approximately with the square of speed, while the power required to overcome it increases approximately with the cube. Doubling speed can therefore require about eight times more aerodynamic power if shape and air density remain unchanged. Streamlined noses, smooth surfaces and protected underbodies reduce drag and pressure waves. Tunnel entry is particularly demanding because the vehicle compresses air in a confined space.
+
+Conventional high-speed trains use steel wheels on rails. This provides low rolling resistance and mature switching technology. Magnetic levitation removes wheel-rail contact at speed, reducing mechanical wear, but it requires dedicated guideways and complex electromagnetic control. Low-pressure tubes could reduce aerodynamic resistance further, yet maintaining long evacuated infrastructure and safe evacuation routes is difficult.
+
+Braking distance grows with the square of speed for a given deceleration. High-speed networks therefore use continuous signalling and automatic train protection rather than relying on lineside signals. Regenerative braking can return energy to the electrical network, provided another train or storage system can absorb it.
+
+Speed alone does not determine usefulness. Door-to-door time, station access, capacity, reliability, construction carbon and ticket cost matter. High-speed rail performs best on busy corridors where large passenger flows justify dedicated infrastructure. Engineers must compare alternatives using energy per passenger-kilometre and lifecycle impact, not vehicle speed or peak power alone.
+\end{ecarticle}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
+A high-performance prototype is not sufficient: engineers must prove repeatability, safety and useful performance under realistic operating conditions.
+\end{tcolorbox}
+
+\begin{engineeringfocus}
+\textbf{Energy conversion in high-speed rail}
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=4mm]
+\node[draw=ECBlue,fill=ECLightBlue,rounded corners] (grid) {electric grid};
+\node[draw=ECPurple,fill=ECPurple!10,rounded corners,right=of grid] (drive) {converter and motor};
+\node[draw=ECGreen,fill=ECGreen!10,rounded corners,right=of drive] (motion) {vehicle motion};
+\node[draw=ECOrange,fill=ECOrange!10,rounded corners,below=of drive] (loss) {drag and losses};
+\draw[->,thick] (grid)--(drive); \draw[->,thick] (drive)--(motion); \draw[->,thick] (motion)--(loss);
+\draw[->,thick,dashed] (motion) to[bend left=35] node[above]{regeneration} (grid);
+\end{tikzpicture}
+\end{center}
+\end{engineeringfocus}
+
+\begin{keyfigures}
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+Drag force & $\propto v^2$\\
+Aerodynamic power & $\propto v^3$\\
+Braking distance & $\propto v^2$\\
+Safety system & continuous signalling\\
+Useful metric & passenger-km\\
+\end{tabularx}
+\end{keyfigures}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Aerodynamic power versus speed,colback=white,colframe=ECBlue]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[width=\linewidth,height=48mm,xlabel={Speed (km/h)},ylabel={Relative aerodynamic power},grid=major,ticklabel style={font=\scriptsize}]
+\addplot[thick,mark=*] table[x=speed,y=power,col sep=comma]{data/EC30/power.csv};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{tcolorbox}
+
+\begin{vocabulary}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+aerodynamic drag & traînée aérodynamique\\
+rolling resistance & résistance au roulement\\
+guideway & voie de guidage\\
+magnetic levitation & sustentation magnétique\\
+pressure wave & onde de pression\\
+braking distance & distance de freinage\\
+regenerative braking & freinage régénératif\\
+signalling & signalisation\\
+passenger-kilometre & passager-kilomètre\\
+dedicated infrastructure & infrastructure dédiée\\
+\end{tabularx}
+\end{vocabulary}
+
+\begin{questions}
+\item Why does aerodynamic power rise so quickly with speed?
+\item What are the main advantages and limits of magnetic levitation?
+\item Why are continuous signalling systems necessary?
+\item When can regenerative braking return useful energy?
+\item Why should door-to-door time be considered?
+\end{questions}
+
+\begin{engineeringchallenge}
+Compare a 300 km/h railway with a magnetic-levitation line for a 600 km corridor. Estimate travel time, identify dominant losses, define safety requirements and propose a lifecycle comparison.
+\end{engineeringchallenge}
+
+\begin{speaking}
+Should public investment favour maximum speed or a denser network with lower speeds and more frequent services?
+\end{speaking}
+\end{multicols}
+
+\subsection*{Sources}
+\ECsource{International Union of Railways -- High-speed rail}{https://uic.org/passenger/highspeed/}
+\ECsource{International Energy Agency -- Rail}{https://www.iea.org/energy-system/transport/rail}

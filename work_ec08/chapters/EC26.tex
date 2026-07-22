@@ -1,0 +1,100 @@
+\phantomsection\addcontentsline{toc}{section}{Biomedical Imaging}
+\ECchapter{26}{Biomedical Imaging}{Seeing inside the human body}{ECRed}
+
+\ECObjectives{
+\begin{itemize}
+\item Explain the main physical and engineering principles.
+\item Interpret measurements, models and performance trade-offs.
+\item Identify safety, environmental and validation constraints.
+\end{itemize}}
+
+\begin{multicols}{2}
+\begin{engineeringnews}
+Biomedical imaging allows clinicians to observe anatomy and function without surgery. Engineers combine wave physics, detectors, signal processing and reconstruction algorithms to produce useful images while controlling acquisition time, cost and patient risk.
+\end{engineeringnews}
+
+\begin{ecarticle}
+Biomedical imaging converts physical interactions inside the body into maps that clinicians can interpret. Different technologies measure different properties. X-ray radiography and computed tomography use the attenuation of ionising radiation. Ultrasound sends mechanical waves and analyses their echoes. Magnetic resonance imaging, or MRI, measures signals produced by hydrogen nuclei in a strong magnetic field. Nuclear medicine detects radiation emitted by a tracer introduced into the body.
+
+Every imaging chain contains four stages: excitation, interaction, detection and reconstruction. The detector rarely produces a ready-to-use picture. It records many noisy signals from different positions or times. A reconstruction algorithm estimates the spatial distribution that best explains these measurements. Increasing spatial resolution usually requires more data, more acquisition time or a stronger signal.
+
+Image quality is described by resolution, contrast, signal-to-noise ratio and artefacts. Resolution determines the smallest visible detail. Contrast separates tissues with similar properties. Noise creates random variations, while artefacts create structured errors caused by motion, metal objects or incomplete measurements. Engineers must choose acquisition parameters that balance these quantities.
+
+Safety is equally important. X-ray dose must be kept as low as reasonably achievable. MRI avoids ionising radiation but requires strict control of magnetic objects, radio-frequency heating and acoustic noise. Ultrasound is portable and relatively inexpensive, yet image quality depends strongly on the operator and on acoustic access to the organ.
+
+Artificial intelligence can assist segmentation, reconstruction and anomaly detection, but it must be validated on diverse patients and scanners. A convincing image is not necessarily an accurate one. Biomedical engineers therefore work closely with physicists, radiologists, clinicians and regulators.
+\end{ecarticle}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
+A high-performance prototype is not sufficient: engineers must prove repeatability, safety and useful performance under realistic operating conditions.
+\end{tcolorbox}
+
+\begin{engineeringfocus}
+\textbf{From measurement to diagnosis}
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=4mm]
+\node[draw=ECRed,fill=ECRed!10,rounded corners] (source) {energy source};
+\node[draw=ECOrange,fill=ECOrange!10,rounded corners,right=of source] (body) {body interaction};
+\node[draw=ECBlue,fill=ECLightBlue,rounded corners,right=of body] (det) {detector};
+\node[draw=ECPurple,fill=ECPurple!10,rounded corners,below=of body] (alg) {reconstruction};
+\node[draw=ECGreen,fill=ECGreen!10,rounded corners,below=of det] (image) {clinical image};
+\draw[->,thick] (source)--(body); \draw[->,thick] (body)--(det); \draw[->,thick] (det)--(alg); \draw[->,thick] (alg)--(image);
+\end{tikzpicture}
+\end{center}
+\end{engineeringfocus}
+
+\begin{keyfigures}
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+X-ray / CT & attenuation\\
+Ultrasound & echo time\\
+MRI & magnetic resonance\\
+Main trade-off & quality vs risk\\
+Critical step & validation\\
+\end{tabularx}
+\end{keyfigures}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Resolution and acquisition time,colback=white,colframe=ECRed]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[width=\linewidth,height=48mm,xlabel={Voxel size (mm)},ylabel={Acquisition time (s)},grid=major,ticklabel style={font=\scriptsize},x dir=reverse]
+\addplot[thick,mark=*] table[x=resolution,y=time,col sep=comma]{data/EC26/imaging.csv};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{tcolorbox}
+
+\begin{vocabulary}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+attenuation & atténuation\\
+echo & écho\\
+voxel & voxel\\
+spatial resolution & résolution spatiale\\
+contrast & contraste\\
+noise & bruit\\
+artefact & artefact\\
+reconstruction & reconstruction\\
+radiation dose & dose de rayonnement\\
+tracer & traceur\\
+\end{tabularx}
+\end{vocabulary}
+
+\begin{questions}
+\item Why do different imaging technologies reveal different tissues?
+\item What is the role of reconstruction algorithms?
+\item Explain the difference between noise and an artefact.
+\item Why is higher resolution not always the best choice?
+\item Give one safety constraint for CT and one for MRI.
+\end{questions}
+
+\begin{engineeringchallenge}
+Design an imaging protocol for a moving organ. Choose a technology, define the required resolution and acquisition time, identify one major artefact and propose a method to reduce it.
+\end{engineeringchallenge}
+
+\begin{speaking}
+Should AI-generated medical images be accepted when they improve visibility but modify the original measurements? Discuss accuracy, responsibility and patient safety.
+\end{speaking}
+\end{multicols}
+
+\subsection*{Sources}
+\ECsource{World Health Organization -- Medical imaging}{https://www.who.int/health-topics/medical-devices}
+\ECsource{International Atomic Energy Agency -- Radiation protection}{https://www.iaea.org/resources/rpop}

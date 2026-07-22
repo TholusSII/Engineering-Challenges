@@ -1,0 +1,124 @@
+\phantomsection\addcontentsline{toc}{section}{Industry 4.0}
+\ECchapter{22}{Industry 4.0}{Connected manufacturing}{ECGreen}
+
+\ECObjectives{
+\begin{itemize}
+\item Describe the architecture of a connected production system.
+\item Explain how data can improve availability and quality.
+\item Identify cybersecurity and human factors.
+\end{itemize}}
+
+\begin{multicols}{2}
+\begin{engineeringnews}
+Factories are connecting machines, robots, inspection stations and planning software. The objective
+is not simply to automate more tasks, but to create a production system that can measure its own
+performance, adapt to variation and support faster decisions.
+\end{engineeringnews}
+
+\begin{ecarticle}
+Industry 4.0 describes the integration of connected machines, digital models, automation and data
+analysis in manufacturing. At machine level, sensors measure cycle time, motor current, vibration,
+position and product quality. Controllers operate the process in real time, while industrial networks
+send selected information to supervisory systems.
+
+A connected factory is organised in layers. The physical layer contains machines and products. The
+control layer contains PLCs, drives and robot controllers. Manufacturing execution systems coordinate
+orders, traceability and work instructions. At the top, enterprise software manages resources,
+suppliers and customer demand. Data must move between these layers without compromising real-time
+operation.
+
+Condition monitoring can detect a damaged bearing before failure. Vision systems can inspect every
+part instead of a small sample. Production data can reveal that a defect appears only with one tool,
+one material batch or one temperature range. These applications reduce unplanned downtime and waste,
+but only when engineers define useful indicators rather than collecting data without purpose.
+
+Overall equipment effectiveness, or OEE, combines availability, performance and quality. A machine
+with high speed but frequent stops may have poor OEE. Connected monitoring helps teams identify the
+main loss and verify whether an improvement is effective.
+
+Industry 4.0 also creates risks. A cyberattack can interrupt production or modify process parameters.
+Old machines may use insecure protocols. Operators may receive too many alarms or distrust opaque
+algorithms. Successful projects therefore combine secure architecture, clear interfaces, training and
+human expertise. Technology should support operators, not remove their understanding of the process.
+\end{ecarticle}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
+More data do not automatically produce better decisions. A useful industrial indicator must be linked
+to a physical cause, a decision and a person responsible for acting on it.
+\end{tcolorbox}
+
+\begin{engineeringfocus}
+\textbf{Connected production architecture}
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=3.5mm]
+\node[draw=ECGreen,fill=ECGreen!10,rounded corners] (machines) {machines and sensors};
+\node[draw=ECBlue,fill=ECLightBlue,rounded corners,above=of machines] (control) {PLCs and control};
+\node[draw=ECPurple,fill=ECPurple!10,rounded corners,above=of control] (mes) {MES and traceability};
+\node[draw=ECOrange,fill=ECOrange!10,rounded corners,above=of mes] (erp) {planning and enterprise};
+\draw[<->,thick] (machines)--(control); \draw[<->,thick] (control)--(mes); \draw[<->,thick] (mes)--(erp);
+\end{tikzpicture}
+\end{center}
+\end{engineeringfocus}
+
+\begin{keyfigures}
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+Availability loss & downtime\\
+Performance loss & slow cycles\\
+Quality loss & rejected parts\\
+Typical local controller & PLC\\
+Critical requirement & secure network
+\end{tabularx}
+\end{keyfigures}
+
+\begin{tcolorbox}[title=\sffamily\bfseries OEE components,colback=white,colframe=ECGreen]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[ybar,bar width=8pt,width=\linewidth,height=50mm,ymin=0,ymax=105,ylabel={Score (\%)},
+symbolic x coords={Conventional,Connected},xtick=data,legend style={font=\scriptsize,at={(0.5,-0.22)},anchor=north,legend columns=3},ticklabel style={font=\scriptsize}]
+\addplot table[x=mode,y=availability,col sep=comma]{data/EC22/oee.csv};
+\addplot table[x=mode,y=performance,col sep=comma]{data/EC22/oee.csv};
+\addplot table[x=mode,y=quality,col sep=comma]{data/EC22/oee.csv};
+\legend{Availability,Performance,Quality}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{tcolorbox}
+
+\begin{vocabulary}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+shop floor & atelier de production\\
+PLC & automate programmable\\
+downtime & temps d'arrêt\\
+traceability & traçabilité\\
+work instruction & instruction de travail\\
+condition monitoring & surveillance d'état\\
+quality control & contrôle qualité\\
+throughput & cadence / débit\\
+legacy machine & machine ancienne\\
+cybersecurity & cybersécurité
+\end{tabularx}
+\end{vocabulary}
+
+\begin{questions}
+\item What are the main layers of a connected factory?
+\item How can condition monitoring reduce downtime?
+\item What three factors form OEE?
+\item Why is collecting all possible data ineffective?
+\item Name two human or cybersecurity risks.
+\end{questions}
+
+\begin{engineeringchallenge}
+A packaging line suffers short, frequent stops. Propose a measurement plan, define three indicators,
+identify the required network connections and describe how operators would use the dashboard during a
+shift.
+\end{engineeringchallenge}
+
+\begin{speaking}
+Will connected factories create better industrial jobs or reduce human autonomy? Discuss safety,
+skills, productivity, surveillance and responsibility.
+\end{speaking}
+\end{multicols}
+
+\subsection*{Sources}
+\ECsource{International Society of Automation}{https://www.isa.org/}
+\ECsource{NIST -- Smart Manufacturing}{https://www.nist.gov/topics/smart-manufacturing}

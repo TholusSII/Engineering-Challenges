@@ -1,0 +1,166 @@
+\phantomsection\addcontentsline{toc}{section}{Water Treatment}
+\ECchapter{14}{Water Treatment}{How can engineering provide safe drinking water?}{ECBlue}
+
+\ECObjectives{
+\begin{itemize}
+\item Identify the principal stages of drinking-water treatment.
+\item Explain filtration, disinfection and reverse osmosis.
+\item Select a robust treatment chain from water-quality and local constraints.
+\end{itemize}}
+
+\begin{multicols}{2}
+\begin{engineeringnews}
+Membrane filtration, ultraviolet disinfection and low-energy desalination are improving access to
+safe water. Yet the best solution is not always the most advanced one: reliability, operator skills,
+spare parts and energy availability often determine whether a plant succeeds.
+\end{engineeringnews}
+
+\begin{ecarticle}
+Raw water may contain suspended particles, microorganisms, organic matter, dissolved salts and
+chemical pollutants. No single process removes every contaminant, so drinking-water plants combine
+several stages. The treatment chain is selected according to the source-water quality, local constraints and the
+required quality of the final water.
+
+Screens first remove leaves and large debris. During coagulation, a chemical reagent destabilises
+very small particles that would otherwise remain in suspension. Gentle mixing then creates larger
+flocs. In a sedimentation tank, these flocs settle under gravity and form sludge that must be
+collected and treated.
+
+Filtration removes the particles that remain. Sand filters trap material inside a porous bed,
+whereas activated carbon also adsorbs some organic molecules responsible for taste, odour or
+pollution. Membrane systems use pores of controlled size. As the membrane becomes dirty, pressure
+loss increases, so periodic backwashing or chemical cleaning is necessary.
+
+Disinfection inactivates harmful microorganisms. Chlorine can maintain protection throughout the distribution network, whereas ultraviolet light acts
+rapidly but leaves no disinfectant residual.
+Engineers often combine methods and monitor turbidity, pH, conductivity and disinfectant
+concentration continuously.
+
+Reverse osmosis is used for desalination. Pumps apply a pressure greater than the natural osmotic
+pressure, forcing water through a semi-permeable membrane while most salts remain in a concentrated
+brine. The process produces high-quality water but requires energy, pretreatment and careful brine
+management.
+
+For a remote community, maintainability may be more important than maximum theoretical performance. Gravity
+flow, modular filters, solar pumping and simple sensors can reduce operating costs. A robust system
+must also include safe storage and prevent treated water from being contaminated again.
+\end{ecarticle}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
+Clear-looking water is not necessarily safe. Pathogenic microorganisms are invisible, so treatment
+performance must be verified by measurements and microbiological analysis.
+\end{tcolorbox}
+
+\begin{engineeringfocus}
+\textbf{Multi-barrier treatment chain}
+
+\begin{center}
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=3.5mm]
+\node[draw=ECBlue,fill=ECLightBlue,rounded corners,align=center] (raw) {raw\\water};
+\node[draw=ECGreen,fill=ECGreen!10,rounded corners,align=center,right=of raw] (coag) {coagulation\\and flocculation};
+\node[draw=ECOrange,fill=ECOrange!10,rounded corners,align=center,right=of coag] (sed) {sedimentation};
+\node[draw=ECPurple,fill=ECPurple!10,rounded corners,align=center,below=of sed] (fil) {filtration};
+\node[draw=ECRed,fill=ECRed!8,rounded corners,align=center,left=of fil] (dis) {disinfection};
+\node[draw=ECBlue,fill=ECLightBlue,rounded corners,align=center,left=of dis] (tank) {safe storage\\and distribution};
+\draw[->,thick] (raw)--(coag); \draw[->,thick] (coag)--(sed);
+\draw[->,thick] (sed)--(fil); \draw[->,thick] (fil)--(dis); \draw[->,thick] (dis)--(tank);
+\draw[->,thick,dashed,ECRed] (sed.south) -- +(0,-.65) node[below]{sludge treatment};
+\end{tikzpicture}%
+}
+\end{center}
+
+Each stage is a barrier. If one process performs less effectively, the remaining barriers reduce the
+risk of unsafe water reaching consumers.
+\end{engineeringfocus}
+
+\begin{keyfigures}
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+Typical raw-water turbidity & highly variable\\
+Filtered-water target & very low turbidity\\
+Reverse-osmosis driving force & high pressure\\
+Main maintenance issue & fouling\\
+Essential final step & safe storage
+\end{tabularx}
+\end{keyfigures}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Turbidity through the treatment chain,colback=white,colframe=ECBlue]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[ybar,width=\linewidth,height=48mm,ylabel={Relative turbidity (a.u.)},ymin=0,ymax=20,
+symbolic x coords={Raw water,Coagulation,Sedimentation,Filtration,Final water},xtick=data,
+x tick label style={rotate=38,anchor=east,font=\scriptsize},yticklabel style={font=\scriptsize},grid=major]
+\addplot table[x=stage,y=turbidity,col sep=comma]{data/EC14/treatment_performance.csv};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\footnotesize Successive barriers progressively reduce suspended matter. The values are illustrative;
+actual performance depends on the source water and operating conditions.
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Reverse osmosis principle,colback=white,colframe=ECPurple]
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize,>=Latex]
+\draw[thick,fill=ECBlue!8] (0,0) rectangle (2.2,1.7);
+\draw[thick,fill=ECGreen!8] (3.1,0) rectangle (5.3,1.7);
+\draw[very thick,ECPurple] (2.65,-.15)--(2.65,1.85);
+\node[rotate=90,ECPurple] at (2.45,.85){membrane};
+\foreach \x/\y in {.4/.35,.8/.9,1.3/.55,1.7/1.25,.55/1.4,1.9/.45}{\node at (\x,\y){$+$};}
+\draw[->,very thick,ECOrange] (-.4,.85)--(.15,.85) node[midway,above]{pressure};
+\draw[->,very thick,ECBlue] (2.15,.85)--(3.05,.85);
+\node[align=center] at (1.1,-.35){salty feed};
+\node[align=center] at (4.2,-.35){freshwater};
+\node[align=center,ECRed] at (1.1,2.05){concentrated brine remains};
+\end{tikzpicture}
+\end{center}
+\end{tcolorbox}
+
+\begin{vocabulary}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+raw water & eau brute\\
+coagulation & coagulation\\
+floc & floc\\
+sedimentation & décantation\\
+activated carbon & charbon actif\\
+backwashing & lavage à contre-courant\\
+disinfection & désinfection\\
+turbidity & turbidité\\
+reverse osmosis & osmose inverse\\
+brine & saumure
+\end{tabularx}
+\end{vocabulary}
+
+\begin{questions}
+\item Why does a plant use several treatment stages?
+\item Explain the difference between coagulation and sedimentation.
+\item What additional function can activated carbon provide?
+\item Compare chlorine and ultraviolet disinfection.
+\item Why are pretreatment and maintenance important in reverse osmosis?
+\end{questions}
+
+\begin{applicationexercise}
+A small plant treats 500 m$^3$ of water per day. Raw water has a turbidity of 18 NTU. After
+sedimentation, turbidity is reduced by 75\%, and the filter then removes 92\% of the remaining
+turbidity.
+\begin{enumerate}
+\item Calculate the turbidity after sedimentation.
+\item Calculate the turbidity after filtration.
+\item A target of 0.5 NTU is required. State whether the simplified treatment chain meets it.
+\end{enumerate}
+\end{applicationexercise}
+
+\begin{engineeringchallenge}
+Design a compact treatment system for a village beside a turbid river. Choose the treatment stages,
+energy source and monitoring sensors. Explain routine maintenance and the action taken when one
+measurement exceeds its safe limit.
+\end{engineeringchallenge}
+
+\begin{speaking}
+Compare a central treatment plant with small local treatment units. Which solution is more suitable
+for a remote region, and under which conditions?
+\end{speaking}
+\end{multicols}
+
+\subsection*{Sources}
+\ECsource{World Health Organization -- Drinking Water}{https://www.who.int/news-room/fact-sheets/detail/drinking-water}
+\ECsource{U.S. Environmental Protection Agency -- Drinking Water}{https://www.epa.gov/ground-water-and-drinking-water}

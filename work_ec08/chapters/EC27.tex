@@ -1,0 +1,98 @@
+\phantomsection\addcontentsline{toc}{section}{Nanotechnology}
+\ECchapter{27}{Nanotechnology}{Engineering at the nanoscale}{ECGreen}
+
+\ECObjectives{
+\begin{itemize}
+\item Explain the main physical and engineering principles.
+\item Interpret measurements, models and performance trade-offs.
+\item Identify safety, environmental and validation constraints.
+\end{itemize}}
+
+\begin{multicols}{2}
+\begin{engineeringnews}
+At dimensions below about one hundred nanometres, surfaces, interfaces and quantum effects can dominate material behaviour. Nanotechnology uses these effects in electronics, coatings, sensors, medicine and energy systems.
+\end{engineeringnews}
+
+\begin{ecarticle}
+A nanometre is one billionth of a metre. At this scale, a material can behave differently from the same substance in bulk form. Two reasons are especially important. First, the surface-area-to-volume ratio becomes very large, so surface reactions and interfaces dominate. Second, electrons may be confined to very small regions, creating size-dependent optical and electrical properties.
+
+Engineers use two broad manufacturing strategies. Top-down methods remove material from a larger structure by lithography, etching or machining. Bottom-up methods assemble structures from atoms, molecules or nanoparticles through chemical synthesis and self-organisation. Top-down fabrication offers precise patterns, while bottom-up processes can produce very small features over large areas.
+
+Nanomaterials include particles, tubes, wires, thin films and porous structures. Carbon nanotubes combine low density with high stiffness and electrical conductivity. Quantum dots emit colours that depend on particle size. Nanostructured catalysts expose many active sites, reducing the quantity of expensive material required. Thin coatings can modify friction, corrosion, wettability or optical reflection without changing the bulk component.
+
+Measurement is difficult because ordinary optical microscopes cannot resolve features much smaller than visible-light wavelengths. Electron microscopy, atomic-force microscopy and spectroscopy are therefore essential. Manufacturing control must also prevent agglomeration, contamination and variation in particle size.
+
+Benefits must be assessed together with risks. Nanoparticles can enter organisms and ecosystems in ways that larger particles cannot. Toxicity depends on size, shape, coating and chemical composition, not only on mass. Engineers must therefore design containment, exposure monitoring, recycling and end-of-life procedures. Responsible nanotechnology requires lifecycle thinking as well as impressive laboratory performance.
+\end{ecarticle}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
+A high-performance prototype is not sufficient: engineers must prove repeatability, safety and useful performance under realistic operating conditions.
+\end{tcolorbox}
+
+\begin{engineeringfocus}
+\textbf{Scale changes behaviour}
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize,>=Latex]
+\draw[thick,->] (0,0)--(7,0);
+\foreach \x/\lab in {0.5/1 m,2/1 mm,3.5/1 \textmu m,5/100 nm,6.5/1 nm}{\draw (\x,.12)--(\x,-.12) node[below]{\lab};}
+\node[draw=ECGreen,fill=ECGreen!10,rounded corners,align=center] at (5.8,1) {large surface effects\\and quantum effects};
+\draw[->] (5.8,.65)--(5.8,.1);
+\end{tikzpicture}
+\end{center}
+\end{engineeringfocus}
+
+\begin{keyfigures}
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+1 nanometre & $10^{-9}$ m\\
+Typical nanoparticle & 1--100 nm\\
+Top-down & material removal\\
+Bottom-up & self-assembly\\
+Main concern & exposure\\
+\end{tabularx}
+\end{keyfigures}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Surface area increases as size decreases,colback=white,colframe=ECGreen]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[width=\linewidth,height=48mm,xlabel={Particle diameter (nm)},ylabel={Relative surface area},grid=major,ticklabel style={font=\scriptsize},x dir=reverse]
+\addplot[thick,mark=*] table[x=diameter,y=area,col sep=comma]{data/EC27/surface.csv};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{tcolorbox}
+
+\begin{vocabulary}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+nanoscale & échelle nanométrique\\
+nanoparticle & nanoparticule\\
+thin film & couche mince\\
+lithography & lithographie\\
+etching & gravure\\
+self-assembly & auto-assemblage\\
+quantum dot & boîte quantique\\
+agglomeration & agglomération\\
+coating & revêtement\\
+exposure & exposition\\
+\end{tabularx}
+\end{vocabulary}
+
+\begin{questions}
+\item Why do surfaces become more important at the nanoscale?
+\item Compare top-down and bottom-up manufacturing.
+\item Why are electron microscopes often required?
+\item Give two useful properties of nanostructured materials.
+\item Why is particle mass insufficient for evaluating risk?
+\end{questions}
+
+\begin{engineeringchallenge}
+Select a conventional product and propose a nanostructured coating that improves one function. Define the manufacturing route, verification method, expected benefit and exposure-control measures.
+\end{engineeringchallenge}
+
+\begin{speaking}
+Do the potential benefits of nanoparticles justify their use before all long-term environmental effects are known?
+\end{speaking}
+\end{multicols}
+
+\subsection*{Sources}
+\ECsource{European Commission -- Nanomaterials}{https://environment.ec.europa.eu/topics/chemicals/nanomaterials_en}
+\ECsource{National Nanotechnology Initiative}{https://www.nano.gov/}

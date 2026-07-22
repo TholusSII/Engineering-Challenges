@@ -1,0 +1,21 @@
+Engineering Challenges - V3 Iteration 3 (EC15-EC16)
+
+Base:
+- Engineering_Challenges_V3_Iteration2_EC13_EC14
+
+EC15 - Future Transport
+- Refined several English formulations.
+- Reframed mobility as a system-level engineering problem.
+- Resized the autonomous-driving and multimodal TikZ diagrams to fit the column width.
+- Adjusted the operational-emissions graph width.
+- Added a quantitative application exercise comparing cars and coach travel.
+
+EC16 - Cybersecurity
+- Refined English formulations and clarified business-continuity terminology.
+- Resized the defence-in-depth and risk-reasoning TikZ diagrams.
+- Added a quantitative and design-oriented application exercise on residual risk and fail-safe operation.
+
+Verification:
+- Full project compiled successfully with pdfLaTeX.
+- 64-page PDF produced.
+- EC15 and EC16 pages visually checked after rendering.

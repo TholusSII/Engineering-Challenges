@@ -1,0 +1,141 @@
+\phantomsection\addcontentsline{toc}{section}{Drones}
+\ECchapter{18}{Drones}{How do autonomous aerial systems remain stable and safe?}{ECOrange}
+
+\ECObjectives{
+\begin{itemize}
+\item Explain how thrust, attitude and position are controlled in a multirotor drone.
+\item Identify the sensors used for stabilisation and navigation.
+\item Discuss endurance, payload, regulation and operational safety.
+\end{itemize}}
+
+\begin{multicols}{2}
+\begin{engineeringnews}
+Drones are increasingly used for inspection, mapping, emergency response and precision agriculture.
+Their usefulness depends on more than flight performance: safe autonomy requires reliable sensing,
+energy management, communication and clearly defined procedures for fault conditions.
+\end{engineeringnews}
+
+\begin{ecarticle}
+A multirotor drone flies by controlling the thrust produced by several propellers. When the total
+upward thrust equals the weight, the aircraft hovers. Increasing all rotor speeds causes a vertical
+acceleration. Changing the balance between rotors creates roll, pitch or yaw moments and allows the
+drone to move horizontally or rotate.
+
+The flight controller closes several feedback loops. Gyroscopes measure angular velocity and
+accelerometers measure specific acceleration. Their signals are combined to estimate attitude. A
+barometer provides altitude information, while satellite navigation and cameras can estimate
+position and horizontal velocity. Sensor fusion is essential because every sensor has limitations: gyroscopes drift,
+accelerometers are disturbed by vibration and GNSS signals may be inaccurate or unavailable indoors.
+
+A common controller compares the desired attitude with the estimated attitude and adjusts motor
+speeds many times per second. The inner loop stabilises angular motion, while slower outer loops
+control velocity and position. If tuning is poor, the aircraft may oscillate or react too slowly to a
+gust.
+
+Endurance is strongly limited by battery mass. A larger battery stores more energy but also increases
+weight and the power required to hover. Payload has the same effect. Engineers therefore optimise the
+frame, propellers, motors and flight plan together. Wind, temperature and repeated acceleration also
+reduce real endurance compared with ideal calculations.
+
+Autonomy introduces additional requirements. The drone must detect obstacles, maintain a safe
+separation from people and execute a predictable action if communication is lost. Depending on the
+mission, this may be hovering, landing or returning to a predefined point. Geofencing can prevent
+entry into restricted zones, but it does not replace pilot responsibility, maintenance or risk
+assessment.
+\end{ecarticle}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
+A quadrotor normally changes direction by tilting. Part of the total thrust then acts horizontally,
+so the motors must generate additional thrust to maintain altitude.
+\end{tcolorbox}
+
+\begin{engineeringfocus}
+\textbf{Nested control loops of a drone}
+\begin{center}
+\resizebox{0.98\linewidth}{!}{%
+\begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=3.5mm]
+\node[draw=ECBlue,fill=ECLightBlue,rounded corners,align=center] (cmd) {position\\command};
+\node[draw=ECGreen,fill=ECGreen!10,rounded corners,align=center,right=of cmd] (pos) {position\\controller};
+\node[draw=ECOrange,fill=ECOrange!10,rounded corners,align=center,right=of pos] (att) {attitude\\controller};
+\node[draw=ECPurple,fill=ECPurple!10,rounded corners,align=center,below=of att] (mot) {motors and\\propellers};
+\node[draw=ECRed,fill=ECRed!8,rounded corners,align=center,below=of pos] (sens) {IMU, barometer,\\GNSS, camera};
+\draw[->,thick] (cmd)--(pos); \draw[->,thick] (pos)--(att); \draw[->,thick] (att)--(mot);
+\draw[->,thick] (mot)--(sens); \draw[->,thick] (sens)--(pos); \draw[->,thick] (sens)--(att);
+\end{tikzpicture}%
+}
+\end{center}
+Fast attitude control stabilises the aircraft; slower position control generates the attitude command.
+\end{engineeringfocus}
+
+\begin{keyfigures}
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+Hover condition & thrust = weight\\
+Fast sensor & gyroscope\\
+Altitude sensor & barometer\\
+Main energy store & battery\\
+Typical fault action & return or land
+\end{tabularx}
+\end{keyfigures}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Payload and endurance,colback=white,colframe=ECOrange]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[width=\linewidth,height=49mm,xlabel={Payload (kg)},ylabel={Endurance (min)},xmin=0,xmax=1.2,
+ymin=10,ymax=36,grid=major,ticklabel style={font=\scriptsize}]
+\addplot[very thick,mark=*] table[x=payload,y=endurance,col sep=comma]{data/EC18/drone_endurance.csv};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\footnotesize Illustrative trend for one aircraft: endurance decreases non-linearly as payload increases.
+\end{tcolorbox}
+
+\begin{vocabulary}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+thrust & poussée\\
+hover & vol stationnaire\\
+roll / pitch / yaw & roulis / tangage / lacet\\
+flight controller & contrôleur de vol\\
+gyroscope & gyroscope\\
+sensor fusion & fusion de capteurs\\
+payload & charge utile\\
+gust & rafale\\
+geofencing & géorepérage\\
+return-to-home & retour automatique
+\end{tabularx}
+\end{vocabulary}
+
+\begin{applicationexercise}
+The endurance graph gives 25 min for a payload of 0.6 kg. A safety rule requires the drone to land
+with 20\% of the initial flight time still available. The outward journey to an inspection area takes
+6 min and the return journey takes the same time.
+\begin{enumerate}
+\item Calculate the maximum authorised flight time before landing.
+\item Determine the time available for inspection over the target area.
+\item Recalculate this inspection time for a payload of 0.9 kg.
+\item State two reasons why the pilot should use a larger reserve in strong wind.
+\end{enumerate}
+\end{applicationexercise}
+
+\begin{questions}
+\item How does a quadrotor produce roll and pitch motion?
+\item Why is sensor fusion necessary?
+\item Distinguish the attitude loop from the position loop.
+\item Explain the compromise created by a larger battery.
+\item What should happen after a communication failure?
+\end{questions}
+
+\begin{engineeringchallenge}
+Define a drone mission to inspect a bridge. Estimate the required payload and flight time, select the
+main sensors, propose a safe path and define the response to low battery, GNSS loss and communication
+loss.
+\end{engineeringchallenge}
+
+\begin{speaking}
+Should drones be authorised to deliver parcels in cities? Compare efficiency, noise, safety, privacy
+and infrastructure requirements.
+\end{speaking}
+\end{multicols}
+
+\subsection*{Sources}
+\ECsource{European Union Aviation Safety Agency -- Drones}{https://www.easa.europa.eu/en/domains/civil-drones-rpas}
+\ECsource{NASA -- Unmanned Aircraft Systems}{https://www.nasa.gov/centers-and-facilities/ames/unmanned-aircraft-systems/}

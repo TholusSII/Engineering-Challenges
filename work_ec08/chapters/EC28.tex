@@ -1,0 +1,99 @@
+\phantomsection\addcontentsline{toc}{section}{Quantum Technologies}
+\ECchapter{28}{Quantum Technologies}{Using superposition, entanglement and precise measurement}{ECPurple}
+
+\ECObjectives{
+\begin{itemize}
+\item Explain the main physical and engineering principles.
+\item Interpret measurements, models and performance trade-offs.
+\item Identify safety, environmental and validation constraints.
+\end{itemize}}
+
+\begin{multicols}{2}
+\begin{engineeringnews}
+Quantum technologies are moving from laboratory demonstrations to specialised sensors, secure communication links and prototype computers. Their advantage comes from controlling individual quantum states rather than simply making conventional devices smaller.
+\end{engineeringnews}
+
+\begin{ecarticle}
+Quantum technologies exploit physical effects that are negligible in ordinary engineering systems. A quantum bit, or qubit, can be prepared in a superposition of two basis states. Several qubits may also become entangled, meaning that their measurement results are correlated more strongly than classical systems allow. These properties enable new methods of computation, sensing and communication.
+
+A quantum computer does not test every answer at once. It applies carefully designed operations to amplitudes and uses interference to increase the probability of useful results. Measurement then produces a classical bit string. Quantum algorithms can accelerate certain tasks such as factoring, molecular simulation or specific optimisation subroutines, but they do not make every calculation faster.
+
+The main engineering difficulty is decoherence. Qubits interact unintentionally with their environment and lose the fragile information stored in their state. Platforms based on superconducting circuits, trapped ions, neutral atoms and photons therefore require precise control, isolation and calibration. Some need cryogenic temperatures; others need ultra-high vacuum and stable lasers.
+
+Quantum error correction distributes one logical qubit across many physical qubits. It can detect and correct errors without directly reading the encoded information, but the hardware overhead is large. Current machines are therefore described as noisy and intermediate-scale. They are valuable research tools but not yet universal fault-tolerant computers.
+
+Quantum sensing is closer to deployment in some fields. Atomic clocks, magnetometers and gravimeters use quantum transitions to measure time, magnetic field or acceleration with extreme sensitivity. Quantum communication can reveal interception because measurement disturbs an unknown quantum state. Engineering success will depend on systems integration, standards, realistic benchmarking and secure links between quantum and classical equipment.
+\end{ecarticle}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
+A high-performance prototype is not sufficient: engineers must prove repeatability, safety and useful performance under realistic operating conditions.
+\end{tcolorbox}
+
+\begin{engineeringfocus}
+\textbf{Quantum computing chain}
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=4mm]
+\node[draw=ECPurple,fill=ECPurple!10,rounded corners] (init) {initialise qubits};
+\node[draw=ECBlue,fill=ECLightBlue,rounded corners,right=of init] (gates) {quantum gates};
+\node[draw=ECOrange,fill=ECOrange!10,rounded corners,right=of gates] (meas) {measure};
+\node[draw=ECGreen,fill=ECGreen!10,rounded corners,below=of gates] (class) {classical analysis};
+\draw[->,thick] (init)--(gates); \draw[->,thick] (gates)--(meas); \draw[->,thick] (meas)--(class); \draw[->,thick] (class)--(gates);
+\end{tikzpicture}
+\end{center}
+\end{engineeringfocus}
+
+\begin{keyfigures}
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+Information unit & qubit\\
+Main resource & coherence\\
+Common enemy & noise\\
+Output & probability distribution\\
+Near-term strength & sensing\\
+\end{tabularx}
+\end{keyfigures}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Illustrative coherence decay,colback=white,colframe=ECPurple]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[width=\linewidth,height=48mm,xlabel={Time (arbitrary units)},ylabel={Remaining coherence},ymin=0,ymax=1.05,grid=major,ticklabel style={font=\scriptsize}]
+\addplot[thick,mark=*] table[x=time,y=coherence,col sep=comma]{data/EC28/coherence.csv};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{tcolorbox}
+
+\begin{vocabulary}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+qubit & qubit\\
+superposition & superposition\\
+entanglement & intrication\\
+interference & interférence\\
+measurement & mesure\\
+decoherence & décohérence\\
+quantum gate & porte quantique\\
+error correction & correction d’erreurs\\
+cryogenic & cryogénique\\
+fault-tolerant & tolérant aux fautes\\
+\end{tabularx}
+\end{vocabulary}
+
+\begin{questions}
+\item How does a qubit differ from a classical bit?
+\item Why does measurement limit the information obtained from a quantum state?
+\item What causes decoherence?
+\item Why are many physical qubits needed for one logical qubit?
+\item Name one application of quantum sensing.
+\end{questions}
+
+\begin{engineeringchallenge}
+Propose an experimental quantum sensor for detecting small magnetic-field variations. Describe the quantum element, control system, environmental isolation, calibration and classical signal processing.
+\end{engineeringchallenge}
+
+\begin{speaking}
+Should governments prioritise quantum computing, quantum sensing or quantum-secure communication? Defend one investment strategy.
+\end{speaking}
+\end{multicols}
+
+\subsection*{Sources}
+\ECsource{NIST -- Quantum information science}{https://www.nist.gov/topics/quantum-information-science}
+\ECsource{European Quantum Flagship}{https://qt.eu/}

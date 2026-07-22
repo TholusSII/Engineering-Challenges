@@ -1,0 +1,21 @@
+Engineering Challenges - V3 Iteration 2
+Chapters updated: EC13 and EC14
+
+EC13 - Smart Cities
+- Improved several English formulations and technical precision.
+- Added edge computing, cybersecurity and redundancy concepts.
+- Resized the adaptive-lighting TikZ diagram to the available column width.
+- Clarified graph labels and caption.
+- Added a quantitative application exercise on street-lighting energy savings.
+
+EC14 - Water Treatment
+- Improved several English formulations and technical precision.
+- Clarified the comparison between chlorine and ultraviolet disinfection.
+- Resized the treatment-chain TikZ diagram to the available column width.
+- Clarified graph labels and caption.
+- Added a quantitative application exercise on turbidity reduction.
+
+Verification
+- Full project compiled twice with pdfLaTeX.
+- Final document: 64 A4 pages.
+- Pages for EC13 and EC14 visually checked after rendering.

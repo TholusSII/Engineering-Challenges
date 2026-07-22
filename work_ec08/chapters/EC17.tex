@@ -1,0 +1,141 @@
+\phantomsection\addcontentsline{toc}{section}{Internet of Things}
+\ECchapter{17}{Internet of Things}{How can connected objects remain useful, secure and energy-efficient?}{ECGreen}
+
+\ECObjectives{
+\begin{itemize}
+\item Describe the architecture of an IoT system from sensing to user service.
+\item Compare communication technologies and explain the importance of energy management.
+\item Identify reliability, interoperability, privacy and cybersecurity requirements.
+\end{itemize}}
+
+\begin{multicols}{2}
+\begin{engineeringnews}
+Connected sensors now monitor factories, buildings, farms and transport networks. The engineering
+challenge is no longer simply to connect a device, but to keep thousands of low-power objects useful,
+secure and maintainable throughout their entire service life.
+\end{engineeringnews}
+
+\begin{ecarticle}
+The Internet of Things (IoT) links physical objects to digital services. A typical object contains a
+sensor, a microcontroller, a communication interface and a power supply. It measures a physical
+quantity, processes the signal locally and sends useful information to a gateway or cloud platform.
+The platform stores data, detects abnormal behaviour and may send a command back to an actuator.
+
+A connected temperature sensor illustrates the complete chain. The sensing element converts
+temperature into an electrical signal. The microcontroller filters the measurement, adds a timestamp
+and decides whether transmission is necessary. Sending every value provides detailed data but wastes
+energy and network capacity. Edge processing can instead transmit only a periodic summary or an alarm
+when a threshold is exceeded.
+
+Communication technology depends on range, data rate, power and infrastructure. Bluetooth Low Energy
+is suited to short-range devices. Wi-Fi offers higher throughput but usually consumes more power.
+LoRaWAN can transmit small packets over several kilometres, while cellular IoT provides wide-area
+coverage through an operator network. No protocol is best for every application.
+
+Energy autonomy is often the limiting requirement. Engineers reduce consumption by using sleep modes,
+low sampling rates and short radio transmissions. A battery-powered sensor may need to operate for
+several years without maintenance. Energy harvesting from light, vibration or heat can extend battery life,
+but the available power is small and variable.
+
+Security must be designed from the start. Each object needs a unique identity, authenticated software
+updates and encrypted communication. A compromised device can reveal private data or become an entry
+point into a larger system. Finally, interoperability matters: devices from different manufacturers
+must use compatible data formats so that the system can evolve without replacing every component.
+\end{ecarticle}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
+For a battery-powered object, radio transmission may consume far more energy than the measurement
+itself. Sending less data is therefore often more effective than improving the sensor electronics.
+\end{tcolorbox}
+
+\begin{engineeringfocus}
+\textbf{Architecture of a connected monitoring system}
+\begin{center}
+\resizebox{0.98\linewidth}{!}{%
+\begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=4mm]
+\node[draw=ECGreen,fill=ECGreen!10,rounded corners,align=center] (s) {sensor and\\microcontroller};
+\node[draw=ECBlue,fill=ECLightBlue,rounded corners,align=center,right=of s] (r) {low-power\\radio};
+\node[draw=ECPurple,fill=ECPurple!10,rounded corners,align=center,right=of r] (g) {gateway or\\base station};
+\node[draw=ECOrange,fill=ECOrange!10,rounded corners,align=center,below=of g] (p) {data platform\\and analytics};
+\node[draw=ECRed,fill=ECRed!8,rounded corners,align=center,below=of r] (u) {dashboard or\\maintenance alarm};
+\draw[->,thick] (s)--(r); \draw[->,thick] (r)--(g); \draw[->,thick] (g)--(p);
+\draw[->,thick] (p)--(u); \draw[->,thick,dashed] (u)--(s);
+\end{tikzpicture}%
+}
+\end{center}
+Local processing reduces traffic and allows basic operation even if the cloud connection is lost.
+\end{engineeringfocus}
+
+\begin{keyfigures}
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+Typical sensor data rate & low\\
+Critical resource & battery energy\\
+Long-range low-power example & LoRaWAN\\
+Short-range example & BLE\\
+Essential maintenance feature & remote update
+\end{tabularx}
+\end{keyfigures}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Relative communication current,colback=white,colframe=ECGreen]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[xbar,width=0.86\linewidth,height=50mm,xlabel={Relative current},xmin=0,xmax=110,
+symbolic y coords={Deep sleep,BLE advertising,LoRaWAN,Wi-Fi duty cycle,Continuous Wi-Fi},
+ytick=data,grid=major,ticklabel style={font=\scriptsize},nodes near coords]
+\addplot table[x=current,y=mode,col sep=comma]{data/EC17/iot_power.csv};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\footnotesize Illustrative values: actual consumption depends strongly on hardware, coverage and transmission frequency.
+\end{tcolorbox}
+
+\begin{vocabulary}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+connected object & objet connecté\\
+gateway & passerelle\\
+throughput & débit\\
+sleep mode & mode veille\\
+edge processing & traitement local\\
+packet & paquet de données\\
+energy harvesting & récupération d'énergie\\
+firmware update & mise à jour du micrologiciel\\
+interoperability & interopérabilité\\
+encryption & chiffrement
+\end{tabularx}
+\end{vocabulary}
+
+\begin{applicationexercise}
+A connected sensor is powered by a 2400 mAh battery. During each hour, it remains in deep sleep for
+3590 s at a relative current of 2, then transmits for 10 s using LoRaWAN at a relative current of 18.
+Assume that one relative-current unit corresponds to 0.10 mA.
+\begin{enumerate}
+\item Calculate the average current over one hour.
+\item Estimate the ideal battery life in hours and in years.
+\item Explain why the real service life would be shorter.
+\item Suggest one change to the sensing or communication strategy that would extend autonomy.
+\end{enumerate}
+\end{applicationexercise}
+
+\begin{questions}
+\item Describe the information chain of an IoT system.
+\item Why is edge processing useful for a battery-powered sensor?
+\item Compare Wi-Fi, BLE and LoRaWAN for one application.
+\item Why are software updates a safety and security requirement?
+\item Give two methods for increasing sensor autonomy.
+\end{questions}
+
+\begin{engineeringchallenge}
+Design a connected sensor for monitoring humidity in a school building. Select the sensing period,
+communication method and power source. Define one alarm rule, one local fallback function and two
+measures that protect user data.
+\end{engineeringchallenge}
+
+\begin{speaking}
+Should every household appliance be connected? Present one useful service, one environmental cost and
+one cybersecurity risk.
+\end{speaking}
+\end{multicols}
+
+\subsection*{Sources}
+\ECsource{NIST -- Internet of Things}{https://www.nist.gov/programs-projects/nist-cybersecurity-iot-program}
+\ECsource{LoRa Alliance}{https://lora-alliance.org/}

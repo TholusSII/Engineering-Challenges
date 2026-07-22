@@ -1,0 +1,26 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{Electric Vehicles}{13}{section*.8}%
+\contentsline {section}{Robotics}{15}{section*.10}%
+\contentsline {section}{Artificial Intelligence}{17}{section*.12}%
+\contentsline {section}{Space Engineering}{19}{section*.14}%
+\contentsline {section}{Medical Engineering}{21}{section*.16}%
+\contentsline {section}{Additive Manufacturing}{23}{section*.18}%
+\contentsline {section}{Smart Materials}{25}{section*.20}%
+\contentsline {section}{Smart Cities}{27}{section*.22}%
+\contentsline {section}{Water Treatment}{29}{section*.24}%
+\contentsline {section}{Future Transport}{31}{section*.26}%
+\contentsline {section}{Cybersecurity}{33}{section*.28}%
+\contentsline {section}{Internet of Things}{35}{section*.30}%
+\contentsline {section}{Drones}{37}{section*.32}%
+\contentsline {section}{Biomimetics}{39}{section*.34}%
+\contentsline {section}{Circular Economy}{41}{section*.36}%
+\contentsline {section}{Digital Twin}{43}{section*.38}%
+\contentsline {section}{Industry 4.0}{45}{section*.40}%
+\contentsline {section}{Autonomous Vehicles}{47}{section*.42}%
+\contentsline {section}{Smart Grids}{49}{section*.44}%
+\contentsline {section}{Marine Renewable Energy}{51}{section*.46}%
+\contentsline {section}{Biomedical Imaging}{53}{section*.48}%
+\contentsline {section}{Nanotechnology}{55}{section*.50}%
+\contentsline {section}{Quantum Technologies}{57}{section*.52}%
+\contentsline {section}{Sustainable Buildings}{59}{section*.54}%
+\contentsline {section}{High-Speed Transportation}{61}{section*.56}%

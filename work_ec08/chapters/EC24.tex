@@ -1,0 +1,125 @@
+\phantomsection\addcontentsline{toc}{section}{Smart Grids}
+\ECchapter{24}{Smart Grids}{Managing tomorrow's electricity networks}{ECPurple}
+
+\ECObjectives{
+\begin{itemize}
+\item Explain how generation and demand must remain balanced.
+\item Describe the role of storage, forecasting and demand response.
+\item Identify resilience and cybersecurity constraints.
+\end{itemize}}
+
+\begin{multicols}{2}
+\begin{engineeringnews}
+Electricity networks are changing from one-way systems dominated by large power stations into
+interactive networks containing solar roofs, wind farms, batteries, electric vehicles and flexible
+loads. Digital control is becoming essential to coordinate these distributed resources.
+\end{engineeringnews}
+
+\begin{ecarticle}
+An electricity grid must balance production and consumption at every moment. If generation is lower
+than demand, frequency falls; if it is higher, frequency rises. Traditional grids adjusted a limited
+number of controllable power stations. Smart grids coordinate many smaller and more variable devices.
+
+Smart meters measure energy flows at short intervals. Forecasting software estimates demand and
+renewable generation. Automated substations can change network configuration after a fault, while
+batteries and flexible loads respond rapidly to imbalances. Demand response shifts selected uses in
+time: for example, water heating or electric-vehicle charging may be delayed when the grid is heavily
+loaded.
+
+Distributed generation creates bidirectional power flows. A neighbourhood may consume electricity in
+the evening but export solar power at midday. Voltage can rise near photovoltaic installations, and
+protection systems must distinguish normal reverse flow from a dangerous fault. Engineers therefore
+combine power electronics, communication systems and network models.
+
+Storage provides several services. Batteries can smooth short fluctuations, support frequency and
+reduce peak demand. Pumped hydro stores larger amounts of energy for longer periods. Electric vehicles
+may eventually provide controlled charging or energy back to the grid, but battery degradation and
+user mobility must be respected.
+
+Digitalisation increases exposure to cyberattack and communication failure. Local controllers must
+retain safe behaviour when the central platform is unavailable. Resilience also requires physical
+redundancy, black-start capability and plans for extreme weather. A smart grid is not merely connected;
+it must remain stable, secure and understandable during abnormal conditions.
+\end{ecarticle}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
+Electricity itself travels through the network almost instantly, but energy planning may cover seconds,
+hours, seasons and years. Different storage technologies are needed for these different timescales.
+\end{tcolorbox}
+
+\begin{engineeringfocus}
+\textbf{Bidirectional smart grid}
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=4mm]
+\node[draw=ECPurple,fill=ECPurple!10,rounded corners] (grid) {distribution grid};
+\node[draw=ECOrange,fill=ECOrange!10,rounded corners,left=of grid] (solar) {solar and wind};
+\node[draw=ECGreen,fill=ECGreen!10,rounded corners,right=of grid] (loads) {homes and industry};
+\node[draw=ECBlue,fill=ECLightBlue,rounded corners,below=of grid] (store) {storage and EVs};
+\node[draw=ECRed,fill=ECRed!8,rounded corners,above=of grid] (control) {forecast and control};
+\draw[<->,thick] (solar)--(grid); \draw[<->,thick] (grid)--(loads); \draw[<->,thick] (grid)--(store);
+\draw[<->,thick,dashed] (control)--(grid);
+\end{tikzpicture}
+\end{center}
+\end{engineeringfocus}
+
+\begin{keyfigures}
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+Instant requirement & power balance\\
+Fast flexibility & batteries\\
+Long storage & pumped hydro\\
+Flexible demand & smart charging\\
+Critical risk & cyberattack
+\end{tabularx}
+\end{keyfigures}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Daily balancing example,colback=white,colframe=ECPurple]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[width=\linewidth,height=50mm,xlabel={Hour},ylabel={Power (MW)},grid=major,
+legend style={font=\scriptsize,at={(0.5,-0.2)},anchor=north,legend columns=3},ticklabel style={font=\scriptsize}]
+\addplot[thick] table[x=hour,y=demand,col sep=comma]{data/EC24/load.csv};
+\addplot[thick] table[x=hour,y=solar,col sep=comma]{data/EC24/load.csv};
+\addplot[thick,dashed] table[x=hour,y=battery,col sep=comma]{data/EC24/load.csv};
+\legend{Demand,Solar,Battery output}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{tcolorbox}
+
+\begin{vocabulary}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+smart meter & compteur communicant\\
+demand response & effacement / flexibilité\\
+distributed generation & production décentralisée\\
+peak demand & pointe de consommation\\
+frequency control & réglage de fréquence\\
+bidirectional flow & flux bidirectionnel\\
+substation & poste électrique\\
+black start & redémarrage autonome\\
+load shedding & délestage\\
+grid resilience & résilience du réseau
+\end{tabularx}
+\end{vocabulary}
+
+\begin{questions}
+\item Why must generation equal demand continuously?
+\item How does demand response help the network?
+\item What problem can midday solar export create?
+\item Compare batteries and pumped hydro.
+\item Why should local controllers work without the central platform?
+\end{questions}
+
+\begin{engineeringchallenge}
+Plan the energy management of a school with rooftop solar panels, a 200 kWh battery and ten EV
+chargers. Define priorities for a normal day, a winter peak and a two-hour grid outage.
+\end{engineeringchallenge}
+
+\begin{speaking}
+Should electricity suppliers be allowed to delay domestic appliances automatically during peak demand?
+Discuss consent, comfort, price, privacy and grid stability.
+\end{speaking}
+\end{multicols}
+
+\subsection*{Sources}
+\ECsource{International Energy Agency -- Smart Grids}{https://www.iea.org/energy-system/electricity/smart-grids}
+\ECsource{ENTSO-E}{https://www.entsoe.eu/}

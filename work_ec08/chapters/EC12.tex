@@ -1,0 +1,163 @@
+\phantomsection\addcontentsline{toc}{section}{Smart Materials}
+\ECchapter{12}{Smart Materials}{Can materials react to their environment?}{ECPurple}
+
+\ECObjectives{
+\begin{itemize}
+\item Identify the stimulus and response of several smart materials.
+\item Explain how shape-memory and piezoelectric effects are used in engineering systems.
+\item Evaluate performance, fatigue, control and lifecycle constraints.
+\end{itemize}}
+
+\begin{multicols}{2}
+\begin{engineeringnews}
+Smart materials can sense or respond to temperature, stress, electricity, light or magnetic fields.
+They are used in medical devices, vibration control, precision positioning and energy-efficient
+buildings, where one compact material can perform both structural and functional roles.
+\end{engineeringnews}
+
+\begin{ecarticle}
+A conventional material is selected mainly for passive properties such as stiffness, strength or
+thermal conductivity. A smart material produces a predictable response to an external stimulus. The
+response may be a change in shape, electrical charge, colour, viscosity or magnetic behaviour.
+Engineers use this coupling to create sensors, actuators and adaptive structures.
+
+Shape-memory alloys are a well-known example. Nickel-titanium can be deformed in a low-temperature
+phase and recover a previously defined shape when heated. This effect results from a reversible
+change in crystal structure. A thin wire can therefore act as a compact actuator: electrical
+current heats it, the wire contracts, and a spring or external load returns it when it cools.
+Applications include medical stents, valves and lightweight mechanisms.
+
+Piezoelectric materials couple mechanical and electrical energy. When compressed or bent, they
+produce electrical charge; this is the direct effect used in force, pressure and vibration sensors.
+When voltage is applied, they deform slightly; this inverse effect is used in ultrasound
+transducers, fuel injectors and nanometre-scale positioning systems. Their movement is small, but it
+is rapid and precise.
+
+Other smart materials provide different functions. Electrochromic layers change optical
+transmission when a voltage is applied, allowing windows to control solar gain. Magnetorheological
+fluids become more resistant to flow in a magnetic field and can adjust the damping of a suspension.
+Self-healing polymers may release a repair agent when a crack ruptures embedded microcapsules.
+
+These materials are not intelligent by themselves. A useful engineering system still requires
+sensors, power electronics, control logic and safe limits. Performance can change with temperature,
+fatigue and ageing. The designer must also consider response time, energy consumption, recyclability
+and what happens when the active effect fails. A passive safe state is often essential.
+\end{ecarticle}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
+A piezoelectric element can be used as both a sensor and an actuator. The same physical coupling
+converts mechanical energy into electrical energy and electrical energy into mechanical motion.
+\end{tcolorbox}
+
+\begin{engineeringfocus}
+\textbf{Stimulus--material--response chain}
+
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=3mm,scale=.80,transform shape]
+\node[draw=ECBlue,fill=ECLightBlue,rounded corners,align=center] (stim) {stimulus\\temperature, force, voltage};
+\node[draw=ECPurple,fill=ECPurple!10,rounded corners,align=center,right=of stim] (mat) {smart\\material};
+\node[draw=ECGreen,fill=ECGreen!10,rounded corners,align=center,right=of mat] (resp) {response\\shape, charge, colour};
+\node[draw=ECOrange,fill=ECOrange!10,rounded corners,align=center,below=of mat] (control) {controller and\\power interface};
+\draw[->,thick] (stim) -- (mat);
+\draw[->,thick] (mat) -- (resp);
+\draw[<->,thick,ECOrange] (control) -- (mat);
+\draw[->,dashed,ECBlue] (resp.south) |- (control.east);
+\end{tikzpicture}
+\end{center}
+
+Closed-loop control measures the actual response and adjusts the stimulus. This improves accuracy
+and compensates for temperature variation or ageing.
+\end{engineeringfocus}
+
+\begin{keyfigures}
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+Shape-memory alloy response & several percent strain\\
+Piezoelectric actuator motion & micrometres\\
+Piezoelectric response & very fast\\
+Electrochromic transition & seconds to minutes\\
+Critical design issue & fatigue and ageing
+\end{tabularx}
+\end{keyfigures}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Shape recovery with temperature,colback=white,colframe=ECPurple]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+width=\linewidth,height=47mm,
+xlabel={Temperature ($^\circ$C)},ylabel={Recovered strain (\%)},
+xmin=15,xmax=95,ymin=0,ymax=5.5,
+xticklabel style={font=\scriptsize},yticklabel style={font=\scriptsize},
+grid=major]
+\addplot[very thick,mark=*] table[x=temperature,y=strain,col sep=comma]{data/EC12/smart_response.csv};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\footnotesize Illustrative response of a shape-memory actuator. The transformation occurs over a
+temperature range rather than at one exact temperature.
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Piezoelectric vibration control,colback=white,colframe=ECBlue]
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize,>=Latex]
+\draw[very thick] (0,0) -- (5.2,0);
+\draw[fill=ECBlue!12,draw=ECBlue,thick] (.3,0) rectangle (4.9,.22);
+\draw[fill=ECPurple!20,draw=ECPurple,thick] (1.3,.22) rectangle (3.9,.42);
+\node[above] at (2.6,.45) {bonded piezoelectric patch};
+\draw[->,thick,ECRed] (5.05,.1) -- +(0,1.05) node[above]{disturbance};
+\draw[->,thick,ECGreen] (2.6,1.65) -- (2.6,.48) node[midway,right]{controlled voltage};
+\draw[decorate,decoration={snake,amplitude=1.2mm,segment length=5mm},ECBlue,thick]
+(.5,-.35) -- (4.7,-.35);
+\node[below,align=center] at (2.6,-.55) {structural vibration measured and reduced\\by an opposing actuator force};
+\end{tikzpicture}
+\end{center}
+A sensor measures vibration, the controller calculates a corrective command and the piezoelectric
+patch produces a small deformation that opposes the motion.
+\end{tcolorbox}
+
+\begin{vocabulary}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+smart material & matériau intelligent\\
+stimulus & sollicitation / stimulus\\
+shape-memory alloy & alliage à mémoire de forme\\
+phase transformation & transformation de phase\\
+piezoelectric effect & effet piézoélectrique\\
+strain & déformation relative\\
+damping & amortissement\\
+self-healing & autoréparant\\
+ageing & vieillissement\\
+fail-safe state & état sûr en cas de panne
+\end{tabularx}
+\end{vocabulary}
+
+\begin{questions}
+\item What distinguishes a smart material from a passive material?
+\item How can a shape-memory wire act as an actuator?
+\item Explain the direct and inverse piezoelectric effects.
+\item Why is closed-loop control useful with smart materials?
+\item Give two limitations that must be considered during design.
+\end{questions}
+
+\begin{applicationexercise}
+A piezoelectric actuator is 40 mm long and produces a free strain of 0.08\% when powered.
+\begin{enumerate}
+\item Calculate its free displacement in millimetres and micrometres.
+\item A mechanical amplifier multiplies the displacement by 4. Estimate the output movement.
+\item Explain why the real movement will generally be lower than this ideal value.
+\end{enumerate}
+\end{applicationexercise}
+
+\begin{engineeringchallenge}
+Design an adaptive bicycle helmet ventilation system using a smart material. Define the stimulus,
+material response and mechanical function. Add a simple control strategy, estimate the required
+movement and explain how the helmet remains safe if the active material or power supply fails.
+\end{engineeringchallenge}
+
+\begin{speaking}
+Choose one smart material and present an everyday product that could use it. Explain the benefit,
+technical limitation and environmental impact in a three-minute product pitch.
+\end{speaking}
+\end{multicols}
+
+\subsection*{Sources}
+\ECsource{NIST -- Materials Research}{https://www.nist.gov/topics/materials}
+\ECsource{European Space Agency -- Space Engineering and Technology}{https://www.esa.int/Enabling_Support/Space_Engineering_Technology}

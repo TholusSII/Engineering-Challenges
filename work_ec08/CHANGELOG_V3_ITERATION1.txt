@@ -1,0 +1,17 @@
+Engineering Challenges — V3, iteration 1 (EC11–EC12)
+
+EC11 — Additive Manufacturing
+- Polished several English formulations.
+- Improved the digital-chain and comparison-graph sizing.
+- Added a quantitative application exercise on layer count and build time.
+- Shortened selected activity text to preserve a clean two-page layout.
+
+EC12 — Smart Materials
+- Polished several English formulations.
+- Improved the stimulus–material–response diagram sizing.
+- Added a quantitative application exercise on piezoelectric displacement.
+
+Verification
+- Full project compiled twice with pdfLaTeX.
+- Final manual: 64 pages.
+- EC11 and EC12 visually checked; both remain on two pages.

@@ -1,0 +1,4 @@
+setting,recall,precision
+Low threshold,96,68
+Balanced,90,86
+High threshold,74,95
