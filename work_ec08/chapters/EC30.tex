@@ -3,43 +3,58 @@
 
 \ECObjectives{
 \begin{itemize}
-\item Explain the main physical and engineering principles.
-\item Interpret measurements, models and performance trade-offs.
-\item Identify safety, environmental and validation constraints.
+\item Explain how drag, power and braking distance scale with speed.
+\item Compare conventional rail, magnetic levitation and low-pressure concepts.
+\item Evaluate travel time, energy use and system-level safety constraints.
 \end{itemize}}
 
 \begin{multicols}{2}
 \begin{engineeringnews}
-High-speed rail, magnetic-levitation systems and evacuated-tube concepts seek to reduce journey times between cities. At high speed, aerodynamic drag, infrastructure quality, safety and energy supply become dominant engineering constraints.
+High-speed rail, magnetic-levitation systems and low-pressure-tube concepts seek to reduce journey times between cities. At high speed, aerodynamic drag, infrastructure quality, signalling, energy supply and emergency procedures become dominant engineering constraints.
 \end{engineeringnews}
 
 \begin{ecarticle}
-High-speed transportation is a system problem rather than simply a faster vehicle. Track geometry, propulsion, signalling, stations, maintenance and emergency procedures must be designed together. A train travelling at 300 km/h covers more than 80 metres each second, so small errors can rapidly become critical.
+High-speed transportation is a system problem rather than simply a faster vehicle. Track geometry, propulsion, signalling, stations, maintenance and emergency procedures must be designed together. A train travelling at 300 km/h moves at $83.3$ m/s, so it covers the length of a football pitch in little more than one second.
 
-Aerodynamic drag increases approximately with the square of speed, while the power required to overcome it increases approximately with the cube. Doubling speed can therefore require about eight times more aerodynamic power if shape and air density remain unchanged. Streamlined noses, smooth surfaces and protected underbodies reduce drag and pressure waves. Tunnel entry is particularly demanding because the vehicle compresses air in a confined space.
+Aerodynamic drag can be approximated by
+\[
+F_D=\frac{1}{2}\rho C_D A v^2,
+\]
+where $\rho$ is air density, $C_D$ the drag coefficient, $A$ the frontal area and $v$ the speed. The corresponding power is
+\[
+P_D=F_Dv=\frac{1}{2}\rho C_D A v^3.
+\]
+Therefore, doubling speed multiplies aerodynamic power by about eight if geometry and air density remain unchanged. Streamlined noses, smooth inter-car gaps and protected underbodies reduce drag and pressure waves. Tunnel entry is particularly demanding because the train compresses air in a confined space.
 
-Conventional high-speed trains use steel wheels on rails. This provides low rolling resistance and mature switching technology. Magnetic levitation removes wheel-rail contact at speed, reducing mechanical wear, but it requires dedicated guideways and complex electromagnetic control. Low-pressure tubes could reduce aerodynamic resistance further, yet maintaining long evacuated infrastructure and safe evacuation routes is difficult.
+Conventional high-speed trains use steel wheels on rails. This gives low rolling resistance, mature switches and compatibility with parts of existing networks. Magnetic levitation removes wheel--rail contact at speed and can reduce mechanical wear, but it requires dedicated guideways, accurate gap control and specialised power electronics. Low-pressure tubes could reduce aerodynamic resistance further, yet maintaining long sealed infrastructure, controlling thermal expansion and providing safe evacuation remain major challenges.
 
-Braking distance grows with the square of speed for a given deceleration. High-speed networks therefore use continuous signalling and automatic train protection rather than relying on lineside signals. Regenerative braking can return energy to the electrical network, provided another train or storage system can absorb it.
+For a constant deceleration $a$, the ideal braking distance is
+\[
+d=\frac{v^2}{2a}.
+\]
+Real stopping distance is longer because it includes detection, command and brake-build-up delays. High-speed networks therefore use continuous cab signalling and automatic train protection rather than relying on lineside signals. Regenerative braking can return energy to the supply system when another train, the grid or a storage device can absorb it.
 
-Speed alone does not determine usefulness. Door-to-door time, station access, capacity, reliability, construction carbon and ticket cost matter. High-speed rail performs best on busy corridors where large passenger flows justify dedicated infrastructure. Engineers must compare alternatives using energy per passenger-kilometre and lifecycle impact, not vehicle speed or peak power alone.
+Maximum speed does not determine usefulness on its own. Door-to-door time includes access, waiting, intermediate stops and transfers. Capacity, reliability, construction carbon, noise and ticket cost also matter. High-speed rail performs best on busy corridors where high passenger flows justify dedicated infrastructure. Engineers should compare energy per passenger-kilometre and lifecycle impacts, not only vehicle speed or peak power.
 \end{ecarticle}
 
 \begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
-A high-performance prototype is not sufficient: engineers must prove repeatability, safety and useful performance under realistic operating conditions.
+Increasing maximum speed may save only a few minutes when stations are close together, because acceleration, braking and dwell times occupy a large fraction of the journey.
 \end{tcolorbox}
 
 \begin{engineeringfocus}
 \textbf{Energy conversion in high-speed rail}
 \begin{center}
+\resizebox{0.96\linewidth}{!}{%
 \begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=4mm]
 \node[draw=ECBlue,fill=ECLightBlue,rounded corners] (grid) {electric grid};
 \node[draw=ECPurple,fill=ECPurple!10,rounded corners,right=of grid] (drive) {converter and motor};
 \node[draw=ECGreen,fill=ECGreen!10,rounded corners,right=of drive] (motion) {vehicle motion};
-\node[draw=ECOrange,fill=ECOrange!10,rounded corners,below=of drive] (loss) {drag and losses};
-\draw[->,thick] (grid)--(drive); \draw[->,thick] (drive)--(motion); \draw[->,thick] (motion)--(loss);
+\node[draw=ECOrange,fill=ECOrange!10,rounded corners,below=of drive] (loss) {drag, rolling and auxiliaries};
+\draw[->,thick] (grid)--(drive);
+\draw[->,thick] (drive)--(motion);
+\draw[->,thick] (motion)--(loss);
 \draw[->,thick,dashed] (motion) to[bend left=35] node[above]{regeneration} (grid);
-\end{tikzpicture}
+\end{tikzpicture}}
 \end{center}
 \end{engineeringfocus}
 
@@ -47,20 +62,30 @@ A high-performance prototype is not sufficient: engineers must prove repeatabili
 \begin{tabularx}{\linewidth}{@{}Xr@{}}
 Drag force & $\propto v^2$\\
 Aerodynamic power & $\propto v^3$\\
-Braking distance & $\propto v^2$\\
+Ideal braking distance & $v^2/(2a)$\\
 Safety system & continuous signalling\\
-Useful metric & passenger-km\\
+Useful metric & passenger-km
 \end{tabularx}
 \end{keyfigures}
 
 \begin{tcolorbox}[title=\sffamily\bfseries Aerodynamic power versus speed,colback=white,colframe=ECBlue]
 \begin{center}
 \begin{tikzpicture}
-\begin{axis}[width=\linewidth,height=48mm,xlabel={Speed (km/h)},ylabel={Relative aerodynamic power},grid=major,ticklabel style={font=\scriptsize}]
+\begin{axis}[width=0.96\linewidth,height=46mm,xlabel={Speed (km/h)},ylabel={Relative aerodynamic power},grid=major,ticklabel style={font=\scriptsize},label style={font=\scriptsize}]
 \addplot[thick,mark=*] table[x=speed,y=power,col sep=comma]{data/EC30/power.csv};
 \end{axis}
 \end{tikzpicture}
 \end{center}
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Quantitative application,colback=ECBlue!5,colframe=ECBlue]
+A train has $C_DA=8.0$ m$^2$ and runs in air of density $1.2$ kg/m$^3$.
+\begin{enumerate}
+\item Estimate aerodynamic drag and power at 300 km/h.
+\item With an emergency deceleration of $0.9$ m/s$^2$, calculate the ideal braking distance from 300 km/h.
+\item Add a 5 s response delay and estimate the total stopping distance.
+\end{enumerate}
+\textit{Expected result:} $F_D\approx33$ kN, $P_D\approx2.8$ MW, ideal braking distance $\approx3.86$ km and total distance $\approx4.28$ km.
 \end{tcolorbox}
 
 \begin{vocabulary}
@@ -74,20 +99,20 @@ braking distance & distance de freinage\\
 regenerative braking & freinage régénératif\\
 signalling & signalisation\\
 passenger-kilometre & passager-kilomètre\\
-dedicated infrastructure & infrastructure dédiée\\
+dedicated infrastructure & infrastructure dédiée
 \end{tabularx}
 \end{vocabulary}
 
 \begin{questions}
-\item Why does aerodynamic power rise so quickly with speed?
+\item Why does aerodynamic power rise more quickly than drag force?
 \item What are the main advantages and limits of magnetic levitation?
 \item Why are continuous signalling systems necessary?
-\item When can regenerative braking return useful energy?
-\item Why should door-to-door time be considered?
+\item Under what conditions can regenerative braking recover useful energy?
+\item Why can maximum speed be a poor indicator of door-to-door performance?
 \end{questions}
 
 \begin{engineeringchallenge}
-Compare a 300 km/h railway with a magnetic-levitation line for a 600 km corridor. Estimate travel time, identify dominant losses, define safety requirements and propose a lifecycle comparison.
+Compare a 300 km/h railway with a magnetic-levitation line for a 600 km corridor. Estimate non-stop travel time, identify dominant energy losses, define safety requirements and propose a lifecycle comparison including infrastructure carbon and passenger demand.
 \end{engineeringchallenge}
 
 \begin{speaking}
