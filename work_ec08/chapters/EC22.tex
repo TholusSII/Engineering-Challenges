@@ -3,16 +3,16 @@
 
 \ECObjectives{
 \begin{itemize}
-\item Describe the architecture of a connected production system.
-\item Explain how data can improve availability and quality.
-\item Identify cybersecurity and human factors.
+\item Describe the layered architecture of a connected production system.
+\item Explain how data can improve availability, performance and quality.
+\item Identify cybersecurity risks and human factors.
 \end{itemize}}
 
 \begin{multicols}{2}
 \begin{engineeringnews}
 Factories are connecting machines, robots, inspection stations and planning software. The objective
 is not simply to automate more tasks, but to create a production system that can measure its own
-performance, adapt to variation and support faster decisions.
+performance, adapt to variation and support faster, better-informed decisions.
 \end{engineeringnews}
 
 \begin{ecarticle}
@@ -25,7 +25,7 @@ A connected factory is organised in layers. The physical layer contains machines
 control layer contains PLCs, drives and robot controllers. Manufacturing execution systems coordinate
 orders, traceability and work instructions. At the top, enterprise software manages resources,
 suppliers and customer demand. Data must move between these layers without compromising real-time
-operation.
+operation or production safety.
 
 Condition monitoring can detect a damaged bearing before failure. Vision systems can inspect every
 part instead of a small sample. Production data can reveal that a defect appears only with one tool,
@@ -33,11 +33,11 @@ one material batch or one temperature range. These applications reduce unplanned
 but only when engineers define useful indicators rather than collecting data without purpose.
 
 Overall equipment effectiveness, or OEE, combines availability, performance and quality. A machine
-with high speed but frequent stops may have poor OEE. Connected monitoring helps teams identify the
-main loss and verify whether an improvement is effective.
+with high nominal speed but frequent stops may have poor OEE. Connected monitoring helps teams
+identify the dominant loss and verify whether an improvement is effective.
 
 Industry 4.0 also creates risks. A cyberattack can interrupt production or modify process parameters.
-Old machines may use insecure protocols. Operators may receive too many alarms or distrust opaque
+Legacy machines may use insecure protocols. Operators may receive too many alarms or distrust opaque
 algorithms. Successful projects therefore combine secure architecture, clear interfaces, training and
 human expertise. Technology should support operators, not remove their understanding of the process.
 \end{ecarticle}
@@ -50,13 +50,15 @@ to a physical cause, a decision and a person responsible for acting on it.
 \begin{engineeringfocus}
 \textbf{Connected production architecture}
 \begin{center}
+\resizebox{0.82\linewidth}{!}{%
 \begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=3.5mm]
 \node[draw=ECGreen,fill=ECGreen!10,rounded corners] (machines) {machines and sensors};
 \node[draw=ECBlue,fill=ECLightBlue,rounded corners,above=of machines] (control) {PLCs and control};
 \node[draw=ECPurple,fill=ECPurple!10,rounded corners,above=of control] (mes) {MES and traceability};
 \node[draw=ECOrange,fill=ECOrange!10,rounded corners,above=of mes] (erp) {planning and enterprise};
 \draw[<->,thick] (machines)--(control); \draw[<->,thick] (control)--(mes); \draw[<->,thick] (mes)--(erp);
-\end{tikzpicture}
+\end{tikzpicture}%
+}
 \end{center}
 \end{engineeringfocus}
 
@@ -73,8 +75,10 @@ Critical requirement & secure network
 \begin{tcolorbox}[title=\sffamily\bfseries OEE components,colback=white,colframe=ECGreen]
 \begin{center}
 \begin{tikzpicture}
-\begin{axis}[ybar,bar width=8pt,width=\linewidth,height=50mm,ymin=0,ymax=105,ylabel={Score (\%)},
-symbolic x coords={Conventional,Connected},xtick=data,legend style={font=\scriptsize,at={(0.5,-0.22)},anchor=north,legend columns=3},ticklabel style={font=\scriptsize}]
+\begin{axis}[ybar,bar width=8pt,width=0.96\linewidth,height=47mm,ymin=0,ymax=105,ylabel={Score (\%)},
+symbolic x coords={Conventional,Connected},xtick=data,
+legend style={font=\scriptsize,at={(0.5,-0.22)},anchor=north,legend columns=3},
+ticklabel style={font=\scriptsize}]
 \addplot table[x=mode,y=availability,col sep=comma]{data/EC22/oee.csv};
 \addplot table[x=mode,y=performance,col sep=comma]{data/EC22/oee.csv};
 \addplot table[x=mode,y=quality,col sep=comma]{data/EC22/oee.csv};
@@ -83,6 +87,17 @@ symbolic x coords={Conventional,Connected},xtick=data,legend style={font=\script
 \end{tikzpicture}
 \end{center}
 \end{tcolorbox}
+
+\begin{applicationexercise}{Calculating OEE}
+During one shift, a production line has an availability of $90\%$, a performance score of $85\%$ and
+a quality score of $98\%$.
+\begin{enumerate}
+\item Calculate the OEE using $\mathrm{OEE}=A\times P\times Q$.
+\item A connected monitoring system raises availability to $95\%$ while the other two factors remain
+unchanged. Calculate the new OEE.
+\item Determine the improvement in percentage points.
+\end{enumerate}
+\end{applicationexercise}
 
 \begin{vocabulary}
 \begin{tabularx}{\linewidth}{@{}lX@{}}
