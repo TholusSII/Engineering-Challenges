@@ -3,59 +3,65 @@
 
 \ECObjectives{
 \begin{itemize}
-\item Explain the main physical and engineering principles.
-\item Interpret measurements, models and performance trade-offs.
-\item Identify safety, environmental and validation constraints.
+\item Distinguish classical bits from qubits and explain superposition, interference and measurement.
+\item Identify the engineering constraints imposed by decoherence and error correction.
+\item Evaluate realistic applications in computing, sensing and communication.
 \end{itemize}}
 
 \begin{multicols}{2}
 \begin{engineeringnews}
-Quantum technologies are moving from laboratory demonstrations to specialised sensors, secure communication links and prototype computers. Their advantage comes from controlling individual quantum states rather than simply making conventional devices smaller.
+Quantum technologies are moving from laboratory demonstrations to specialised sensors, secure communication links and prototype computers. Their potential comes from preparing, controlling and measuring individual quantum states rather than merely reducing the size of conventional devices.
 \end{engineeringnews}
 
 \begin{ecarticle}
-Quantum technologies exploit physical effects that are negligible in ordinary engineering systems. A quantum bit, or qubit, can be prepared in a superposition of two basis states. Several qubits may also become entangled, meaning that their measurement results are correlated more strongly than classical systems allow. These properties enable new methods of computation, sensing and communication.
+A classical bit takes the value 0 or 1. A qubit can be prepared in a superposition $\alpha\lvert 0\rangle+\beta\lvert 1\rangle$, where the complex amplitudes satisfy $|\alpha|^2+|\beta|^2=1$. A measurement returns either 0 or 1 with probabilities determined by these amplitudes. Several qubits may also become entangled, so their measurement results cannot be described as independent classical variables.
 
-A quantum computer does not test every answer at once. It applies carefully designed operations to amplitudes and uses interference to increase the probability of useful results. Measurement then produces a classical bit string. Quantum algorithms can accelerate certain tasks such as factoring, molecular simulation or specific optimisation subroutines, but they do not make every calculation faster.
+A quantum computer does not simply test every possible answer at once. Quantum gates modify probability amplitudes, while interference suppresses some outcomes and reinforces others. The final measurement produces an ordinary bit string, so a useful algorithm must concentrate probability on informative results before measurement. Quantum algorithms can accelerate selected tasks such as factoring, quantum simulation or particular search and optimisation subroutines, but they do not make every computation faster.
 
-The main engineering difficulty is decoherence. Qubits interact unintentionally with their environment and lose the fragile information stored in their state. Platforms based on superconducting circuits, trapped ions, neutral atoms and photons therefore require precise control, isolation and calibration. Some need cryogenic temperatures; others need ultra-high vacuum and stable lasers.
+The main engineering challenge is decoherence. Unwanted interactions with the environment disturb phase relationships and progressively destroy the stored quantum information. Superconducting circuits may require millikelvin temperatures and carefully filtered microwave signals. Trapped ions and neutral atoms need ultra-high vacuum, stable lasers and precise electromagnetic fields. Photonic systems avoid some cooling constraints but require low-loss sources, detectors and optical circuits.
 
-Quantum error correction distributes one logical qubit across many physical qubits. It can detect and correct errors without directly reading the encoded information, but the hardware overhead is large. Current machines are therefore described as noisy and intermediate-scale. They are valuable research tools but not yet universal fault-tolerant computers.
+Quantum error correction encodes one logical qubit in many physical qubits. Repeated syndrome measurements reveal certain errors without directly reading the logical state. This can support fault-tolerant computation, but only when physical error rates remain below a demanding threshold and when enough hardware is available. The number of physical qubits required for one reliable logical qubit can therefore be very large.
 
-Quantum sensing is closer to deployment in some fields. Atomic clocks, magnetometers and gravimeters use quantum transitions to measure time, magnetic field or acceleration with extreme sensitivity. Quantum communication can reveal interception because measurement disturbs an unknown quantum state. Engineering success will depend on systems integration, standards, realistic benchmarking and secure links between quantum and classical equipment.
+Quantum sensing is closer to practical deployment in several fields. Atomic clocks use stable transition frequencies, while magnetometers and gravimeters detect tiny variations in magnetic field or acceleration. Sensitivity often improves with longer interrogation time, but longer measurements also allow more decoherence and environmental drift. Engineers must therefore optimise preparation time, coherence, repetition rate and signal processing.
+
+Quantum communication can reveal interception because measuring an unknown quantum state generally disturbs it. However, a complete secure system still depends on trusted hardware, authentication, classical cryptography and careful implementation. Real engineering performance must be demonstrated through repeatable benchmarks, calibration, standards and integration with conventional equipment.
 \end{ecarticle}
 
 \begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
-A high-performance prototype is not sufficient: engineers must prove repeatability, safety and useful performance under realistic operating conditions.
+If coherence decays exponentially, it can be modelled by $C(t)=C_0\exp(-t/T_2)$, where $T_2$ is the coherence time.
 \end{tcolorbox}
 
 \begin{engineeringfocus}
-\textbf{Quantum computing chain}
+\textbf{Hybrid quantum--classical computing chain}
 \begin{center}
+\resizebox{0.96\linewidth}{!}{%
 \begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=4mm]
-\node[draw=ECPurple,fill=ECPurple!10,rounded corners] (init) {initialise qubits};
-\node[draw=ECBlue,fill=ECLightBlue,rounded corners,right=of init] (gates) {quantum gates};
+\node[draw=ECPurple,fill=ECPurple!10,rounded corners] (init) {initialise};
+\node[draw=ECBlue,fill=ECLightBlue,rounded corners,right=of init] (gates) {apply gates};
 \node[draw=ECOrange,fill=ECOrange!10,rounded corners,right=of gates] (meas) {measure};
-\node[draw=ECGreen,fill=ECGreen!10,rounded corners,below=of gates] (class) {classical analysis};
-\draw[->,thick] (init)--(gates); \draw[->,thick] (gates)--(meas); \draw[->,thick] (meas)--(class); \draw[->,thick] (class)--(gates);
-\end{tikzpicture}
+\node[draw=ECGreen,fill=ECGreen!10,rounded corners,below=of gates] (class) {classical optimisation};
+\draw[->,thick] (init)--(gates);
+\draw[->,thick] (gates)--(meas);
+\draw[->,thick] (meas)--(class);
+\draw[->,thick] (class)--(gates);
+\end{tikzpicture}}
 \end{center}
 \end{engineeringfocus}
 
 \begin{keyfigures}
 \begin{tabularx}{\linewidth}{@{}Xr@{}}
 Information unit & qubit\\
-Main resource & coherence\\
-Common enemy & noise\\
-Output & probability distribution\\
-Near-term strength & sensing\\
+State lifetime & coherence time\\
+Main disturbance & noise\\
+Measured output & probabilities\\
+Near-term strength & sensing
 \end{tabularx}
 \end{keyfigures}
 
 \begin{tcolorbox}[title=\sffamily\bfseries Illustrative coherence decay,colback=white,colframe=ECPurple]
 \begin{center}
 \begin{tikzpicture}
-\begin{axis}[width=\linewidth,height=48mm,xlabel={Time (arbitrary units)},ylabel={Remaining coherence},ymin=0,ymax=1.05,grid=major,ticklabel style={font=\scriptsize}]
+\begin{axis}[width=0.94\linewidth,height=45mm,xlabel={Time (arbitrary units)},ylabel={Remaining coherence},ymin=0,ymax=1.05,grid=major,ticklabel style={font=\scriptsize},label style={font=\scriptsize}]
 \addplot[thick,mark=*] table[x=time,y=coherence,col sep=comma]{data/EC28/coherence.csv};
 \end{axis}
 \end{tikzpicture}
@@ -73,24 +79,30 @@ decoherence & décohérence\\
 quantum gate & porte quantique\\
 error correction & correction d’erreurs\\
 cryogenic & cryogénique\\
-fault-tolerant & tolérant aux fautes\\
+fault-tolerant & tolérant aux fautes
 \end{tabularx}
 \end{vocabulary}
 
 \begin{questions}
 \item How does a qubit differ from a classical bit?
-\item Why does measurement limit the information obtained from a quantum state?
-\item What causes decoherence?
-\item Why are many physical qubits needed for one logical qubit?
-\item Name one application of quantum sensing.
+\item Why can a measurement not reveal all amplitudes of one unknown quantum state?
+\item What physical mechanisms can cause decoherence?
+\item Why are many physical qubits needed to create one reliable logical qubit?
+\item Explain one trade-off between sensitivity and coherence time in a quantum sensor.
 \end{questions}
 
 \begin{engineeringchallenge}
-Propose an experimental quantum sensor for detecting small magnetic-field variations. Describe the quantum element, control system, environmental isolation, calibration and classical signal processing.
+A qubit has an initial coherence $C_0=1$ and a coherence time $T_2=80\,\mu\mathrm{s}$. Assume $C(t)=\exp(-t/T_2)$.
+\begin{enumerate}
+\item Calculate the remaining coherence after $40\,\mu\mathrm{s}$ and $120\,\mu\mathrm{s}$.
+\item Determine the maximum operation time required to keep $C(t)\geq0.70$.
+\item A quantum gate lasts $50\,\mathrm{ns}$. Estimate how many sequential gates fit within this time limit.
+\item Explain why this number is only an upper bound in a real processor.
+\end{enumerate}
 \end{engineeringchallenge}
 
 \begin{speaking}
-Should governments prioritise quantum computing, quantum sensing or quantum-secure communication? Defend one investment strategy.
+Should governments prioritise quantum computing, quantum sensing or quantum-secure communication? Defend one investment strategy using technological maturity, social benefit and cost.
 \end{speaking}
 \end{multicols}
 

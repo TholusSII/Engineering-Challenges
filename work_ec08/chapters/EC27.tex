@@ -3,41 +3,44 @@
 
 \ECObjectives{
 \begin{itemize}
-\item Explain the main physical and engineering principles.
-\item Interpret measurements, models and performance trade-offs.
-\item Identify safety, environmental and validation constraints.
+\item Explain why surface and quantum effects become dominant at the nanoscale.
+\item Compare top-down and bottom-up manufacturing routes.
+\item Evaluate performance, measurement and exposure-control trade-offs.
 \end{itemize}}
 
 \begin{multicols}{2}
 \begin{engineeringnews}
-At dimensions below about one hundred nanometres, surfaces, interfaces and quantum effects can dominate material behaviour. Nanotechnology uses these effects in electronics, coatings, sensors, medicine and energy systems.
+At dimensions below about one hundred nanometres, the ratio between surface area and volume rises sharply and quantum confinement can modify optical or electrical behaviour. Nanotechnology exploits these scale effects in electronics, coatings, sensors, medicine and energy systems.
 \end{engineeringnews}
 
 \begin{ecarticle}
-A nanometre is one billionth of a metre. At this scale, a material can behave differently from the same substance in bulk form. Two reasons are especially important. First, the surface-area-to-volume ratio becomes very large, so surface reactions and interfaces dominate. Second, electrons may be confined to very small regions, creating size-dependent optical and electrical properties.
+A nanometre is one billionth of a metre. A material at this scale may behave differently from the same substance in bulk form. The first reason is geometric: for similar particles, surface area varies with the square of size whereas volume varies with the cube. The surface-area-to-volume ratio therefore increases as the characteristic length decreases. Surface reactions, interfaces and adhesion can then dominate the behaviour of the whole object.
 
-Engineers use two broad manufacturing strategies. Top-down methods remove material from a larger structure by lithography, etching or machining. Bottom-up methods assemble structures from atoms, molecules or nanoparticles through chemical synthesis and self-organisation. Top-down fabrication offers precise patterns, while bottom-up processes can produce very small features over large areas.
+The second reason is quantum confinement. When electrons are restricted to dimensions comparable with their characteristic wavelengths, allowed energy levels change. Quantum dots consequently emit different colours depending on particle size, and nanoscale conductors can show electrical properties that do not appear in larger components.
 
-Nanomaterials include particles, tubes, wires, thin films and porous structures. Carbon nanotubes combine low density with high stiffness and electrical conductivity. Quantum dots emit colours that depend on particle size. Nanostructured catalysts expose many active sites, reducing the quantity of expensive material required. Thin coatings can modify friction, corrosion, wettability or optical reflection without changing the bulk component.
+Engineers use two broad manufacturing strategies. Top-down processes remove material from a larger structure by lithography, etching or precision machining. They provide accurate patterns and compatibility with semiconductor production, but become expensive as feature size decreases. Bottom-up processes assemble atoms, molecules or nanoparticles through chemical synthesis, deposition or self-organisation. They can create extremely small structures over large areas, although controlling defects, orientation and particle-size distribution is difficult.
 
-Measurement is difficult because ordinary optical microscopes cannot resolve features much smaller than visible-light wavelengths. Electron microscopy, atomic-force microscopy and spectroscopy are therefore essential. Manufacturing control must also prevent agglomeration, contamination and variation in particle size.
+Nanomaterials include particles, tubes, wires, thin films and porous structures. Carbon nanotubes combine low density with high axial stiffness and electrical conductivity. Nanostructured catalysts expose many active sites, so less precious metal may be required. Thin coatings can alter friction, corrosion resistance, wettability or optical reflection without changing the bulk component.
 
-Benefits must be assessed together with risks. Nanoparticles can enter organisms and ecosystems in ways that larger particles cannot. Toxicity depends on size, shape, coating and chemical composition, not only on mass. Engineers must therefore design containment, exposure monitoring, recycling and end-of-life procedures. Responsible nanotechnology requires lifecycle thinking as well as impressive laboratory performance.
+Measurement and quality control are major engineering challenges. Conventional optical microscopes cannot resolve features much smaller than the wavelength of visible light. Electron microscopy, atomic-force microscopy and spectroscopy are therefore used to measure dimensions, morphology and composition. Manufacturing must also limit agglomeration, contamination and variation between batches.
+
+Benefits must be assessed together with risks. Nanoparticles may enter organisms and ecosystems through pathways that are less important for larger particles. Toxicity depends on size, shape, surface chemistry and solubility, not only on total mass. Responsible design therefore includes containment, ventilation, exposure monitoring, recycling and end-of-life planning.
 \end{ecarticle}
 
 \begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
-A high-performance prototype is not sufficient: engineers must prove repeatability, safety and useful performance under realistic operating conditions.
+For a spherical particle of diameter $d$, the surface-area-to-volume ratio is $6/d$. Halving the diameter therefore doubles this ratio.
 \end{tcolorbox}
 
 \begin{engineeringfocus}
-\textbf{Scale changes behaviour}
+\textbf{From bulk material to nanoscale behaviour}
 \begin{center}
+\resizebox{0.96\linewidth}{!}{%
 \begin{tikzpicture}[font=\scriptsize,>=Latex]
 \draw[thick,->] (0,0)--(7,0);
 \foreach \x/\lab in {0.5/1 m,2/1 mm,3.5/1 \textmu m,5/100 nm,6.5/1 nm}{\draw (\x,.12)--(\x,-.12) node[below]{\lab};}
-\node[draw=ECGreen,fill=ECGreen!10,rounded corners,align=center] at (5.8,1) {large surface effects\\and quantum effects};
+\node[draw=ECGreen,fill=ECGreen!10,rounded corners,align=center] at (5.8,1) {surface effects increase\\quantum effects may appear};
 \draw[->] (5.8,.65)--(5.8,.1);
-\end{tikzpicture}
+\end{tikzpicture}}
 \end{center}
 \end{engineeringfocus}
 
@@ -46,15 +49,15 @@ A high-performance prototype is not sufficient: engineers must prove repeatabili
 1 nanometre & $10^{-9}$ m\\
 Typical nanoparticle & 1--100 nm\\
 Top-down & material removal\\
-Bottom-up & self-assembly\\
-Main concern & exposure\\
+Bottom-up & assembly\\
+Critical control & exposure
 \end{tabularx}
 \end{keyfigures}
 
 \begin{tcolorbox}[title=\sffamily\bfseries Surface area increases as size decreases,colback=white,colframe=ECGreen]
 \begin{center}
 \begin{tikzpicture}
-\begin{axis}[width=\linewidth,height=48mm,xlabel={Particle diameter (nm)},ylabel={Relative surface area},grid=major,ticklabel style={font=\scriptsize},x dir=reverse]
+\begin{axis}[width=0.94\linewidth,height=45mm,xlabel={Particle diameter (nm)},ylabel={Relative surface area},grid=major,ticklabel style={font=\scriptsize},label style={font=\scriptsize},x dir=reverse]
 \addplot[thick,mark=*] table[x=diameter,y=area,col sep=comma]{data/EC27/surface.csv};
 \end{axis}
 \end{tikzpicture}
@@ -72,24 +75,30 @@ self-assembly & auto-assemblage\\
 quantum dot & boîte quantique\\
 agglomeration & agglomération\\
 coating & revêtement\\
-exposure & exposition\\
+exposure & exposition
 \end{tabularx}
 \end{vocabulary}
 
 \begin{questions}
-\item Why do surfaces become more important at the nanoscale?
-\item Compare top-down and bottom-up manufacturing.
-\item Why are electron microscopes often required?
-\item Give two useful properties of nanostructured materials.
-\item Why is particle mass insufficient for evaluating risk?
+\item Why does the surface-area-to-volume ratio increase as particle size decreases?
+\item Compare one advantage and one limitation of top-down and bottom-up fabrication.
+\item Why are electron or atomic-force microscopes often required?
+\item Give two functions that can be improved by a nanostructured coating.
+\item Why is particle mass alone insufficient for evaluating health risk?
 \end{questions}
 
 \begin{engineeringchallenge}
-Select a conventional product and propose a nanostructured coating that improves one function. Define the manufacturing route, verification method, expected benefit and exposure-control measures.
+A coating contains spherical nanoparticles with a diameter of $40\,\mathrm{nm}$. The same material is also available as particles with a diameter of $200\,\mathrm{nm}$.
+\begin{enumerate}
+\item Calculate the surface-area-to-volume ratio $6/d$ for both particle sizes.
+\item Determine how many times larger the ratio is for the $40\,\mathrm{nm}$ particles.
+\item Explain how this change could improve catalytic activity but also increase exposure risk.
+\item Propose one measurement method and two exposure-control measures for production.
+\end{enumerate}
 \end{engineeringchallenge}
 
 \begin{speaking}
-Do the potential benefits of nanoparticles justify their use before all long-term environmental effects are known?
+Do the potential benefits of nanoparticles justify their use before all long-term environmental effects are known? Discuss evidence, precaution and lifecycle responsibility.
 \end{speaking}
 \end{multicols}
 
