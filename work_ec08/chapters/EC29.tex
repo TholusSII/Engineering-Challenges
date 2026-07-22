@@ -3,61 +3,74 @@
 
 \ECObjectives{
 \begin{itemize}
-\item Explain the main physical and engineering principles.
-\item Interpret measurements, models and performance trade-offs.
-\item Identify safety, environmental and validation constraints.
+\item Distinguish operational energy from embodied carbon.
+\item Apply simple heat-loss and heat-pump calculations.
+\item Explain why commissioning and measured performance matter.
 \end{itemize}}
 
 \begin{multicols}{2}
 \begin{engineeringnews}
-Buildings consume energy during construction and throughout decades of operation. Sustainable design therefore combines passive architecture, efficient equipment, low-carbon materials, renewable energy and monitoring of real performance.
+Buildings consume energy during construction and throughout decades of operation. Sustainable design therefore combines passive architecture, efficient equipment, low-carbon materials, renewable energy and continuous verification of real performance.
 \end{engineeringnews}
 
 \begin{ecarticle}
-A sustainable building must provide comfort, safety and useful space while reducing environmental impacts over its entire lifecycle. Operational energy is used for heating, cooling, ventilation, lighting and equipment. Embodied carbon is associated with extracting materials, manufacturing products, transport, construction, maintenance and demolition. As grids become cleaner and insulation improves, embodied impacts represent a larger share of the total.
+A sustainable building must provide comfort, safety and useful space while reducing environmental impacts over its complete lifecycle. Operational energy is used for heating, cooling, ventilation, lighting and equipment. Embodied carbon is associated with extracting raw materials, manufacturing products, transport, construction, maintenance and demolition. As electricity grids become cleaner and envelopes improve, embodied impacts account for a growing share of total emissions.
 
-The first design strategy is to reduce demand. Building orientation, window area, shading and thermal mass influence solar gains. Insulation and airtightness reduce heat transfer, while controlled ventilation maintains air quality. External shading can block summer sun without preventing winter daylight. These passive decisions are usually more robust than adding complex equipment later.
+The first design strategy is to reduce demand. Heat transfer through an envelope element can be estimated from
+\[
+\dot Q = U A \Delta T,
+\]
+where $U$ is the thermal transmittance, $A$ the surface area and $\Delta T$ the indoor--outdoor temperature difference. Lower $U$-values, fewer thermal bridges and better airtightness reduce winter losses. Orientation, window area, external shading and thermal mass also influence solar gains and summer overheating.
 
-Heating and cooling systems must then match the reduced demand. Heat pumps can transfer several units of heat for one unit of electricity, but their performance depends on outdoor temperature and supply temperature. Efficient fans, pumps and controls reduce auxiliary consumption. Sensors can adjust operation according to occupancy, carbon-dioxide concentration and weather forecasts.
+Controlled ventilation is essential because airtight construction without adequate air renewal can create excessive humidity and pollutant concentrations. Demand-controlled ventilation may use occupancy and carbon-dioxide measurements, but CO$_2$ is mainly a proxy for human occupancy and ventilation effectiveness, not a complete indicator of indoor air quality.
 
-Material selection requires lifecycle assessment. Concrete offers durability and thermal mass but cement production emits carbon dioxide. Timber stores biogenic carbon and can reduce mass, yet sourcing, fire safety, moisture and end-of-life must be considered. Reuse of structural elements can avoid both waste and new production.
+Heating and cooling systems must then match the reduced demand. A heat pump can deliver several units of heat for one unit of electricity. Its coefficient of performance is
+\[
+\mathrm{COP}=\frac{Q_{\mathrm{heat}}}{W_{\mathrm{electric}}}.
+\]
+Performance decreases when the temperature lift between the heat source and the building increases, so low-temperature emitters and a well-insulated envelope improve system efficiency.
 
-A design model is only a prediction. The performance gap between calculated and measured consumption may result from construction defects, incorrect controls or occupant behaviour. Commissioning, metering and feedback are therefore part of sustainable engineering. A successful building is not merely certified at handover; it continues to perform well during use.
+Material selection requires lifecycle assessment. Concrete provides durability and thermal mass but cement production is carbon intensive. Timber can lower structural mass and store biogenic carbon, yet sourcing, fire safety, moisture resistance and end-of-life scenarios must be assessed. Reusing structural elements can avoid both demolition waste and new manufacturing.
+
+A simulation remains a prediction. The performance gap between calculated and measured consumption may result from construction defects, incorrect controls, unexpected occupancy or user behaviour. Commissioning, sub-metering and feedback are therefore engineering tasks, not optional extras. A building is successful only if it continues to perform during operation.
 \end{ecarticle}
 
 \begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
-A high-performance prototype is not sufficient: engineers must prove repeatability, safety and useful performance under realistic operating conditions.
+Reducing demand usually saves more energy over the building lifetime than selecting a slightly more efficient heating system for a poorly designed envelope.
 \end{tcolorbox}
 
 \begin{engineeringfocus}
 \textbf{Heat and energy flows}
 \begin{center}
+\resizebox{0.95\linewidth}{!}{%
 \begin{tikzpicture}[font=\scriptsize,>=Latex]
 \draw[thick,fill=ECOrange!8] (1,0) rectangle (5,2.8);
 \draw[fill=ECLightBlue] (2.7,0) rectangle (3.3,1.2);
 \node at (3,1.8) {indoor space};
 \draw[->,thick,ECRed] (0,2.2)--node[above]{solar gain}(1,2.2);
-\draw[->,thick,ECBlue] (5,2.0)--node[above]{heat loss}(6.7,2.0);
+\draw[->,thick,ECBlue] (5,2.0)--node[above]{transmission loss}(6.7,2.0);
 \draw[->,thick,ECGreen] (3,-.6)--node[right]{heat pump}(3,0);
 \draw[->,thick,ECPurple] (4.2,3.5)--node[right]{ventilation}(4.2,2.8);
-\end{tikzpicture}
+\draw[->,thick,ECOrange] (1.8,3.5)--node[left]{internal gains}(1.8,2.8);
+\end{tikzpicture}}
 \end{center}
 \end{engineeringfocus}
 
 \begin{keyfigures}
 \begin{tabularx}{\linewidth}{@{}Xr@{}}
 First priority & reduce demand\\
-Envelope metric & U-value\\
-Air quality proxy & CO$_2$\\
+Envelope equation & $\dot Q=UA\Delta T$\\
+Heat-pump metric & COP\\
+Air-quality proxy & CO$_2$\\
 Operational check & metering\\
-Material tool & lifecycle assessment\\
+Material tool & lifecycle assessment
 \end{tabularx}
 \end{keyfigures}
 
 \begin{tcolorbox}[title=\sffamily\bfseries Illustrative annual energy demand,colback=white,colframe=ECOrange]
 \begin{center}
 \begin{tikzpicture}
-\begin{axis}[ybar stacked,bar width=13pt,width=\linewidth,height=50mm,ylabel={Energy (kWh/m$^2$/year)},symbolic x coords={Conventional,Efficient,Passive},xtick=data,legend style={font=\scriptsize,at={(0.5,-0.22)},anchor=north,legend columns=3},ticklabel style={font=\scriptsize}]
+\begin{axis}[ybar stacked,bar width=10pt,width=0.96\linewidth,height=46mm,ylabel={Energy (kWh/m$^2$/year)},symbolic x coords={Conventional,Efficient,Passive},xtick=data,legend style={font=\tiny,at={(0.5,-0.24)},anchor=north,legend columns=3},ticklabel style={font=\scriptsize},ylabel style={font=\scriptsize}]
 \addplot table[x=design,y=heating,col sep=comma]{data/EC29/energy.csv};
 \addplot table[x=design,y=cooling,col sep=comma]{data/EC29/energy.csv};
 \addplot table[x=design,y=lighting,col sep=comma]{data/EC29/energy.csv};
@@ -65,6 +78,15 @@ Material tool & lifecycle assessment\\
 \end{axis}
 \end{tikzpicture}
 \end{center}
+\end{tcolorbox}
+
+\begin{tcolorbox}[title=\sffamily\bfseries Quantitative application,colback=ECOrange!5,colframe=ECOrange]
+A classroom has $120$ m$^2$ of external wall with $U=0.25$ W\,m$^{-2}$\,K$^{-1}$ and $30$ m$^2$ of windows with $U=1.4$ W\,m$^{-2}$\,K$^{-1}$. For an indoor--outdoor temperature difference of $20$ K:
+\begin{enumerate}
+\item Calculate the transmission heat loss through walls and windows.
+\item A heat pump with COP $=3.5$ supplies this heat. Estimate its electrical power.
+\end{enumerate}
+\textit{Expected result:} $\dot Q=1.44$ kW and electrical power $\approx0.41$ kW, excluding ventilation and thermal bridges.
 \end{tcolorbox}
 
 \begin{vocabulary}
@@ -78,7 +100,7 @@ heat pump & pompe à chaleur\\
 commissioning & mise au point\\
 metering & comptage\\
 performance gap & écart de performance\\
-lifecycle assessment & analyse du cycle de vie\\
+lifecycle assessment & analyse du cycle de vie
 \end{tabularx}
 \end{vocabulary}
 
@@ -87,11 +109,11 @@ lifecycle assessment & analyse du cycle de vie\\
 \item Why should demand reduction precede equipment selection?
 \item How can external shading improve summer comfort?
 \item Why can actual consumption differ from simulation?
-\item Give two reasons for monitoring indoor carbon dioxide.
+\item Why is CO$_2$ useful but insufficient as a complete air-quality indicator?
 \end{questions}
 
 \begin{engineeringchallenge}
-Design a low-energy classroom for a temperate climate. Propose envelope targets, shading, ventilation, heating, sensors and a method for checking actual performance after one year.
+Design a low-energy classroom for a temperate climate. Propose envelope targets, shading, ventilation, heating, sensors and a method for checking actual performance after one year. Include one heat-loss estimate and one embodied-carbon comparison.
 \end{engineeringchallenge}
 
 \begin{speaking}
