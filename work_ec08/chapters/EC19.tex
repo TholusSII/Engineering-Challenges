@@ -3,9 +3,9 @@
 
 \ECObjectives{
 \begin{itemize}
-\item Distinguish inspiration from direct imitation of a biological model.
-\item Explain how structure, surface and control principles can be transferred to engineering.
-\item Evaluate a biomimetic solution using measurable performance and life-cycle criteria.
+\item Distinguish biological inspiration, abstraction and direct imitation.
+\item Transfer a biological working principle into a manufacturable engineering concept.
+\item Compare biomimetic and conventional solutions using performance and life-cycle evidence.
 \end{itemize}}
 
 \begin{multicols}{2}
@@ -30,23 +30,23 @@ Surface engineering provides many examples. Gecko feet adhere through millions o
 that create weak intermolecular forces over a large contact area. Artificial dry adhesives reproduce
 the hierarchical structure without using glue. Shark skin has rib-like textures that influence the
 flow close to the surface. Similar riblets can reduce friction drag in selected conditions, although
-their benefit depends on size, orientation and cleanliness.
+their benefit depends on size, orientation, Reynolds number and cleanliness.
 
-Nature also inspires structures. Bone combines a dense outer layer with a porous interior, and achieves a
-high stiffness-to-mass ratio. Additive manufacturing can produce lattice structures that use the same
-principle. Honeycomb panels and branching networks similarly offer efficient ways to distribute
-loads or fluids.
+Nature also inspires structures. Bone combines a dense outer layer with a porous interior and
+achieves a high stiffness-to-mass ratio. Additive manufacturing can produce lattice structures that
+use the same principle. Honeycomb panels and branching networks similarly offer efficient ways to
+distribute loads or fluids.
 
 A biomimetic design is not automatically sustainable. Manufacturing a complex microstructure may
 consume large amounts of energy or use materials that are difficult to recycle. Engineers must compare
 the complete life cycle, durability and maintenance requirements with a conventional solution.
-Biomimetics is most valuable when the biological analogy leads to a measurable improvement rather
-than merely providing an attractive product story.
+Biomimetics is valuable only when the biological analogy leads to a measurable improvement.
 \end{ecarticle}
 
-\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
-The hook-and-loop fastener was inspired by burrs that attached themselves to animal fur and clothing.
-The invention reproduced the attachment principle, not the complete plant structure.
+\begin{tcolorbox}[title=\sffamily\bfseries Engineering Insight,colback=yellow!10,colframe=ECOrange]
+The hook-and-loop fastener was inspired by burrs attached to animal fur. Its success came from
+abstracting a repeatable attachment principle that could be manufactured economically, not from
+reproducing the complete plant structure.
 \end{tcolorbox}
 
 \begin{engineeringfocus}
@@ -64,13 +64,13 @@ The invention reproduced the attachment principle, not the complete plant struct
 \end{tikzpicture}%
 }
 \end{center}
-Iteration is essential because biological materials and manufacturing constraints are very different.
+Iteration is essential because biological materials, scales and manufacturing constraints are different.
 \end{engineeringfocus}
 
 \begin{keyfigures}
 \begin{tabularx}{\linewidth}{@{}Xr@{}}
 Primary objective & functional transfer\\
-Common scale & microstructure\\
+Common design scale & microstructure\\
 Typical benefit & low mass or drag\\
 Necessary step & abstraction\\
 Final proof & measured validation
@@ -80,14 +80,15 @@ Final proof & measured validation
 \begin{tcolorbox}[title=\sffamily\bfseries Illustrative drag comparison,colback=white,colframe=ECPurple]
 \begin{center}
 \begin{tikzpicture}
-\begin{axis}[xbar,width=0.97\linewidth,height=49mm,xlabel={Relative drag index},xmin=0,xmax=110,
+\begin{axis}[xbar,width=.94\linewidth,height=49mm,xlabel={Relative drag index},xmin=0,xmax=110,
 symbolic y coords={Optimised riblets,Shark-inspired coating,Riblet texture,Smooth reference},
 ytick=data,grid=major,ticklabel style={font=\scriptsize},nodes near coords]
 \addplot table[x=drag,y=surface,col sep=comma]{data/EC19/drag.csv};
 \end{axis}
 \end{tikzpicture}
 \end{center}
-\footnotesize Illustrative values showing that geometry must be optimised for the operating flow.
+\footnotesize Illustrative values showing that geometry must be optimised for the operating flow and
+validated against a smooth reference under identical conditions.
 \end{tcolorbox}
 
 \begin{vocabulary}
@@ -105,17 +106,15 @@ life cycle & cycle de vie
 \end{tabularx}
 \end{vocabulary}
 
-
 \begin{applicationexercise}
 A smooth reference surface has a drag index of 100. A biomimetic riblet surface has an index of 82,
-but its manufacture increases the component mass from 12.0 kg to 12.6 kg.
+but its manufacture increases the component mass from 12.0 kg to 12.6 kg and adds 8 impact units.
 \begin{enumerate}
 \item Calculate the percentage reduction in drag index.
 \item Calculate the percentage increase in mass.
-\item A design team assigns equal importance to drag reduction and mass increase. Compare the two
-percentages and decide whether the riblet solution appears favourable according to this simplified
-criterion.
-\item State two tests that would be required before approving the design for real service.
+\item Estimate the net score $S=\Delta D-2\Delta m$, where reductions are positive percentages.
+\item Explain one limitation of this simplified score.
+\item Define two controlled experiments and one durability test before approval.
 \end{enumerate}
 \end{applicationexercise}
 
@@ -124,18 +123,20 @@ criterion.
 \item Explain how gecko feet inspire dry adhesives.
 \item What engineering benefit can be obtained from bone-like structures?
 \item Why must operating scale be considered for riblets?
-\item How can a biomimetic product have a poor environmental performance?
+\item How can a biomimetic product have poor environmental performance?
+\item What should a fair reference solution include during testing?
 \end{questions}
 
 \begin{engineeringchallenge}
 Choose a biological strategy that could improve a small wind turbine, robot gripper or protective
-helmet. Identify the function, abstract the principle, propose a manufacturable concept and define
-two experiments that compare it with a conventional design.
+helmet. Define measurable requirements, abstract the biological principle and propose a manufacturable
+concept. Compare it with a conventional design using a decision matrix, then specify a prototype,
+three experiments, acceptance criteria and a life-cycle check.
 \end{engineeringchallenge}
 
 \begin{speaking}
 Is nature always the best engineer? Discuss optimisation, evolution, materials, manufacturing and the
-need for measurable evidence.
+need for measurable evidence. Use one successful and one questionable analogy.
 \end{speaking}
 \end{multicols}
 
