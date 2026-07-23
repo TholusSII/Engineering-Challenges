@@ -3,9 +3,9 @@
 
 \ECObjectives{
 \begin{itemize}
-\item Describe the architecture of an IoT system from sensing to user service.
-\item Compare communication technologies and explain the importance of energy management.
-\item Identify reliability, interoperability, privacy and cybersecurity requirements.
+\item Describe the complete IoT chain from sensing to decision and user service.
+\item Compare communication technologies using range, data rate, latency and energy criteria.
+\item Estimate battery life and justify reliability, interoperability, privacy and maintenance choices.
 \end{itemize}}
 
 \begin{multicols}{2}
@@ -27,31 +27,33 @@ and decides whether transmission is necessary. Sending every value provides deta
 energy and network capacity. Edge processing can instead transmit only a periodic summary or an alarm
 when a threshold is exceeded.
 
-Communication technology depends on range, data rate, power and infrastructure. Bluetooth Low Energy
-is suited to short-range devices. Wi-Fi offers higher throughput but usually consumes more power.
-LoRaWAN can transmit small packets over several kilometres, while cellular IoT provides wide-area
-coverage through an operator network. No protocol is best for every application.
+Communication technology depends on range, data rate, latency, power and available infrastructure.
+Bluetooth Low Energy is suited to short-range devices. Wi-Fi offers higher throughput but usually
+consumes more power. LoRaWAN can transmit small packets over several kilometres, while cellular IoT
+provides wide-area coverage through an operator network. No protocol is best for every application.
 
 Energy autonomy is often the limiting requirement. Engineers reduce consumption by using sleep modes,
 low sampling rates and short radio transmissions. A battery-powered sensor may need to operate for
-several years without maintenance. Energy harvesting from light, vibration or heat can extend battery life,
-but the available power is small and variable.
+several years without maintenance. Energy harvesting from light, vibration or heat can extend battery
+life, but the available power is small and variable.
 
-Security must be designed from the start. Each object needs a unique identity, authenticated software
-updates and encrypted communication. A compromised device can reveal private data or become an entry
-point into a larger system. Finally, interoperability matters: devices from different manufacturers
-must use compatible data formats so that the system can evolve without replacing every component.
+Security and maintainability must be designed from the start. Each object needs a unique identity,
+authenticated software updates and encrypted communication. A compromised device can reveal private
+data or become an entry point into a larger system. Interoperability also matters: devices from
+different manufacturers must use compatible data formats so that the system can evolve without
+replacing every component.
 \end{ecarticle}
 
-\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
+\begin{tcolorbox}[title=\sffamily\bfseries Engineering Insight,colback=yellow!10,colframe=ECOrange]
 For a battery-powered object, radio transmission may consume far more energy than the measurement
-itself. Sending less data is therefore often more effective than improving the sensor electronics.
+itself. The best optimisation may therefore be a change in information strategy: send less often,
+compress locally or transmit only when the measured state changes significantly.
 \end{tcolorbox}
 
 \begin{engineeringfocus}
 \textbf{Architecture of a connected monitoring system}
 \begin{center}
-\resizebox{0.98\linewidth}{!}{%
+\resizebox{.98\linewidth}{!}{%
 \begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=4mm]
 \node[draw=ECGreen,fill=ECGreen!10,rounded corners,align=center] (s) {sensor and\\microcontroller};
 \node[draw=ECBlue,fill=ECLightBlue,rounded corners,align=center,right=of s] (r) {low-power\\radio};
@@ -72,21 +74,22 @@ Typical sensor data rate & low\\
 Critical resource & battery energy\\
 Long-range low-power example & LoRaWAN\\
 Short-range example & BLE\\
-Essential maintenance feature & remote update
+Essential lifecycle feature & remote update
 \end{tabularx}
 \end{keyfigures}
 
 \begin{tcolorbox}[title=\sffamily\bfseries Relative communication current,colback=white,colframe=ECGreen]
 \begin{center}
 \begin{tikzpicture}
-\begin{axis}[xbar,width=0.86\linewidth,height=50mm,xlabel={Relative current},xmin=0,xmax=110,
+\begin{axis}[xbar,width=.86\linewidth,height=50mm,xlabel={Relative current},xmin=0,xmax=110,
 symbolic y coords={Deep sleep,BLE advertising,LoRaWAN,Wi-Fi duty cycle,Continuous Wi-Fi},
 ytick=data,grid=major,ticklabel style={font=\scriptsize},nodes near coords]
 \addplot table[x=current,y=mode,col sep=comma]{data/EC17/iot_power.csv};
 \end{axis}
 \end{tikzpicture}
 \end{center}
-\footnotesize Illustrative values: actual consumption depends strongly on hardware, coverage and transmission frequency.
+\footnotesize Illustrative values: actual consumption depends strongly on hardware, coverage,
+transmission duration and retry rate.
 \end{tcolorbox}
 
 \begin{vocabulary}
@@ -110,9 +113,10 @@ A connected sensor is powered by a 2400 mAh battery. During each hour, it remain
 Assume that one relative-current unit corresponds to 0.10 mA.
 \begin{enumerate}
 \item Calculate the average current over one hour.
-\item Estimate the ideal battery life in hours and in years.
-\item Explain why the real service life would be shorter.
-\item Suggest one change to the sensing or communication strategy that would extend autonomy.
+\item Estimate the ideal battery life in hours and years.
+\item Apply a derating factor of 0.70 for temperature, self-discharge and ageing.
+\item Estimate the new service life if the device transmits twice per hour.
+\item Recommend one design change and justify it quantitatively.
 \end{enumerate}
 \end{applicationexercise}
 
@@ -122,17 +126,19 @@ Assume that one relative-current unit corresponds to 0.10 mA.
 \item Compare Wi-Fi, BLE and LoRaWAN for one application.
 \item Why are software updates a safety and security requirement?
 \item Give two methods for increasing sensor autonomy.
+\item Why can poor radio coverage reduce battery life?
 \end{questions}
 
 \begin{engineeringchallenge}
-Design a connected sensor for monitoring humidity in a school building. Select the sensing period,
-communication method and power source. Define one alarm rule, one local fallback function and two
-measures that protect user data.
+Design a connected humidity-monitoring network for a school building. Define requirements for range,
+autonomy, measurement uncertainty and alarm latency. Select the sensing period, communication method
+and power source. Add one local fallback function, two privacy measures, a maintenance strategy and a
+verification plan. Present your final choice in a weighted decision matrix.
 \end{engineeringchallenge}
 
 \begin{speaking}
-Should every household appliance be connected? Present one useful service, one environmental cost and
-one cybersecurity risk.
+Should every household appliance be connected? Present one useful service, one environmental cost,
+one cybersecurity risk and one measurable condition that would justify connectivity.
 \end{speaking}
 \end{multicols}
 
