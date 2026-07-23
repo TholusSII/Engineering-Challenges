@@ -3,50 +3,53 @@
 
 \ECObjectives{
 \begin{itemize}
-\item Explain the digital chain from CAD model to finished part.
-\item Compare additive manufacturing with machining and casting.
-\item Identify the main design rules, benefits and limitations of metal 3D printing.
+\item Explain the complete digital chain from CAD model to qualified part.
+\item Compare additive manufacturing with machining and casting using engineering criteria.
+\item Justify design, orientation, post-processing and inspection choices for a printed component.
 \end{itemize}}
 
 \begin{multicols}{2}
 \begin{engineeringnews}
 Additive manufacturing is now used for rocket engines, aircraft components, medical implants and
-industrial tooling. Its main advantage is not simply that it prints parts: it allows engineers to
-produce geometries that conventional processes cannot easily manufacture.
+industrial tooling. Its real value is not simply the ability to print a shape, but the possibility of
+redesigning a function, reducing assembly operations and producing geometries that conventional
+processes cannot manufacture economically.
 \end{engineeringnews}
 
 \begin{ecarticle}
 Additive manufacturing creates a component layer by layer from a digital model. The process begins
 with a three-dimensional CAD file. Slicing software divides the geometry into thin horizontal
-sections and generates the machine instructions. Depending on the technology, a nozzle deposits a
+sections and generates machine instructions. Depending on the technology, a nozzle deposits a
 molten polymer, a laser melts metal powder, or light solidifies a liquid resin.
 
 This manufacturing route changes the designer's freedom. Internal cooling channels, lattice
 structures and organic shapes can be integrated into a single component. Topology optimisation can
-remove material from low-stress zones while preserving load paths. In aerospace engineering, this
-can reduce mass and therefore fuel consumption. In medicine, a porous implant can be adapted to a
-patient and encourage bone growth.
+remove material from low-stress zones while preserving principal load paths. In aerospace
+engineering, this can reduce mass and fuel consumption. In medicine, a porous implant can be adapted
+to a patient and encourage bone growth.
 
-The process also has constraints. Overhanging zones may require temporary supports. These supports
-consume material and must be removed after printing. Thermal gradients can create residual stress,
-warping or cracks, especially in metal parts. Build orientation affects surface quality, printing
-time and mechanical properties. The engineer must therefore design both the part and its
-manufacturing strategy.
+The process also has important constraints. Overhanging zones may require temporary supports. These
+supports consume material, conduct heat and must be removed after printing. Thermal gradients can
+create residual stress, warping or cracks, especially in metal parts. Build orientation therefore
+affects support volume, surface quality, printing time, dimensional accuracy and mechanical
+properties.
 
 A printed component is rarely ready for immediate use. Powder removal, heat treatment, support
 removal, machining and inspection may be required. Non-destructive testing can detect internal
-porosity, while dimensional measurement verifies that the geometry is within tolerance. Because mechanical properties may vary with the build direction, qualification is essential for safety-critical parts.
+porosity, while dimensional measurement verifies that the geometry remains within tolerance. Since
+mechanical properties may vary with build direction, qualification is essential for safety-critical
+parts.
 
 Additive manufacturing is particularly effective for prototypes, customised products, spare parts
-and low-volume high-value components. It is less competitive for millions of simple identical
-parts. The best industrial solution is often hybrid: printing creates the complex near-net shape,
-then conventional machining produces accurate interfaces and smooth functional surfaces.
+and low-volume high-value components. It is less competitive for millions of simple identical parts.
+The best industrial solution is often hybrid: printing creates the complex near-net shape, then
+conventional machining produces accurate interfaces and smooth functional surfaces.
 \end{ecarticle}
 
-\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
-A component redesigned for additive manufacturing can combine several conventional parts into one.
-This reduces assembly operations, fasteners and possible leakage points, but it can make inspection
-and repair more difficult.
+\begin{tcolorbox}[title=\sffamily\bfseries Engineering Insight,colback=yellow!10,colframe=ECOrange]
+A successful printed part is designed together with its manufacturing plan. Geometry, orientation,
+supports, scan strategy, heat treatment, machining references and inspection method form one
+integrated engineering decision.
 \end{tcolorbox}
 
 \begin{engineeringfocus}
@@ -80,7 +83,7 @@ strictly linear.
 \begin{tabularx}{\linewidth}{@{}Xr@{}}
 Typical polymer layer & 0.10--0.30 mm\\
 Typical metal layer & 0.02--0.08 mm\\
-Main input & 3D CAD model\\
+Main digital input & 3D CAD model\\
 Frequent post-processes & heat treatment, machining\\
 Best production range & low volume / high value
 \end{tabularx}
@@ -90,7 +93,7 @@ Best production range & low volume / high value
 \begin{center}
 \begin{tikzpicture}
 \begin{axis}[
-width=.88\linewidth,height=47mm,
+width=.94\linewidth,height=45mm,
 ybar,bar width=7pt,
 ymin=0,ymax=105,
 ylabel={Relative score},
@@ -107,7 +110,7 @@ grid=major]
 \end{tikzpicture}
 \end{center}
 \footnotesize Illustrative comparison. The most suitable process depends on quantity, material,
-tolerance, geometry and total lifecycle cost.
+tolerance, geometry, qualification effort and total lifecycle cost.
 \end{tcolorbox}
 
 \begin{tcolorbox}[title=\sffamily\bfseries Designing a lightweight bracket,colback=white,colframe=ECBlue]
@@ -144,10 +147,11 @@ topology optimisation & optimisation topologique
 
 \begin{questions}
 \item What information does slicing software generate?
-\item Why does build orientation influence a printed part?
-\item Give two examples of post-processing operations.
+\item Why does build orientation influence support volume and mechanical performance?
+\item Give three examples of post-processing or inspection operations.
 \item Why can mechanical properties be anisotropic?
-\item When is additive manufacturing more suitable than mass production?
+\item Use the comparison chart to identify one advantage and one limitation of each process.
+\item Why may part consolidation improve reliability but reduce repairability?
 \end{questions}
 
 \begin{applicationexercise}
@@ -157,18 +161,21 @@ A metal part is 120 mm high and is printed with a layer thickness of 0.04 mm. Ea
 \item Calculate the number of layers.
 \item Estimate the ideal build time in hours.
 \item Add 25\% for calibration and interruptions. Estimate the total production time.
+\item Explain why the real industrial lead time also includes preparation, cooling and inspection.
 \end{enumerate}
 \end{applicationexercise}
 
 \begin{engineeringchallenge}
-Redesign an aluminium bracket for metal additive manufacturing. Define the loads and interfaces,
-propose a lighter geometry and select a build orientation. Identify the required supports, two
-inspection methods and the surfaces to machine after printing.
+Redesign an aluminium bracket for metal additive manufacturing. Define loads, interfaces and
+acceptance criteria; propose a lighter geometry; select a build orientation; estimate support and
+post-processing needs; identify inspection methods; and compare the total production route with
+machining from solid. Conclude with a justified recommendation.
 \end{engineeringchallenge}
 
 \begin{speaking}
-Will additive manufacturing replace conventional factories? Give a balanced three-minute answer
-with examples of suitable and unsuitable products.
+Will additive manufacturing replace conventional factories? Give a balanced four-minute answer with
+examples of suitable and unsuitable products, and distinguish technical possibility from economic
+relevance.
 \end{speaking}
 \end{multicols}
 
