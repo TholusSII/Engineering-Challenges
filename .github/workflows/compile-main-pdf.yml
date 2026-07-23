@@ -30,7 +30,7 @@ concurrency:
 jobs:
   compile:
     name: Compile main.pdf
-    if: github.event_name != 'push' || github.event.head_commit.message != 'chore: update compiled main.pdf'
+    if: ${{ github.actor != 'github-actions[bot]' }}
     runs-on: ubuntu-latest
 
     steps:
@@ -59,9 +59,7 @@ jobs:
           retention-days: ${{ github.event.inputs.keep_artifact_days || 30 }}
 
       - name: Commit updated PDF to main
-        if: >-
-          (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
-          (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main')
+        if: ${{ (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
