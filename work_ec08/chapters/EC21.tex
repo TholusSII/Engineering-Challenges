@@ -1,61 +1,58 @@
 \phantomsection\addcontentsline{toc}{section}{Digital Twin}
-\ECchapter{21}{Digital Twin}{Creating virtual replicas of physical systems}{ECBlue}
+\ECchapter{21}{Digital Twin}{How can a virtual model improve a real system?}{ECBlue}
 
 \ECObjectives{
 \begin{itemize}
-\item Explain how measurements continuously update a digital model.
-\item Distinguish simulation, monitoring, diagnosis and prediction.
-\item Identify the limits and uncertainties of a digital twin.
+\item Explain the closed information loop between a physical asset and its digital model.
+\item Distinguish monitoring, diagnosis, prediction and optimisation.
+\item Evaluate model uncertainty, data quality and validation limits.
 \end{itemize}}
 
 \begin{multicols}{2}
 \begin{engineeringnews}
-Digital twins are increasingly used for aircraft engines, factories, bridges and energy systems. By
-combining sensor data with physical or statistical models, engineers can estimate internal states,
-predict degradation and test operating strategies without disturbing the real asset.
+Digital twins are used for aircraft engines, production lines, bridges and energy systems. Their value
+comes from combining measurements with models to estimate hidden states, predict degradation and test
+decisions before applying them to the real asset.
 \end{engineeringnews}
 
 \begin{ecarticle}
-A digital twin is a virtual representation of a physical system that is regularly updated with real
-measurements. Unlike a static CAD model, it evolves with the asset. Sensors measure quantities such as
-temperature, vibration, force, pressure or electrical current. These data are filtered, time-stamped
-and compared with a mathematical model that describes how the system should behave.
+A digital twin is a virtual representation of a physical system that is repeatedly updated with real
+measurements. Unlike a static CAD model, it evolves during operation. Sensors measure quantities such
+as temperature, vibration, force, pressure or electrical current. These data are filtered,
+time-stamped and compared with the behaviour predicted by a model.
 
 The model may be physics-based, data-driven or hybrid. A physics-based model uses conservation laws,
 material properties and geometry. A data-driven model learns relationships from historical data. A
-hybrid twin combines both approaches: physics constrains the solution while machine learning corrects
-unknown effects or accelerates computation.
+hybrid model combines both approaches: physics constrains the solution while machine learning corrects
+unknown effects or reduces computation time.
 
-Engineers use twins for several linked purposes. Monitoring compares measured and expected behaviour.
-A growing difference can reveal sensor drift, wear or an incorrect model. Diagnosis tries to identify
-the cause of that difference. Prediction estimates future states, for example the remaining life of a
-bearing or the battery temperature during a demanding mission. Optimisation allows engineers to test
-control settings, maintenance dates or production schedules before applying them to the real system.
+Engineers use twins for several linked functions. Monitoring compares measured and expected
+behaviour. Diagnosis identifies the probable cause of a residual. Prediction estimates future states,
+for example the remaining useful life of a bearing. Optimisation compares maintenance dates, control
+settings or production schedules before they are applied.
 
-A useful twin depends on data quality. Measurements must be calibrated, synchronised and transmitted
-reliably. The model must also be validated over the full operating range. A twin that performs well at
-nominal speed may fail during start-up, overload or extreme weather. Its uncertainty must therefore be
-reported rather than hidden.
+A useful twin depends on calibrated sensors, synchronised data and a validated model. A model that is
+accurate at nominal speed may fail during start-up, overload or extreme weather. Engineers must therefore
+report uncertainty and define the operating domain in which the twin is trusted.
 
-Digital twins do not replace physical tests. They help engineers decide which tests are most useful and
-interpret measurements more effectively. Their value comes from the continuous loop between the real
-asset, the data platform and the model.
+Digital twins do not eliminate physical testing. They help select useful tests, interpret measurements
+and update decisions throughout the life cycle.
 \end{ecarticle}
 
-\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
-A model becomes a true digital twin only when information flows repeatedly between the physical asset
-and its virtual representation. Without this update loop, it remains a simulation model.
+\begin{tcolorbox}[title=\sffamily\bfseries Engineering Insight,colback=yellow!10,colframe=ECOrange]
+A simulation becomes a digital twin only when measurements repeatedly update the model and the model
+influences decisions about the physical asset.
 \end{tcolorbox}
 
 \begin{engineeringfocus}
-\textbf{Information loop}
+\textbf{Closed information loop}
 \begin{center}
 \resizebox{\linewidth}{!}{%
 \begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=4mm]
 \node[draw=ECBlue,fill=ECLightBlue,rounded corners,align=center] (asset) {physical\\asset};
 \node[draw=ECGreen,fill=ECGreen!10,rounded corners,align=center,right=of asset] (data) {sensors and\\data platform};
 \node[draw=ECPurple,fill=ECPurple!10,rounded corners,align=center,right=of data] (twin) {digital\\twin};
-\node[draw=ECOrange,fill=ECOrange!10,rounded corners,align=center,below=of data] (decision) {diagnosis and\\decision};
+\node[draw=ECOrange,fill=ECOrange!10,rounded corners,align=center,below=of data] (decision) {diagnosis, prediction\\and decision};
 \draw[->,thick] (asset)-- node[above]{measurements} (data);
 \draw[->,thick] (data)-- node[above]{updates} (twin);
 \draw[->,thick] (twin)--(decision);
@@ -63,12 +60,13 @@ and its virtual representation. Without this update loop, it remains a simulatio
 \end{tikzpicture}%
 }
 \end{center}
+The loop must include validation and human supervision when consequences are safety-critical.
 \end{engineeringfocus}
 
 \begin{keyfigures}
 \begin{tabularx}{\linewidth}{@{}Xr@{}}
 Essential input & calibrated data\\
-Core operation & model update\\
+Core operation & state update\\
 Typical output & health estimate\\
 Main risk & model drift\\
 Validation method & test comparison
@@ -78,24 +76,13 @@ Validation method & test comparison
 \begin{tcolorbox}[title=\sffamily\bfseries Prediction error over time,colback=white,colframe=ECBlue]
 \begin{center}
 \begin{tikzpicture}
-\begin{axis}[width=0.96\linewidth,height=46mm,xlabel={Time (days)},ylabel={Error (\%)},grid=major,
-ticklabel style={font=\scriptsize}]
+\begin{axis}[width=.96\linewidth,height=46mm,xlabel={Time (days)},ylabel={Error (\%)},grid=major,ticklabel style={font=\scriptsize}]
 \addplot[thick,mark=*] table[x=time,y=error,col sep=comma]{data/EC21/prediction.csv};
 \end{axis}
 \end{tikzpicture}
 \end{center}
-\footnotesize A rising residual may indicate wear, a changing environment or an outdated model.
+\footnotesize A rising residual may indicate wear, sensor drift, a changing environment or an outdated model.
 \end{tcolorbox}
-
-\begin{applicationexercise}{Bearing health indicator}
-A digital twin predicts a bearing vibration level of $2.4\,\mathrm{mm\,s^{-1}}$, while the sensor
-measures $3.0\,\mathrm{mm\,s^{-1}}$.
-\begin{enumerate}
-\item Calculate the absolute residual.
-\item Calculate the relative residual as a percentage of the predicted value.
-\item The warning threshold is $20\%$. Decide whether maintenance should be investigated.
-\end{enumerate}
-\end{applicationexercise}
 
 \begin{vocabulary}
 \begin{tabularx}{\linewidth}{@{}lX@{}}
@@ -114,21 +101,32 @@ validation & validation
 
 \begin{questions}
 \item How is a digital twin different from a CAD model?
-\item What is the role of sensors in the update loop?
 \item Compare physics-based and data-driven models.
-\item Why must a twin be validated outside nominal operation?
-\item What can cause prediction error to increase?
+\item Why must the operating domain of a twin be defined?
+\item What can cause a residual to increase?
+\item Why does a digital twin not replace physical tests?
 \end{questions}
 
+\begin{applicationexercise}
+A twin predicts a bearing vibration level of $2.4\,\mathrm{mm\,s^{-1}}$, while the sensor measures
+$3.0\,\mathrm{mm\,s^{-1}}$.
+\begin{enumerate}
+\item Calculate the absolute residual.
+\item Calculate the relative residual as a percentage of the predicted value.
+\item The warning threshold is $20\%$. Decide whether maintenance should be investigated.
+\item Give two checks required before concluding that the bearing is damaged.
+\end{enumerate}
+\end{applicationexercise}
+
 \begin{engineeringchallenge}
-Design a digital twin for a school ventilation unit. Select four sensors, define the model outputs,
-propose one fault indicator and explain how the twin could reduce energy use without lowering air
-quality.
+Design a digital twin for a school ventilation unit. Select four sensors, define the model outputs and
+one fault indicator, specify the validation tests and explain how uncertainty would be displayed to the
+operator. Propose one optimisation rule that reduces energy use without lowering indoor-air quality.
 \end{engineeringchallenge}
 
 \begin{speaking}
-Should safety-critical decisions ever be made automatically by a digital twin? Discuss reliability,
-responsibility, human supervision and uncertainty.
+Should a digital twin be allowed to make a safety-critical decision automatically? Discuss reliability,
+responsibility, uncertainty and human supervision.
 \end{speaking}
 \end{multicols}
 

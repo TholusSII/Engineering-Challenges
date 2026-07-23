@@ -1,57 +1,55 @@
 \phantomsection\addcontentsline{toc}{section}{Smart Grids}
-\ECchapter{24}{Smart Grids}{Managing tomorrow's electricity networks}{ECPurple}
+\ECchapter{24}{Smart Grids}{How can electricity networks balance variable resources?}{ECPurple}
 
 \ECObjectives{
 \begin{itemize}
 \item Explain why generation and demand must remain balanced.
-\item Describe the roles of storage, forecasting and demand response.
-\item Calculate a simple energy balance and identify resilience constraints.
+\item Compare storage, forecasting, demand response and network reconfiguration.
+\item Calculate an energy balance and define resilience requirements.
 \end{itemize}}
 
 \begin{multicols}{2}
 \begin{engineeringnews}
-Electricity networks are changing from one-way systems dominated by large power stations into
+Electricity networks are evolving from one-way systems dominated by large power stations into
 interactive networks containing rooftop solar panels, wind farms, batteries, electric vehicles and
-flexible loads. Digital control is becoming essential to coordinate these distributed resources.
+flexible loads. Digital control is essential to coordinate these distributed resources.
 \end{engineeringnews}
 
 \begin{ecarticle}
 An electricity grid must balance production and consumption at every moment. If generation is lower
-than demand, system frequency tends to fall; if it is higher, frequency tends to rise. Traditional grids
-adjusted a limited number of controllable power stations. Smart grids coordinate many smaller and more
-variable devices.
+than demand, system frequency tends to fall; if it is higher, frequency tends to rise. Traditional
+grids adjusted a limited number of controllable power stations. Smart grids coordinate many smaller,
+more variable devices.
 
 Smart meters measure energy flows at short intervals. Forecasting software estimates demand and
 renewable generation. Automated substations can reconfigure part of the network after a fault, while
-batteries and flexible loads respond rapidly to imbalances. Demand response shifts selected uses in
-time: for example, water heating or electric-vehicle charging may be delayed when the grid is heavily
-loaded.
+batteries and flexible loads respond rapidly to an imbalance. Demand response shifts selected uses in
+time: water heating or electric-vehicle charging may be delayed during a peak.
 
 Distributed generation creates bidirectional power flows. A neighbourhood may import electricity in
 the evening but export solar power at midday. Voltage can rise near photovoltaic installations, and
 protection systems must distinguish normal reverse flow from a dangerous fault. Engineers therefore
 combine power electronics, communication systems and network models.
 
-Storage provides several services on different timescales. Batteries can smooth short fluctuations,
-support frequency and reduce peak demand. Pumped-storage hydroelectricity can store much larger amounts
-of energy for several hours or days. Electric vehicles may provide controlled charging or energy back
-to the grid, but battery degradation, charging efficiency and user mobility must be respected.
+Storage provides different services on different timescales. Batteries smooth short fluctuations,
+support frequency and reduce peak demand. Pumped-storage hydroelectricity stores much larger amounts
+for several hours or days. Electric vehicles may provide controlled charging or energy back to the
+grid, but battery ageing, efficiency and user mobility must be respected.
 
-Digitalisation increases exposure to cyberattack and communication failure. Local controllers must
-retain safe behaviour when the central platform is unavailable. Resilience also requires physical
-redundancy, black-start capability and plans for extreme weather. A smart grid is not merely connected;
-it must remain stable, secure and understandable during abnormal conditions.
+Digitalisation also increases exposure to cyberattack and communication failure. Local controllers
+must retain safe behaviour if the central platform is unavailable. Resilience requires physical
+redundancy, load shedding, black-start capability and plans for extreme weather.
 \end{ecarticle}
 
-\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
-Electricity travels through the network almost instantly, but energy planning covers seconds, hours,
-seasons and years. No single storage technology is optimal for every timescale.
+\begin{tcolorbox}[title=\sffamily\bfseries Engineering Insight,colback=yellow!10,colframe=ECOrange]
+Power balance is an instantaneous requirement, whereas energy planning covers minutes, hours, seasons
+and years. No single storage technology is optimal at every timescale.
 \end{tcolorbox}
 
 \begin{engineeringfocus}
 \textbf{Bidirectional smart grid}
 \begin{center}
-\resizebox{0.96\linewidth}{!}{%
+\resizebox{.96\linewidth}{!}{%
 \begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=4mm]
 \node[draw=ECPurple,fill=ECPurple!10,rounded corners] (grid) {distribution grid};
 \node[draw=ECOrange,fill=ECOrange!10,rounded corners,left=of grid] (solar) {solar and wind};
@@ -60,8 +58,10 @@ seasons and years. No single storage technology is optimal for every timescale.
 \node[draw=ECRed,fill=ECRed!8,rounded corners,above=of grid] (control) {forecast and control};
 \draw[<->,thick] (solar)--(grid); \draw[<->,thick] (grid)--(loads); \draw[<->,thick] (grid)--(store);
 \draw[<->,thick,dashed] (control)--(grid);
-\end{tikzpicture}}
+\end{tikzpicture}%
+}
 \end{center}
+Local protection and fallback rules remain active when communication with the supervisory platform is lost.
 \end{engineeringfocus}
 
 \begin{keyfigures}
@@ -77,8 +77,7 @@ Critical risk & cyberattack
 \begin{tcolorbox}[title=\sffamily\bfseries Daily balancing example,colback=white,colframe=ECPurple]
 \begin{center}
 \begin{tikzpicture}
-\begin{axis}[width=0.96\linewidth,height=48mm,xlabel={Hour},ylabel={Power (MW)},grid=major,
-legend style={font=\scriptsize,at={(0.5,-0.22)},anchor=north,legend columns=3},ticklabel style={font=\scriptsize}]
+\begin{axis}[width=.96\linewidth,height=48mm,xlabel={Hour},ylabel={Power (MW)},grid=major,legend style={font=\scriptsize,at={(.5,-.22)},anchor=north,legend columns=3},ticklabel style={font=\scriptsize}]
 \addplot[thick] table[x=hour,y=demand,col sep=comma]{data/EC24/load.csv};
 \addplot[thick] table[x=hour,y=solar,col sep=comma]{data/EC24/load.csv};
 \addplot[thick,dashed] table[x=hour,y=battery,col sep=comma]{data/EC24/load.csv};
@@ -86,18 +85,6 @@ legend style={font=\scriptsize,at={(0.5,-0.22)},anchor=north,legend columns=3},t
 \end{axis}
 \end{tikzpicture}
 \end{center}
-\end{tcolorbox}
-
-\begin{tcolorbox}[title=\sffamily\bfseries Quantitative application,colback=white,colframe=ECBlue]
-Between 18:00 and 20:00, a school consumes a constant power of $140\,\mathrm{kW}$. Its photovoltaic
-system produces $35\,\mathrm{kW}$, and a battery initially contains $180\,\mathrm{kWh}$ of usable
-energy. The round-trip efficiency is not considered in this first estimate.
-\begin{enumerate}
-\item Calculate the power that must be supplied by the battery if no power is imported from the grid.
-\item Determine the energy required during the two-hour period.
-\item Decide whether the battery can cover the complete period.
-\item Repeat the conclusion with a discharge efficiency of 90\% and a minimum reserve of $30\,\mathrm{kWh}$.
-\end{enumerate}
 \end{tcolorbox}
 
 \begin{vocabulary}
@@ -123,10 +110,22 @@ grid resilience & résilience du réseau
 \item Why should local controllers work without the central platform?
 \end{questions}
 
+\begin{applicationexercise}
+Between 18:00 and 20:00, a school consumes $140\,\mathrm{kW}$. Its photovoltaic system produces
+$35\,\mathrm{kW}$, and a battery initially contains $180\,\mathrm{kWh}$ of usable energy.
+\begin{enumerate}
+\item Calculate the battery power if no electricity is imported.
+\item Determine the energy required during the two-hour period.
+\item Decide whether the battery can cover the complete period.
+\item Repeat the conclusion with a discharge efficiency of $90\%$ and a reserve of $30\,\mathrm{kWh}$.
+\item Propose a demand-response action that would make the requirement achievable.
+\end{enumerate}
+\end{applicationexercise}
+
 \begin{engineeringchallenge}
 Plan the energy management of a school with rooftop solar panels, a $200\,\mathrm{kWh}$ battery and ten
-EV chargers. Define priorities for a normal day, a winter peak and a two-hour grid outage. Include one
-rule that protects battery lifetime.
+EV chargers. Define priorities for a normal day, a winter peak and a two-hour grid outage. Add a battery
+state-of-charge rule, a load-shedding sequence and a local fallback mode for communication failure.
 \end{engineeringchallenge}
 
 \begin{speaking}

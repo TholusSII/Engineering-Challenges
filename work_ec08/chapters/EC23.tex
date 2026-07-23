@@ -1,59 +1,56 @@
 \phantomsection\addcontentsline{toc}{section}{Autonomous Vehicles}
-\ECchapter{23}{Autonomous Vehicles}{Engineering safe autonomous mobility}{ECOrange}
+\ECchapter{23}{Autonomous Vehicles}{How can an autonomous vehicle remain safe?}{ECOrange}
 
 \ECObjectives{
 \begin{itemize}
 \item Describe perception, localisation, prediction, planning and control.
-\item Explain why sensor diversity and redundancy are necessary.
-\item Calculate stopping distance and identify operational limits.
+\item Explain sensor diversity, redundancy and degraded operating modes.
+\item Calculate stopping distance and define an operational design domain.
 \end{itemize}}
 
 \begin{multicols}{2}
 \begin{engineeringnews}
-Autonomous driving systems are being tested in passenger cars, shuttles, mines, ports and warehouses.
-Progress is fastest in controlled environments, whereas public roads remain difficult because weather,
-road geometry, human behaviour and rare events are highly variable.
+Autonomous systems are being tested in passenger cars, shuttles, mines, ports and warehouses. Progress
+is fastest in controlled environments, while public roads remain difficult because weather, road
+geometry, human behaviour and rare events vary widely.
 \end{engineeringnews}
 
 \begin{ecarticle}
 An autonomous vehicle must perceive its environment, estimate its own position, predict how other road
 users may move, plan a safe trajectory and control steering, braking and propulsion. These functions run
-continuously and must satisfy strict timing, reliability and safety requirements.
+continuously under strict timing, reliability and safety constraints.
 
 Perception combines cameras, radar, lidar and ultrasonic sensors. Cameras provide colour and detailed
-shapes but can be affected by darkness, glare or fog. Radar measures distance and relative speed and
-remains useful in poor visibility. Lidar produces accurate three-dimensional point clouds but may be
-costly and sensitive to rain or contamination. Sensor fusion combines these strengths and highlights
-inconsistent measurements.
+shapes but can be affected by darkness, glare or fog. Radar measures distance and relative speed. Lidar
+produces accurate three-dimensional point clouds but may be sensitive to rain or contamination. Sensor
+fusion combines complementary information and helps detect inconsistent measurements.
 
-Localisation uses satellite positioning, inertial sensors, wheel odometry and maps. No single source is
-reliable everywhere: GNSS signals can be blocked in tunnels, while wheel slip creates odometry errors.
-Redundant estimates allow the system to detect a faulty measurement and maintain a safe state.
+Localisation uses satellite positioning, inertial sensors, wheel odometry and maps. No source is
+reliable everywhere: GNSS can be blocked in tunnels, while wheel slip creates odometry errors. Redundant
+estimates allow the system to identify faulty data and enter a safe degraded mode.
 
 The prediction module estimates the future motion of pedestrians, cyclists and vehicles. The planner
-then selects a manoeuvre and generates a trajectory that respects road geometry, traffic rules, vehicle
-dynamics and passenger comfort. The controller follows this trajectory by adjusting steering torque,
-brake pressure and propulsion.
+selects a manoeuvre and generates a trajectory that respects road geometry, traffic rules, vehicle
+dynamics and comfort. The controller then adjusts steering torque, brake pressure and propulsion.
 
-Braking distance increases approximately with the square of speed because kinetic energy is
-proportional to $v^2$. Total stopping distance also includes sensing, computation and actuator delay.
-Wet roads, worn tyres and downhill gradients reduce the available deceleration.
+Total stopping distance includes the distance travelled during sensing, computation and actuator delay,
+plus the physical braking distance. Because kinetic energy is proportional to $v^2$, braking distance
+rises rapidly with speed. Wet roads, worn tyres and downhill gradients reduce available deceleration.
 
-A safe system needs an operational design domain: the conditions in which automation is allowed. These
-conditions may specify road type, speed, weather and map quality. At the boundary of this domain, the
-vehicle must request human control or perform a minimal-risk manoeuvre. Safety therefore depends on
-clear limits and predictable fallback behaviour, not only on intelligent algorithms.
+Automation must operate inside a defined operational design domain specifying road type, speed, weather,
+visibility and map quality. At its boundary, the vehicle must request human control or perform a
+minimal-risk manoeuvre.
 \end{ecarticle}
 
-\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
-A vehicle may correctly detect an object yet still choose an unsafe action. Verification must therefore
-cover the complete chain from sensing to decision and control.
+\begin{tcolorbox}[title=\sffamily\bfseries Engineering Insight,colback=yellow!10,colframe=ECOrange]
+Correct object detection is not enough. Safety must be verified across the complete chain from sensing
+to prediction, decision, control and fallback behaviour.
 \end{tcolorbox}
 
 \begin{engineeringfocus}
 \textbf{Autonomous driving pipeline}
 \begin{center}
-\resizebox{0.98\linewidth}{!}{%
+\resizebox{.98\linewidth}{!}{%
 \begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=3mm]
 \node[draw=ECBlue,fill=ECLightBlue,rounded corners] (sense) {sensors};
 \node[draw=ECGreen,fill=ECGreen!10,rounded corners,right=of sense] (per) {perception};
@@ -63,8 +60,10 @@ cover the complete chain from sensing to decision and control.
 \node[draw=black,fill=gray!10,rounded corners,below=of plan] (safe) {safety monitor};
 \draw[->,thick] (sense)--(per); \draw[->,thick] (per)--(pred); \draw[->,thick] (pred)--(plan); \draw[->,thick] (plan)--(ctrl);
 \draw[->,thick,dashed] (safe)--(ctrl); \draw[->,thick,dashed] (per)--(safe);
-\end{tikzpicture}}
+\end{tikzpicture}%
+}
 \end{center}
+The safety monitor checks plausibility, timing and operational-domain limits independently of the nominal planner.
 \end{engineeringfocus}
 
 \begin{keyfigures}
@@ -80,26 +79,13 @@ Safe fallback & minimal-risk manoeuvre
 \begin{tcolorbox}[title=\sffamily\bfseries Illustrative braking distance,colback=white,colframe=ECOrange]
 \begin{center}
 \begin{tikzpicture}
-\begin{axis}[width=0.96\linewidth,height=46mm,xlabel={Speed (km/h)},ylabel={Braking distance (m)},grid=major,
-legend style={font=\scriptsize,at={(0.5,-0.22)},anchor=north,legend columns=2},ticklabel style={font=\scriptsize}]
+\begin{axis}[width=.96\linewidth,height=46mm,xlabel={Speed (km/h)},ylabel={Braking distance (m)},grid=major,legend style={font=\scriptsize,at={(.5,-.22)},anchor=north,legend columns=2},ticklabel style={font=\scriptsize}]
 \addplot[thick,mark=*] table[x=speed,y=dry,col sep=comma]{data/EC23/stopping.csv};
 \addplot[thick,mark=square*] table[x=speed,y=wet,col sep=comma]{data/EC23/stopping.csv};
 \legend{Dry road,Wet road}
 \end{axis}
 \end{tikzpicture}
 \end{center}
-\end{tcolorbox}
-
-\begin{tcolorbox}[title=\sffamily\bfseries Quantitative application,colback=white,colframe=ECBlue]
-A shuttle travels at $36\,\mathrm{km\,h^{-1}}$. The sensing and computation delay is $0.35\,\mathrm{s}$,
-and the brake actuator delay is $0.15\,\mathrm{s}$. Assume a constant deceleration of
-$5.0\,\mathrm{m\,s^{-2}}$.
-\begin{enumerate}
-\item Convert the speed into $\mathrm{m\,s^{-1}}$.
-\item Calculate the distance travelled during the total delay.
-\item Using $d_b=v^2/(2a)$, calculate the braking distance.
-\item Determine the total stopping distance and propose a minimum detection range with a 25\% safety margin.
-\end{enumerate}
 \end{tcolorbox}
 
 \begin{vocabulary}
@@ -111,29 +97,41 @@ trajectory & trajectoire\\
 fallback & solution de repli\\
 operational design domain & domaine opérationnel\\
 wheel slip & glissement des roues\\
-blind spot & angle mort\\
 braking distance & distance de freinage\\
-redundancy & redondance
+redundancy & redondance\\
+minimal-risk manoeuvre & manœuvre de risque minimal
 \end{tabularx}
 \end{vocabulary}
 
 \begin{questions}
-\item What functions form the autonomous driving chain?
+\item What functions form the autonomous-driving chain?
 \item Why are several sensor technologies combined?
 \item How can localisation fail in a tunnel?
 \item Why does braking distance rise rapidly with speed?
-\item What is an operational design domain?
+\item What information belongs in an operational design domain?
 \end{questions}
+
+\begin{applicationexercise}
+A shuttle travels at $36\,\mathrm{km\,h^{-1}}$. Sensing and computation take $0.35\,\mathrm{s}$ and
+the brake actuator adds $0.15\,\mathrm{s}$. Assume a deceleration of $5.0\,\mathrm{m\,s^{-2}}$.
+\begin{enumerate}
+\item Convert the speed into $\mathrm{m\,s^{-1}}$.
+\item Calculate the distance travelled during the total delay.
+\item Using $d_b=v^2/(2a)$, calculate the braking distance.
+\item Determine the total stopping distance and a detection range with a $25\%$ safety margin.
+\item Repeat the result for a degraded deceleration of $3.0\,\mathrm{m\,s^{-2}}$.
+\end{enumerate}
+\end{applicationexercise}
 
 \begin{engineeringchallenge}
 Design an autonomous shuttle for a closed university campus. Define its sensors, maximum speed,
-operational design domain, emergency strategy and verification tests for pedestrians, rain and GNSS
-loss.
+operational design domain and minimal-risk manoeuvre. Add a verification matrix covering pedestrians,
+rain, glare, GNSS loss and one faulty sensor, with a measurable acceptance criterion for each test.
 \end{engineeringchallenge}
 
 \begin{speaking}
-Who should be responsible after an autonomous vehicle accident: the passenger, manufacturer,
-software provider or road operator? Defend a position.
+Who should be responsible after an autonomous-vehicle accident: the passenger, manufacturer, software
+provider or road operator? Defend a position using technical evidence.
 \end{speaking}
 \end{multicols}
 

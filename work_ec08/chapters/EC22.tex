@@ -1,56 +1,57 @@
 \phantomsection\addcontentsline{toc}{section}{Industry 4.0}
-\ECchapter{22}{Industry 4.0}{Connected manufacturing}{ECGreen}
+\ECchapter{22}{Industry 4.0}{How can connected factories improve production?}{ECGreen}
 
 \ECObjectives{
 \begin{itemize}
 \item Describe the layered architecture of a connected production system.
-\item Explain how data can improve availability, performance and quality.
-\item Identify cybersecurity risks and human factors.
+\item Calculate and interpret availability, performance, quality and OEE.
+\item Evaluate cybersecurity, traceability and human-factor requirements.
 \end{itemize}}
 
 \begin{multicols}{2}
 \begin{engineeringnews}
-Factories are connecting machines, robots, inspection stations and planning software. The objective
-is not simply to automate more tasks, but to create a production system that can measure its own
-performance, adapt to variation and support faster, better-informed decisions.
+Factories are connecting machines, robots, inspection stations and planning software. The objective is
+not simply to automate more tasks, but to measure losses, adapt to variation and support faster,
+better-informed decisions.
 \end{engineeringnews}
 
 \begin{ecarticle}
-Industry 4.0 describes the integration of connected machines, digital models, automation and data
-analysis in manufacturing. At machine level, sensors measure cycle time, motor current, vibration,
-position and product quality. Controllers operate the process in real time, while industrial networks
-send selected information to supervisory systems.
+Industry 4.0 combines connected machines, digital models, automation and data analysis. At machine
+level, sensors measure cycle time, motor current, vibration, position and product quality. Controllers
+operate the process in real time, while industrial networks transmit selected information to
+supervisory systems.
 
 A connected factory is organised in layers. The physical layer contains machines and products. The
-control layer contains PLCs, drives and robot controllers. Manufacturing execution systems coordinate
-orders, traceability and work instructions. At the top, enterprise software manages resources,
-suppliers and customer demand. Data must move between these layers without compromising real-time
-operation or production safety.
+control layer contains PLCs, drives and robot controllers. A manufacturing execution system coordinates
+orders, traceability and work instructions. Enterprise software manages resources, suppliers and demand.
+Information must move between these layers without disturbing deterministic control or production safety.
 
 Condition monitoring can detect a damaged bearing before failure. Vision systems can inspect every
-part instead of a small sample. Production data can reveal that a defect appears only with one tool,
-one material batch or one temperature range. These applications reduce unplanned downtime and waste,
-but only when engineers define useful indicators rather than collecting data without purpose.
+part. Production data can reveal that a defect appears only with one tool, one material batch or one
+temperature range. These applications reduce downtime and waste only when each indicator is connected
+to a physical cause and a defined action.
 
-Overall equipment effectiveness, or OEE, combines availability, performance and quality. A machine
-with high nominal speed but frequent stops may have poor OEE. Connected monitoring helps teams
-identify the dominant loss and verify whether an improvement is effective.
+Overall equipment effectiveness combines availability, performance and quality:
+\[
+\mathrm{OEE}=A\times P\times Q.
+\]
+A machine with high nominal speed but frequent stops may therefore have poor OEE. Engineers must locate
+the dominant loss rather than improve the most visible one.
 
-Industry 4.0 also creates risks. A cyberattack can interrupt production or modify process parameters.
-Legacy machines may use insecure protocols. Operators may receive too many alarms or distrust opaque
-algorithms. Successful projects therefore combine secure architecture, clear interfaces, training and
-human expertise. Technology should support operators, not remove their understanding of the process.
+Connectivity also introduces risks. A cyberattack can modify process parameters, legacy equipment may
+use insecure protocols and operators may receive too many alarms. Successful projects combine network
+segmentation, clear interfaces, training and human expertise.
 \end{ecarticle}
 
-\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
-More data do not automatically produce better decisions. A useful industrial indicator must be linked
-to a physical cause, a decision and a person responsible for acting on it.
+\begin{tcolorbox}[title=\sffamily\bfseries Engineering Insight,colback=yellow!10,colframe=ECOrange]
+Collecting more data does not automatically improve production. A useful indicator needs a physical
+meaning, a decision threshold, an owner and a verification method.
 \end{tcolorbox}
 
 \begin{engineeringfocus}
 \textbf{Connected production architecture}
 \begin{center}
-\resizebox{0.82\linewidth}{!}{%
+\resizebox{.82\linewidth}{!}{%
 \begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=3.5mm]
 \node[draw=ECGreen,fill=ECGreen!10,rounded corners] (machines) {machines and sensors};
 \node[draw=ECBlue,fill=ECLightBlue,rounded corners,above=of machines] (control) {PLCs and control};
@@ -60,6 +61,7 @@ to a physical cause, a decision and a person responsible for acting on it.
 \end{tikzpicture}%
 }
 \end{center}
+Real-time control should remain local even if an upper information layer becomes unavailable.
 \end{engineeringfocus}
 
 \begin{keyfigures}
@@ -67,7 +69,7 @@ to a physical cause, a decision and a person responsible for acting on it.
 Availability loss & downtime\\
 Performance loss & slow cycles\\
 Quality loss & rejected parts\\
-Typical local controller & PLC\\
+Typical controller & PLC\\
 Critical requirement & secure network
 \end{tabularx}
 \end{keyfigures}
@@ -75,10 +77,7 @@ Critical requirement & secure network
 \begin{tcolorbox}[title=\sffamily\bfseries OEE components,colback=white,colframe=ECGreen]
 \begin{center}
 \begin{tikzpicture}
-\begin{axis}[ybar,bar width=8pt,width=0.96\linewidth,height=47mm,ymin=0,ymax=105,ylabel={Score (\%)},
-symbolic x coords={Conventional,Connected},xtick=data,
-legend style={font=\scriptsize,at={(0.5,-0.22)},anchor=north,legend columns=3},
-ticklabel style={font=\scriptsize}]
+\begin{axis}[ybar,bar width=8pt,width=.96\linewidth,height=47mm,ymin=0,ymax=105,ylabel={Score (\%)},symbolic x coords={Conventional,Connected},xtick=data,legend style={font=\scriptsize,at={(.5,-.22)},anchor=north,legend columns=3},ticklabel style={font=\scriptsize}]
 \addplot table[x=mode,y=availability,col sep=comma]{data/EC22/oee.csv};
 \addplot table[x=mode,y=performance,col sep=comma]{data/EC22/oee.csv};
 \addplot table[x=mode,y=quality,col sep=comma]{data/EC22/oee.csv};
@@ -87,17 +86,6 @@ ticklabel style={font=\scriptsize}]
 \end{tikzpicture}
 \end{center}
 \end{tcolorbox}
-
-\begin{applicationexercise}{Calculating OEE}
-During one shift, a production line has an availability of $90\%$, a performance score of $85\%$ and
-a quality score of $98\%$.
-\begin{enumerate}
-\item Calculate the OEE using $\mathrm{OEE}=A\times P\times Q$.
-\item A connected monitoring system raises availability to $95\%$ while the other two factors remain
-unchanged. Calculate the new OEE.
-\item Determine the improvement in percentage points.
-\end{enumerate}
-\end{applicationexercise}
 
 \begin{vocabulary}
 \begin{tabularx}{\linewidth}{@{}lX@{}}
@@ -119,13 +107,24 @@ cybersecurity & cybersécurité
 \item How can condition monitoring reduce downtime?
 \item What three factors form OEE?
 \item Why is collecting all possible data ineffective?
-\item Name two human or cybersecurity risks.
+\item Why should machine control remain local?
 \end{questions}
 
+\begin{applicationexercise}
+During one shift, a line has an availability of $90\%$, a performance score of $85\%$ and a quality
+score of $98\%$.
+\begin{enumerate}
+\item Calculate the OEE.
+\item Availability rises to $95\%$. Calculate the new OEE.
+\item Determine the improvement in percentage points and relative percentage.
+\item Decide whether improving availability or quality by one additional point produces the larger OEE gain.
+\end{enumerate}
+\end{applicationexercise}
+
 \begin{engineeringchallenge}
-A packaging line suffers short, frequent stops. Propose a measurement plan, define three indicators,
-identify the required network connections and describe how operators would use the dashboard during a
-shift.
+A packaging line suffers short, frequent stops. Define a measurement plan, three indicators and their
+thresholds. Draw the information path from sensor to dashboard, identify one cybersecurity risk and
+specify how operators will verify that the proposed improvement actually increases OEE.
 \end{engineeringchallenge}
 
 \begin{speaking}
