@@ -3,53 +3,30 @@
 
 \ECObjectives{
 \begin{itemize}
-\item Identify the mechanical, electrical and software subsystems of a robot.
+\item Identify the mechanical, electrical, control and safety subsystems of a robot.
 \item Explain position, force and vision feedback in a collaborative workstation.
-\item Propose a safe robotic solution for an industrial task.
+\item Design and justify a safe robotic solution for an industrial task.
 \end{itemize}}
 
 \begin{multicols}{2}
 \begin{engineeringnews}
-Collaborative robots, or \textbf{cobots}, are changing the organisation of factories and
-laboratories. Instead of operating permanently behind a fence, they can share selected tasks
-with people. The engineering objective is not merely to make the robot slower: the complete
-workstation must detect hazards, limit energy and bring the system to a safe state when required.
+Collaborative robots, or \textbf{cobots}, are changing the organisation of factories and laboratories. Instead of operating permanently behind a fence, they can share selected tasks with people. The engineering objective is not merely to make the robot slower: the complete workstation must detect hazards, limit energy and bring the system to a safe state when required.
 \end{engineeringnews}
 
 \begin{ecarticle}
-A robot is a programmable machine that senses its environment, processes information and acts
-through a mechanical structure. A typical articulated robot contains rigid links connected by
-joints. Electric servomotors create torque at these joints, while encoders measure angular
-position and speed. A controller compares the measured motion with the requested trajectory and
-continuously corrects the motor commands.
+A robot is a programmable machine that senses its environment, processes information and acts through a mechanical structure. A typical articulated robot contains rigid links connected by joints. Electric servomotors create torque at these joints, while encoders measure angular position and speed. A controller compares the measured motion with the requested trajectory and continuously corrects the motor commands.
 
-The tool attached to the final link is called the \textbf{end-effector}. It may be a gripper,
-a welding torch, a screwdriver or a camera. Selecting this tool requires engineers to consider
-payload, accuracy, cycle time, gripping force and the geometry of the product. The useful region
-that the end-effector can reach is the robot's workspace.
+The tool attached to the final link is called the \textbf{end-effector}. It may be a gripper, a welding torch, a screwdriver or a camera. Selecting this tool requires engineers to consider payload, accuracy, cycle time, gripping force and product geometry. The useful region that the end-effector can reach is the robot's workspace.
 
-Position control is sufficient for many repetitive tasks, but physical interaction requires
-additional information. A force--torque sensor can detect contact, while motor-current monitoring
-can estimate resistance at a joint. Machine-vision systems locate parts, inspect surfaces and
-track people. These measurements form feedback loops that allow the robot to adapt rather than
-repeat a completely fixed sequence.
+Position control is sufficient for many repetitive tasks, but physical interaction requires additional information. A force--torque sensor can detect contact, while motor-current monitoring can estimate resistance at a joint. Machine-vision systems locate parts, inspect surfaces and track people. These measurements form feedback loops that allow the robot to adapt rather than repeat a completely fixed sequence.
 
-Safe collaboration depends on the entire application. Possible strategies include monitored
-stops, hand-guiding, speed and separation monitoring, and power-and-force limitation. A scanner
-or camera can define protective zones around the robot. As a person approaches, the controller
-first reduces speed and then stops the hazardous motion. Mechanical design also matters: rounded
-surfaces, low moving mass and the absence of crushing points can reduce injury risk.
+Safe collaboration depends on the entire application. Possible strategies include monitored stops, hand-guiding, speed and separation monitoring, and power-and-force limitation. A scanner or camera can define protective zones around the robot. As a person approaches, the controller first reduces speed and then stops hazardous motion. Mechanical design also matters: rounded surfaces, low moving mass and the avoidance of crushing points can reduce injury risk.
 
-Mobile robots combine localisation, mapping and path planning. Because sensors can fail or be
-obstructed, their design needs diagnostics and a defined safe response. Cybersecurity is equally
-important: access control, validated software and network segmentation help prevent dangerous
-commands or corrupted sensor data.
+Mobile robots combine localisation, mapping and path planning. Because sensors can fail or be obstructed, their design requires diagnostics and a defined safe response. Cybersecurity is equally important: access control, validated software and network segmentation help prevent dangerous commands or corrupted sensor data.
 \end{ecarticle}
 
-\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
-A collaborative robot is not automatically a safe collaborative application. The gripper, the
-workpiece, the programmed speed and the surrounding equipment must all be included in the risk
-assessment.
+\begin{tcolorbox}[title=\sffamily\bfseries Engineering Insight,colback=yellow!10,colframe=ECOrange]
+A cobot is not automatically a safe collaborative application. Safety depends on the robot, tool, workpiece, programmed speed, human task and surrounding equipment. The risk assessment must therefore cover the complete workstation.
 \end{tcolorbox}
 
 \columnbreak
@@ -60,15 +37,13 @@ assessment.
 \begin{center}
 \resizebox{\linewidth}{!}{%
 \begin{tikzpicture}[node distance=5mm and 5mm,font=\scriptsize,>=Latex]
-\tikzset{block/.style={draw=ECBlue,fill=ECLightBlue,rounded corners,align=center,
-minimum height=9mm,minimum width=18mm}}
+\tikzset{block/.style={draw=ECBlue,fill=ECLightBlue,rounded corners,align=center,minimum height=9mm,minimum width=18mm}}
 \node[block] (plan) {task and\\trajectory};
 \node[block,right=of plan] (ctrl) {robot\\controller};
 \node[block,right=of ctrl] (drive) {servo\\drives};
 \node[block,right=of drive] (mech) {joints and\\end-effector};
 \node[block,below=8mm of drive] (sense) {encoders, force,\\vision, scanner};
-\node[draw=ECOrange,fill=ECOrange!12,rounded corners,below=8mm of plan,align=center,
-minimum height=9mm] (safe) {safety\\controller};
+\node[draw=ECOrange,fill=ECOrange!12,rounded corners,below=8mm of plan,align=center,minimum height=9mm] (safe) {safety\\controller};
 \draw[->,very thick,ECBlue] (plan) -- (ctrl);
 \draw[->,very thick,ECBlue] (ctrl) -- (drive);
 \draw[->,very thick,ECBlue] (drive) -- (mech);
@@ -80,8 +55,7 @@ minimum height=9mm] (safe) {safety\\controller};
 }
 \end{center}
 
-The standard motion controller aims to achieve the task. The safety controller independently
-supervises hazardous conditions and can request a controlled stop or remove drive power.
+The standard motion controller aims to achieve the task. The safety controller independently supervises hazardous conditions and can request a controlled stop or remove drive power.
 \end{engineeringfocus}
 
 \begin{keyfigures}
@@ -97,23 +71,12 @@ Emergency response objective & safe state
 \begin{tcolorbox}[title=\sffamily\bfseries Assembly cycle comparison,colback=white,colframe=ECBlue]
 \begin{center}
 \begin{tikzpicture}
-\begin{axis}[
-width=\linewidth,height=46mm,
-ybar,bar width=13pt,
-ymin=0,ymax=60,
-ylabel={Cycle time (s)},
-symbolic x coords={Manual,Cobot-assisted,Industrial robot},
-xtick=data,
-xticklabel style={font=\scriptsize,align=center,rotate=12,anchor=east},
-yticklabel style={font=\scriptsize},
-grid=major,nodes near coords,
-every node near coord/.append style={font=\scriptsize}]
+\begin{axis}[width=.96\linewidth,height=45mm,ybar,bar width=13pt,ymin=0,ymax=60,ylabel={Cycle time (s)},symbolic x coords={Manual,Cobot-assisted,Industrial robot},xtick=data,xticklabel style={font=\scriptsize,align=center,rotate=12,anchor=east},yticklabel style={font=\scriptsize},grid=major,nodes near coords,every node near coord/.append style={font=\scriptsize}]
 \addplot[fill=ECBlue] table[x=mode,y=cycle_time,col sep=comma]{data/EC07/robot_cycle.csv};
 \end{axis}
 \end{tikzpicture}
 \end{center}
-\footnotesize Illustrative values for one assembly operation. A faster cycle does not by itself
-prove that a solution is safer, more flexible or more economical.
+\footnotesize Illustrative values for one assembly operation. A faster cycle does not by itself prove that a solution is safer, more flexible or more economical.
 \end{tcolorbox}
 
 \begin{vocabulary}
@@ -136,28 +99,19 @@ protective stop & arrêt de protection
 \item Explain speed and separation monitoring.
 \item Why must the end-effector be included in the risk assessment?
 \item Give two possible consequences of a cybersecurity failure.
-\item Why is productivity data alone insufficient when selecting a robot?
+\item Use the graph to explain why productivity cannot be the only selection criterion.
 \end{questions}
 
 \begin{engineeringchallenge}
-A company wants to automate the insertion and tightening of four screws on a 2.5~kg product while
-an operator performs the adjacent wiring task. Design the collaborative workstation. Select the
-robot, end-effector and sensors; define the work sequence and protective zones; identify crushing,
-impact, tool and cybersecurity hazards; and propose validation tests. Compare the solution with a
-fully manual station and a fenced industrial robot.
+A company wants to automate the insertion and tightening of four screws on a 2.5~kg product while an operator performs the adjacent wiring task. Design the collaborative workstation. Select the robot, end-effector and sensors; define the work sequence and protective zones; identify crushing, impact, tool and cybersecurity hazards; and propose validation tests. Compare the solution with a fully manual station and a fenced industrial robot using a weighted decision matrix.
 \end{engineeringchallenge}
 
 \begin{applicationexercise}
-A collaborative robot moves a 4.0~kg component with a horizontal acceleration of
-1.8~m/s$^2$. Calculate the resulting inertial force. If the end-effector has a mass of
-1.5~kg, repeat the calculation for the complete moving load. Explain why this simple
-calculation is not sufficient to validate human--robot safety.
+A collaborative robot moves a 4.0~kg component with a horizontal acceleration of 1.8~m/s$^2$. Calculate the resulting inertial force. If the end-effector has a mass of 1.5~kg, repeat the calculation for the complete moving load. Explain why this simple calculation is not sufficient to validate human--robot safety.
 \end{applicationexercise}
 
 \begin{speaking}
-Prepare a four-minute design review answering the question: ``Should this workstation use a cobot
-or a conventional industrial robot?'' Defend your choice using safety, cycle time, flexibility,
-payload, maintenance and cost.
+Prepare a four-minute design review answering the question: ``Should this workstation use a cobot or a conventional industrial robot?'' Defend your choice using safety, cycle time, flexibility, payload, maintenance and cost.
 \end{speaking}
 \end{multicols}
 

@@ -3,74 +3,46 @@
 
 \ECObjectives{
 \begin{itemize}
-\item Distinguish rule-based programming, machine learning and inference.
-\item Explain how data quality affects classification performance.
-\item Propose a validated AI architecture for an engineering application.
+\item Distinguish rule-based programming, machine learning, training and inference.
+\item Explain how dataset quality and thresholds affect classification performance.
+\item Design and justify a validated AI architecture for an engineering application.
 \end{itemize}}
 
 \begin{multicols}{2}
 \begin{engineeringnews}
-Artificial intelligence is now embedded in industrial inspection, predictive maintenance,
-energy management, medical imaging and autonomous systems. Its engineering value comes from
-its ability to process large quantities of sensor data, but performance figures alone are not
-enough: reliability, traceability and human responsibility must also be designed.
+Artificial intelligence is now embedded in industrial inspection, predictive maintenance, energy management, medical imaging and autonomous systems. Its engineering value comes from its ability to process large quantities of sensor data, but performance figures alone are not enough: reliability, traceability and human responsibility must also be designed.
 \end{engineeringnews}
 
 \begin{ecarticle}
-Traditional software follows explicit rules written by a programmer. A machine-learning system
-instead learns a mathematical model from examples. During \textbf{training}, an algorithm adjusts
-internal parameters so that the model's outputs approach the expected answers contained in a
-labelled dataset. During \textbf{inference}, the trained model processes new data and produces a
-classification, numerical estimate or recommended action.
+Traditional software follows explicit rules written by a programmer. A machine-learning system instead learns a mathematical model from examples. During \textbf{training}, an algorithm adjusts internal parameters so that the model's outputs approach the expected answers contained in a labelled dataset. During \textbf{inference}, the trained model processes new data and produces a classification, numerical estimate or recommended action.
 
-In computer vision, a neural network can learn to distinguish acceptable products from defective
-ones. The input may be an image of a machined surface, while the output is a defect category and a
-confidence score. In predictive maintenance, vibration, temperature and current measurements can
-be used to estimate the condition of a bearing or motor. In both cases, the model is only one part
-of the complete engineering system: sensors, lighting, communication, computing hardware and the
-human-machine interface also determine the final result.
+In computer vision, a neural network can learn to distinguish acceptable products from defective ones. The input may be an image of a machined surface, while the output is a defect category and a confidence score. In predictive maintenance, vibration, temperature and current measurements can be used to estimate the condition of a bearing or motor. In both cases, the model is only one part of the complete engineering system: sensors, lighting, communication, computing hardware and the human--machine interface also determine the final result.
 
-Dataset quality is critical. If defects are rare, poorly labelled or photographed under only one
-lighting condition, the model may appear accurate while failing in production. Engineers therefore
-separate data into training, validation and test sets. The test set must remain independent so that
-it measures generalisation rather than memorisation. Useful indicators include precision, recall,
-false-alarm rate and missed-detection rate.
+Dataset quality is critical. If defects are rare, poorly labelled or photographed under only one lighting condition, the model may appear accurate while failing in production. Engineers therefore separate data into training, validation and test sets. The test set must remain independent so that it measures generalisation rather than memorisation. Useful indicators include precision, recall, false-alarm rate and missed-detection rate.
 
-Safety-critical applications require additional safeguards. A confidence threshold can prevent
-uncertain outputs from triggering an automatic decision. Independent physical checks, plausibility
-rules and human confirmation can also reduce risk. Engineers must monitor \textbf{data drift}: over
-time, new products, sensor ageing or environmental changes may make the operating data different
-from the original training data.
+Safety-critical applications require additional safeguards. A confidence threshold can prevent uncertain outputs from triggering an automatic decision. Independent physical checks, plausibility rules and human confirmation can also reduce risk. Engineers must monitor \textbf{data drift}: over time, new products, sensor ageing or environmental changes may make operating data different from the original training data.
 
-Explainability and traceability are also important. The development team should record dataset
-versions, model parameters, test results and software updates. If the system influences a hazardous
-action, responsibility remains with the organisation that designed and validated the complete
-system, not with the algorithm itself.
+Explainability and traceability are also important. The development team should record dataset versions, model parameters, test results and software updates. If the system influences a hazardous action, responsibility remains with the organisation that designed and validated the complete system, not with the algorithm itself.
 \end{ecarticle}
 
-\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
-An AI model can achieve a high overall accuracy while still missing most rare defects. When the
-classes are unbalanced, precision and recall are often more informative than accuracy alone.
+\begin{tcolorbox}[title=\sffamily\bfseries Engineering Insight,colback=yellow!10,colframe=ECOrange]
+A model can achieve high overall accuracy while still missing most rare defects. Engineers must therefore select performance indicators from the consequences of errors, not from a single headline score.
 \end{tcolorbox}
 
 \columnbreak
 
 \begin{engineeringfocus}
 \textbf{Validated AI inspection architecture}
-
 \begin{center}
 \resizebox{\linewidth}{!}{%
 \begin{tikzpicture}[node distance=5mm and 5mm,font=\scriptsize,>=Latex]
-\tikzset{block/.style={draw=ECPurple,fill=ECPurple!8,rounded corners,align=center,
-minimum height=9mm,minimum width=19mm}}
+\tikzset{block/.style={draw=ECPurple,fill=ECPurple!8,rounded corners,align=center,minimum height=9mm,minimum width=19mm}}
 \node[block] (part) {product and\\lighting};
 \node[block,right=of part] (cam) {camera and\\pre-processing};
 \node[block,right=of cam] (model) {trained AI\\model};
 \node[block,right=of model] (decision) {decision and\\confidence};
-\node[draw=ECOrange,fill=ECOrange!12,rounded corners,below=9mm of model,align=center,
-minimum height=9mm] (safe) {rules, thresholds\\and fallback};
-\node[draw=ECGreen,fill=ECGreen!10,rounded corners,below=9mm of decision,align=center,
-minimum height=9mm] (human) {operator review\\and traceability};
+\node[draw=ECOrange,fill=ECOrange!12,rounded corners,below=9mm of model,align=center,minimum height=9mm] (safe) {rules, thresholds\\and fallback};
+\node[draw=ECGreen,fill=ECGreen!10,rounded corners,below=9mm of decision,align=center,minimum height=9mm] (human) {operator review\\and traceability};
 \draw[->,very thick,ECPurple] (part) -- (cam);
 \draw[->,very thick,ECPurple] (cam) -- (model);
 \draw[->,very thick,ECPurple] (model) -- (decision);
@@ -80,17 +52,14 @@ minimum height=9mm] (human) {operator review\\and traceability};
 \end{tikzpicture}%
 }
 \end{center}
-
-The AI model proposes a result. Independent thresholds and fallback rules determine whether the
-result may be accepted automatically or must be reviewed by a person. Production data and operator
-feedback are stored so that performance can be monitored over time.
+The AI model proposes a result. Independent thresholds and fallback rules determine whether it may be accepted automatically or must be reviewed by a person. Production data and operator feedback are stored so that performance can be monitored over time.
 \end{engineeringfocus}
 
 \begin{keyfigures}
 \begin{tabularx}{\linewidth}{@{}Xr@{}}
 Training set & model fitting\\
 Validation set & parameter selection\\
-Test set & final independent evaluation\\
+Test set & independent evaluation\\
 False negative & missed defect\\
 False positive & false alarm\\
 Confidence threshold & application-dependent
@@ -100,25 +69,14 @@ Confidence threshold & application-dependent
 \begin{tcolorbox}[title=\sffamily\bfseries Defect-detection trade-off,colback=white,colframe=ECPurple]
 \begin{center}
 \begin{tikzpicture}
-\begin{axis}[
-width=\linewidth,height=46mm,
-ybar,bar width=11pt,
-ymin=0,ymax=100,
-ylabel={Rate (\%)},
-symbolic x coords={Low threshold,Balanced,High threshold},
-xtick=data,
-xticklabel style={font=\scriptsize,align=center,rotate=12,anchor=east},
-yticklabel style={font=\scriptsize},
-grid=major,
-legend style={font=\scriptsize,at={(0.5,1.02)},anchor=south,legend columns=2}]
+\begin{axis}[width=.96\linewidth,height=45mm,ybar,bar width=11pt,ymin=0,ymax=100,ylabel={Rate (\%)},symbolic x coords={Low threshold,Balanced,High threshold},xtick=data,xticklabel style={font=\scriptsize,align=center,rotate=12,anchor=east},yticklabel style={font=\scriptsize},grid=major,legend style={font=\scriptsize,at={(0.5,1.02)},anchor=south,legend columns=2}]
 \addplot[fill=ECGreen] table[x=setting,y=recall,col sep=comma]{data/EC08/ai_thresholds.csv};
 \addplot[fill=ECOrange] table[x=setting,y=precision,col sep=comma]{data/EC08/ai_thresholds.csv};
 \legend{Recall,Precision}
 \end{axis}
 \end{tikzpicture}
 \end{center}
-\footnotesize Illustrative values. Lowering the threshold detects more defects but may also create
-more false alarms. The correct setting depends on the consequences of each error.
+\footnotesize Illustrative values. Lowering the threshold detects more defects but may also create more false alarms. The correct setting depends on the consequences of each error.
 \end{tcolorbox}
 
 \begin{vocabulary}
@@ -139,31 +97,21 @@ data drift & dérive des données
 \item Why must a test set remain independent?
 \item Explain the difference between a false positive and a false negative.
 \item Why can overall accuracy be misleading for rare defects?
-\item What is the purpose of a confidence threshold?
+\item Use the graph to explain the threshold trade-off.
 \item Give two possible causes of data drift.
 \item Why must responsibility remain with the engineering organisation?
 \end{questions}
 
 \begin{engineeringchallenge}
-A factory wants to inspect 30 aluminium parts per minute using a camera and an AI model. A missed
-crack may lead to a dangerous failure, while a false alarm sends a good part for manual inspection.
-Design the complete inspection station. Specify the camera and lighting arrangement, dataset,
-performance indicators, acceptance threshold, fallback strategy, traceability records and
-validation tests. Explain how you would monitor the system after deployment.
+A factory wants to inspect 30 aluminium parts per minute using a camera and an AI model. A missed crack may lead to a dangerous failure, while a false alarm sends a good part for manual inspection. Design the complete inspection station. Specify the camera and lighting arrangement, dataset, performance indicators, acceptance threshold, fallback strategy, traceability records and validation tests. Include a monitoring plan for data drift and define the conditions that require human review or model retraining.
 \end{engineeringchallenge}
 
 \begin{applicationexercise}
-An image-inspection system processes 240 parts per minute. Its false-rejection rate is
-1.5\% and its false-acceptance rate is 0.20\%. During an eight-hour shift, estimate the
-number of acceptable parts wrongly rejected if 96\% of production is actually conforming,
-and the number of defective parts wrongly accepted. State one operational consequence of
-each type of error.
+An image-inspection system processes 240 parts per minute. Its false-rejection rate is 1.5\% and its false-acceptance rate is 0.20\%. During an eight-hour shift, estimate the number of acceptable parts wrongly rejected if 96\% of production is actually conforming, and the number of defective parts wrongly accepted. State one operational consequence of each type of error.
 \end{applicationexercise}
 
 \begin{speaking}
-Prepare a four-minute design review answering the question: ``Should this inspection system reject
-parts automatically?'' Defend your position using safety, productivity, precision, recall,
-traceability and human supervision.
+Prepare a four-minute design review answering the question: ``Should this inspection system reject parts automatically?'' Defend your position using safety, productivity, precision, recall, traceability and human supervision.
 \end{speaking}
 \end{multicols}
 

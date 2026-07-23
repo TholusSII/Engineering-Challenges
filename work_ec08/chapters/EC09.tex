@@ -3,62 +3,37 @@
 
 \ECObjectives{
 \begin{itemize}
-\item Identify the main subsystems of an artificial satellite.
-\item Explain how engineers manage launch loads, vacuum and temperature variations.
-\item Propose a coherent architecture for a small Earth-observation mission.
+\item Identify the main subsystems and interfaces of an artificial satellite.
+\item Explain how engineers manage launch loads, vacuum, radiation and temperature variations.
+\item Build and justify a coherent mass, power and reliability budget for a small mission.
 \end{itemize}}
 
 \begin{multicols}{2}
 \begin{engineeringnews}
-Reusable launch vehicles, commercial constellations and small satellites are changing access to
-space. Lower launch costs make new missions possible, but every spacecraft must still survive an
-extreme environment and operate for years without direct maintenance.
+Reusable launch vehicles, commercial constellations and small satellites are changing access to space. Lower launch costs make new missions possible, but every spacecraft must still survive an extreme environment and operate for years without direct maintenance.
 \end{engineeringnews}
 
 \begin{ecarticle}
-A spacecraft is designed around its \textbf{mission}. An Earth-observation satellite must carry a
-camera or radar payload, point it accurately towards the ground, store the collected data and send
-it to a ground station. Around this payload, engineers build a service platform containing the
-structure, power supply, thermal control, communication system, onboard computer and attitude-control
-system.
+A spacecraft is designed around its \textbf{mission}. An Earth-observation satellite must carry a camera or radar payload, point it accurately towards the ground, store the collected data and send it to a ground station. Around this payload, engineers build a service platform containing the structure, power supply, thermal control, communication system, onboard computer and attitude-control system.
 
-Launch is the first major challenge. The satellite experiences acceleration, vibration and intense
-acoustic pressure. Its structure must therefore be light but stiff, while sensitive components are
-mounted and tested so that they do not resonate dangerously. After separation from the launcher,
-the environment changes completely: there is almost no atmosphere, heat cannot be removed by
-convection and electronic components are exposed to radiation.
+Launch is the first major challenge. The satellite experiences acceleration, vibration and intense acoustic pressure. Its structure must therefore be light but stiff, while sensitive components are mounted and tested so that they do not resonate dangerously. After separation from the launcher, the environment changes completely: there is almost no atmosphere, heat cannot be removed by convection and electronic components are exposed to radiation.
 
-Electrical power usually comes from photovoltaic panels. Batteries supply the spacecraft during
-eclipse, when Earth blocks the Sun. A power-control unit regulates voltage and distributes energy
-to the payload, computer, heaters and transmitters. Because available power is limited, mission
-operations are planned carefully: a high-power transmitter or instrument may only be activated at
-specific times.
+Electrical power usually comes from photovoltaic panels. Batteries supply the spacecraft during eclipse, when Earth blocks the Sun. A power-control unit regulates voltage and distributes energy to the payload, computer, heaters and transmitters. Because available power is limited, mission operations are planned carefully: a high-power transmitter or instrument may only be activated at specific times.
 
-Thermal control is equally important. In sunlight, exposed surfaces may become very hot; in shadow,
-they may cool rapidly. Engineers use insulation blankets, reflective coatings, heat pipes,
-radiators and electrical heaters. The objective is not to keep every part at room temperature, but
-to keep each component within its qualified operating range.
+Thermal control is equally important. In sunlight, exposed surfaces may become very hot; in shadow, they may cool rapidly. Engineers use insulation blankets, reflective coatings, heat pipes, radiators and electrical heaters. The objective is not to keep every part at room temperature, but to keep each component within its qualified operating range.
 
-A satellite must also control its orientation, called \textbf{attitude}. Sun sensors, star trackers
-and gyroscopes estimate its orientation. Reaction wheels rotate internally and make the spacecraft
-turn in the opposite direction. Small thrusters can desaturate the wheels or perform orbital
-corrections. Since repair is generally impossible, critical functions may be duplicated and the
-onboard software must detect faults and switch to a safe mode.
+A satellite must also control its orientation, called \textbf{attitude}. Sun sensors, star trackers and gyroscopes estimate its orientation. Reaction wheels rotate internally and make the spacecraft turn in the opposite direction. Small thrusters can desaturate the wheels or perform orbital corrections. Since repair is generally impossible, critical functions may be duplicated and the onboard software must detect faults and switch to a safe mode.
 \end{ecarticle}
 
-\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
-In low Earth orbit, a satellite travels at about \(7.8\,\mathrm{km\,s^{-1}}\) and completes one orbit
-in roughly 90 minutes. It may therefore pass from sunlight to eclipse many times each day.
+\begin{tcolorbox}[title=\sffamily\bfseries Engineering Insight,colback=yellow!10,colframe=ECOrange]
+Every additional subsystem improves capability or reliability, but also consumes mass, volume and power. Spacecraft design is therefore governed by tightly coupled budgets rather than by independent component choices.
 \end{tcolorbox}
-
 
 \begin{engineeringfocus}
 \textbf{Typical small-satellite architecture}
-
 \begin{center}
 \begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=5mm and 5mm]
-\tikzset{block/.style={draw=ECBlue,fill=ECLightBlue,rounded corners,align=center,
-minimum width=21mm,minimum height=10mm}}
+\tikzset{block/.style={draw=ECBlue,fill=ECLightBlue,rounded corners,align=center,minimum width=21mm,minimum height=10mm}}
 \node[block] (payload) {payload\\camera};
 \node[block,right=of payload] (computer) {onboard\\computer};
 \node[block,right=of computer] (radio) {radio and\\antenna};
@@ -74,9 +49,7 @@ minimum width=21mm,minimum height=10mm}}
 \draw[<->,thick,ECGreen] (thermal) -- (computer);
 \end{tikzpicture}
 \end{center}
-
-The payload performs the mission, while the platform keeps it powered, pointed, protected and
-connected. Interfaces between subsystems are as important as the components themselves.
+The payload performs the mission, while the platform keeps it powered, pointed, protected and connected. Interfaces between subsystems are as important as the components themselves.
 \end{engineeringfocus}
 
 \begin{keyfigures}
@@ -84,7 +57,7 @@ connected. Interfaces between subsystems are as important as the components them
 Typical low Earth orbit altitude & 400--800 km\\
 Orbital speed & about 7.8 km/s\\
 One orbit & about 90 min\\
-Vacuum pressure & extremely low\\
+Convection in vacuum & unavailable\\
 Repair after launch & usually impossible
 \end{tabularx}
 \end{keyfigures}
@@ -92,22 +65,12 @@ Repair after launch & usually impossible
 \begin{tcolorbox}[title=\sffamily\bfseries Thermal cycle in orbit,colback=white,colframe=ECDarkGrey]
 \begin{center}
 \begin{tikzpicture}
-\begin{axis}[
-width=\linewidth,height=46mm,
-ymin=-60,ymax=100,
-ylabel={Illustrative surface temperature (°C)},
-symbolic x coords={Sunlight,Eclipse,Sunlight2,Eclipse2},
-xtick=data,
-xticklabels={Sunlight,Eclipse,Sunlight,Eclipse},
-xticklabel style={font=\scriptsize},
-yticklabel style={font=\scriptsize},
-grid=major]
+\begin{axis}[width=.96\linewidth,height=45mm,ymin=-60,ymax=100,ylabel={Illustrative surface temperature (°C)},symbolic x coords={Sunlight,Eclipse,Sunlight2,Eclipse2},xtick=data,xticklabels={Sunlight,Eclipse,Sunlight,Eclipse},xticklabel style={font=\scriptsize},yticklabel style={font=\scriptsize},grid=major]
 \addplot[very thick,mark=*] table[x=phase,y=temperature,col sep=comma]{data/EC09/orbit_temperature.csv};
 \end{axis}
 \end{tikzpicture}
 \end{center}
-\footnotesize Illustrative values only. Real temperatures depend on orbit, surface coating,
-orientation, internal dissipation and thermal-control design.
+\footnotesize Illustrative values only. Real temperatures depend on orbit, surface coating, orientation, internal dissipation and thermal-control design.
 \end{tcolorbox}
 
 \begin{tcolorbox}[title=\sffamily\bfseries Three-axis attitude control,colback=white,colframe=ECBlue]
@@ -122,8 +85,7 @@ orientation, internal dissipation and thermal-control design.
 \node at (0,0) {satellite};
 \end{tikzpicture}
 \end{center}
-Sensors estimate orientation; reaction wheels or thrusters create the required rotation around the
-three axes.
+Sensors estimate orientation; reaction wheels or thrusters create the required rotation around the three axes.
 \end{tcolorbox}
 
 \begin{vocabulary}
@@ -147,26 +109,20 @@ redundancy & redondance
 \item What is the role of the battery during eclipse?
 \item Name three devices used for attitude determination or control.
 \item Why are critical functions sometimes duplicated?
+\item Use the thermal graph to identify the main thermal-control challenge.
+\item Why must mass, power and reliability budgets be considered together?
 \end{questions}
 
 \begin{engineeringchallenge}
-Design a 20 kg Earth-observation satellite. Draw a subsystem diagram and explain how the satellite
-will generate and store power, control its temperature, point its camera, communicate with Earth
-and react to one critical failure. Identify two design compromises involving mass, power, cost or
-reliability.
+Design a 20~kg Earth-observation satellite. Draw a subsystem diagram and prepare preliminary mass and power budgets. Explain how the satellite will store energy, control temperature, point its camera, communicate with Earth and react to one critical failure. Identify at least two design compromises involving mass, power, cost, image quality or reliability, then justify the final architecture.
 \end{engineeringchallenge}
 
 \begin{applicationexercise}
-A satellite in low Earth orbit receives 950~W from its solar arrays in sunlight and
-requires an average electrical power of 620~W. During a 36-minute eclipse, the battery
-supplies the complete load. Estimate the minimum energy that must be delivered by the
-battery in kWh. Then calculate the required nominal capacity if only 70\% of the battery
-capacity may be used.
+A satellite in low Earth orbit receives 950~W from its solar arrays in sunlight and requires an average electrical power of 620~W. During a 36-minute eclipse, the battery supplies the complete load. Estimate the minimum energy that must be delivered by the battery in kWh. Then calculate the required nominal capacity if only 70\% of the battery capacity may be used.
 \end{applicationexercise}
 
 \begin{speaking}
-Present your satellite in a four-minute mission review. Explain the mission, the architecture and
-the most serious technical risk. Conclude by defending one design compromise.
+Present your satellite in a four-minute mission review. Explain the mission, architecture, budgets and most serious technical risk. Conclude by defending one design compromise.
 \end{speaking}
 \end{multicols}
 
