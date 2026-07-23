@@ -21,7 +21,7 @@ on:
       - "README.md"
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: compile-main-pdf-${{ github.ref }}
@@ -30,11 +30,14 @@ concurrency:
 jobs:
   compile:
     name: Compile main.pdf
+    if: github.event_name != 'push' || github.event.head_commit.message != 'chore: update compiled main.pdf'
     runs-on: ubuntu-latest
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v4
@@ -54,3 +57,20 @@ jobs:
           path: work_ec08/main.pdf
           if-no-files-found: error
           retention-days: ${{ github.event.inputs.keep_artifact_days || 30 }}
+
+      - name: Commit updated PDF to main
+        if: >-
+          (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
+          (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main')
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add work_ec08/main.pdf
+
+          if git diff --cached --quiet; then
+            echo "main.pdf is already up to date."
+            exit 0
+          fi
+
+          git commit -m "chore: update compiled main.pdf"
+          git push origin HEAD:main
