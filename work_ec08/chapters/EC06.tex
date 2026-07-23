@@ -3,55 +3,30 @@
 
 \ECObjectives{
 \begin{itemize}
-\item Describe the main components of a battery-electric vehicle powertrain.
+\item Describe the energy and information flows in a battery-electric vehicle.
 \item Explain charging, regenerative braking and battery thermal management.
-\item Assess an electric-vehicle project using technical and environmental criteria.
+\item Evaluate an electric-mobility project using technical, economic and environmental criteria.
 \end{itemize}}
 
 \begin{multicols}{2}
 \begin{engineeringnews}
-Electric mobility is moving beyond the vehicle itself. Engineers now design complete systems
-that connect cars, charging stations, buildings and electricity networks. Smart charging can
-shift demand away from peak hours, while vehicle-to-grid operation may allow parked vehicles
-to provide flexibility to the power system.
+Electric mobility is moving beyond the vehicle itself. Engineers now design complete systems that connect cars, charging stations, buildings and electricity networks. Smart charging can shift demand away from peak hours, while vehicle-to-grid operation may allow parked vehicles to support the power system.
 \end{engineeringnews}
 
 \begin{ecarticle}
-A battery-electric vehicle stores electrical energy in a high-voltage battery pack. During
-acceleration, the battery supplies direct current to a power-electronics inverter. The inverter
-controls the alternating current delivered to the traction motor, which converts electrical
-energy into mechanical torque at the wheels. Unlike a combustion engine, an electric motor can
-produce high torque from very low speed and commonly operates with high efficiency over a broad
-range of conditions.
+A battery-electric vehicle stores electrical energy in a high-voltage battery pack. During acceleration, the battery supplies direct current to a power-electronics inverter. The inverter controls the alternating current delivered to the traction motor, which converts electrical energy into mechanical torque at the wheels. Unlike a combustion engine, an electric motor can deliver high torque from very low speed and usually maintains high efficiency over a wide operating range.
 
-The battery is not simply a collection of cells. It also includes electrical connections,
-contactors, sensors, cooling channels, structural protection and a \textbf{Battery Management
-System} (BMS). The BMS estimates state of charge and state of health, balances the cells and
-protects the pack against excessive current, voltage and temperature. Thermal management is
-critical because low temperatures reduce available power, while high temperatures accelerate
-ageing and may increase safety risks.
+The battery pack is not simply a collection of cells. It also contains electrical connections, contactors, sensors, cooling channels, structural protection and a \textbf{Battery Management System} (BMS). The BMS estimates state of charge and state of health, balances the cells and protects the pack against excessive current, voltage and temperature. Thermal management is essential because low temperatures reduce available power, whereas high temperatures accelerate ageing and may increase safety risks.
 
-When the driver brakes, the inverter can operate the traction motor as a generator. Part of the
-vehicle's kinetic energy is then converted back into electrical energy and stored in the battery.
-This \textbf{regenerative braking} reduces energy consumption and mechanical-brake wear, although
-friction brakes remain necessary for emergency stops, low-speed operation and situations in which
-the battery cannot accept additional power.
+When the driver brakes, the inverter can operate the traction motor as a generator. Part of the vehicle's kinetic energy is then converted back into electrical energy and stored in the battery. This \textbf{regenerative braking} reduces energy consumption and mechanical-brake wear. Friction brakes nevertheless remain necessary for emergency stops, low-speed operation and situations in which the battery cannot accept additional power.
 
-Charging power depends on both the charging station and the vehicle. An on-board charger converts
-alternating current from a domestic or public AC supply. Fast DC charging bypasses the on-board
-charger and feeds controlled direct current to the battery. High charging power shortens stops,
-but it also increases heat generation, infrastructure cost and stress on the local electricity
-network.
+Charging power depends on both the charging station and the vehicle. An on-board charger converts alternating current from a domestic or public AC supply. Fast DC charging bypasses the on-board charger and feeds controlled direct current to the battery. High charging power shortens stops, but it also increases heat generation, infrastructure cost, battery stress and demand on the local electricity network.
 
-Electric vehicles have no exhaust emissions during use, but they are not impact-free. Engineers
-must consider battery manufacture, electricity generation, vehicle mass, tyre particles, lifetime
-and recycling. Their environmental performance therefore depends on the complete life cycle and on
-how the electricity used for charging is produced.
+Electric vehicles have no exhaust emissions during use, but they are not impact-free. Engineers must consider battery manufacture, electricity generation, vehicle mass, tyre particles, lifetime, repairability and recycling. Their environmental performance therefore depends on the complete life cycle and on the electricity mix used for charging.
 \end{ecarticle}
 
-\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
-An electric motor can reverse its energy flow in a fraction of a second: it drives the wheels during
-acceleration and becomes a generator during regenerative braking.
+\begin{tcolorbox}[title=\sffamily\bfseries Engineering Insight,colback=yellow!10,colframe=ECOrange]
+Increasing battery capacity improves range, but it also increases mass, cost, material demand and charging time. The best design is therefore not the vehicle with the largest battery, but the one whose capacity matches the real mission.
 \end{tcolorbox}
 
 \columnbreak
@@ -62,8 +37,7 @@ acceleration and becomes a generator during regenerative braking.
 \begin{center}
 \resizebox{\linewidth}{!}{%
 \begin{tikzpicture}[node distance=4mm and 5mm,font=\scriptsize,>=Latex]
-\tikzset{block/.style={draw=ECBlue,fill=ECLightBlue,rounded corners,align=center,
-minimum height=9mm,minimum width=18mm}}
+\tikzset{block/.style={draw=ECBlue,fill=ECLightBlue,rounded corners,align=center,minimum height=9mm,minimum width=18mm}}
 \node[block] (bat) {battery\\pack};
 \node[block,right=of bat] (inv) {inverter};
 \node[block,right=of inv] (mot) {electric\\motor};
@@ -83,9 +57,7 @@ minimum height=9mm,minimum width=18mm}}
 }
 \end{center}
 
-The high-voltage traction circuit is complemented by a DC/DC converter that supplies the
-vehicle's low-voltage network. Isolation monitoring and contactors disconnect the battery if a
-serious fault is detected.
+The high-voltage traction circuit is complemented by a DC/DC converter that supplies the low-voltage network. Isolation monitoring and contactors disconnect the battery if a serious fault is detected.
 \end{engineeringfocus}
 
 \begin{keyfigures}
@@ -101,24 +73,12 @@ Typical passenger-car battery & 40--100 kWh
 \begin{tcolorbox}[title=\sffamily\bfseries From supplied energy to the wheels,colback=white,colframe=ECBlue]
 \begin{center}
 \begin{tikzpicture}
-\begin{axis}[
-width=\linewidth,height=47mm,
-ybar,bar width=13pt,
-ymin=0,ymax=100,
-ylabel={Energy reaching the wheels (kWh)},
-symbolic x coords={Battery EV,Hydrogen EV,Petrol car},
-xtick=data,
-xticklabel style={font=\scriptsize,align=center},
-yticklabel style={font=\scriptsize},
-grid=major,
-nodes near coords,
-every node near coord/.append style={font=\scriptsize}]
+\begin{axis}[width=.96\linewidth,height=45mm,ybar,bar width=13pt,ymin=0,ymax=100,ylabel={Energy reaching the wheels (kWh)},symbolic x coords={Battery EV,Hydrogen EV,Petrol car},xtick=data,xticklabel style={font=\scriptsize,align=center},yticklabel style={font=\scriptsize},grid=major,nodes near coords,every node near coord/.append style={font=\scriptsize}]
 \addplot[fill=ECBlue] table[x=vehicle,y=wheel_energy,col sep=comma]{data/EC06/energy_pathways.csv};
 \end{axis}
 \end{tikzpicture}
 \end{center}
-\footnotesize Illustrative conversion chain starting from 100~kWh of supplied energy. Actual
-values vary with technology, driving conditions and system boundaries.
+\footnotesize Illustrative conversion chain starting from 100~kWh of supplied energy. Actual values vary with technology, driving conditions and system boundaries.
 \end{tcolorbox}
 
 \begin{vocabulary}
@@ -140,29 +100,20 @@ power electronics & électronique de puissance
 \item Explain how regenerative braking changes the direction of energy flow.
 \item Compare AC charging with rapid DC charging.
 \item Why can charging power be limited by the vehicle rather than the station?
-\item Which life-cycle impacts must be considered beyond exhaust emissions?
-\item Why is smart charging useful for the electricity network?
+\item Use the graph to compare the three energy pathways.
+\item Why is the largest possible battery not always the best design choice?
 \end{questions}
 
 \begin{engineeringchallenge}
-A city operates 24 buses, each travelling 220~km per day. Compare overnight depot charging with
-high-power opportunity charging at selected terminal stops. Propose a battery capacity, charging
-power and operating schedule. Justify your choices using range, charging time, battery ageing,
-network connection, redundancy, safety and maintenance.
+A city operates 24 buses, each travelling 220~km per day. Compare overnight depot charging with high-power opportunity charging at selected terminal stops. Propose a battery capacity, charging power and operating schedule. Build a decision table using range, charging time, battery ageing, infrastructure cost, network connection, redundancy, safety and maintenance. Conclude with a justified technical recommendation.
 \end{engineeringchallenge}
 
 \begin{applicationexercise}
-An electric bus has a usable battery capacity of 320~kWh and consumes on average
-1.25~kWh/km. Estimate its theoretical range. Then calculate the energy recovered during
-a 12~km downhill section if the mechanical energy available at the wheels is 18~kWh and
-the regenerative chain efficiency is 72\%. Explain why the practical operating range
-must remain lower than the theoretical value.
+An electric bus has a usable battery capacity of 320~kWh and consumes on average 1.25~kWh/km. Estimate its theoretical range. Then calculate the energy recovered during a 12~km downhill section if the mechanical energy available at the wheels is 18~kWh and the regenerative chain efficiency is 72\%. Explain why the practical operating range must remain lower than the theoretical value.
 \end{applicationexercise}
 
 \begin{speaking}
-Prepare a four-minute technical briefing answering the question: ``Should all new urban cars be
-electric by 2035?'' Present one technical advantage, one limitation and one policy measure that
-could improve the overall transport system.
+Prepare a four-minute technical briefing answering the question: ``Should all new urban cars be electric by 2035?'' Present one technical advantage, one limitation and one system-level measure that could improve urban mobility.
 \end{speaking}
 \end{multicols}
 
