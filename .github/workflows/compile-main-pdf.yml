@@ -1,0 +1,56 @@
+name: Compile Engineering Challenges PDF
+
+on:
+  workflow_dispatch:
+    inputs:
+      keep_artifact_days:
+        description: "Artifact retention in days"
+        required: false
+        default: "30"
+  pull_request:
+    paths:
+      - "work_ec08/**"
+      - ".github/workflows/compile-main-pdf.yml"
+      - "README.md"
+  push:
+    branches:
+      - main
+    paths:
+      - "work_ec08/**"
+      - ".github/workflows/compile-main-pdf.yml"
+      - "README.md"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: compile-main-pdf-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  compile:
+    name: Compile main.pdf
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v4
+        with:
+          working_directory: work_ec08
+          root_file: main.tex
+          latexmk_use_xelatex: false
+          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+
+      - name: Verify generated PDF
+        run: test -s work_ec08/main.pdf
+
+      - name: Upload compiled PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: Engineering-Challenges-PDF
+          path: work_ec08/main.pdf
+          if-no-files-found: error
+          retention-days: ${{ github.event.inputs.keep_artifact_days || 30 }}
