@@ -3,37 +3,38 @@
 
 \ECObjectives{
 \begin{itemize}
-\item Identify the principal stages of drinking-water treatment.
-\item Explain filtration, disinfection and reverse osmosis.
-\item Select a robust treatment chain from water-quality and local constraints.
+\item Identify the principal barriers in a drinking-water treatment chain.
+\item Explain filtration, disinfection and reverse osmosis using physical principles.
+\item Select and monitor a robust treatment solution from water-quality and local constraints.
 \end{itemize}}
 
 \begin{multicols}{2}
 \begin{engineeringnews}
-Membrane filtration, ultraviolet disinfection and low-energy desalination are improving access to
+Membrane filtration, ultraviolet disinfection and lower-energy desalination are improving access to
 safe water. Yet the best solution is not always the most advanced one: reliability, operator skills,
-spare parts and energy availability often determine whether a plant succeeds.
+spare parts, energy availability and safe sludge or brine management often determine whether a plant
+succeeds over its complete lifetime.
 \end{engineeringnews}
 
 \begin{ecarticle}
 Raw water may contain suspended particles, microorganisms, organic matter, dissolved salts and
 chemical pollutants. No single process removes every contaminant, so drinking-water plants combine
-several stages. The treatment chain is selected according to the source-water quality, local constraints and the
-required quality of the final water.
+several barriers. The treatment chain is selected according to source-water quality, local
+constraints and the required quality of the final water.
 
 Screens first remove leaves and large debris. During coagulation, a chemical reagent destabilises
 very small particles that would otherwise remain in suspension. Gentle mixing then creates larger
 flocs. In a sedimentation tank, these flocs settle under gravity and form sludge that must be
-collected and treated.
+collected, dewatered and treated.
 
 Filtration removes the particles that remain. Sand filters trap material inside a porous bed,
 whereas activated carbon also adsorbs some organic molecules responsible for taste, odour or
-pollution. Membrane systems use pores of controlled size. As the membrane becomes dirty, pressure
-loss increases, so periodic backwashing or chemical cleaning is necessary.
+pollution. Membrane systems use pores of controlled size. As a filter becomes dirty, pressure loss
+increases, so periodic backwashing or chemical cleaning is necessary.
 
-Disinfection inactivates harmful microorganisms. Chlorine can maintain protection throughout the distribution network, whereas ultraviolet light acts
-rapidly but leaves no disinfectant residual.
-Engineers often combine methods and monitor turbidity, pH, conductivity and disinfectant
+Disinfection inactivates harmful microorganisms. Chlorine can maintain protection throughout the
+distribution network, whereas ultraviolet light acts rapidly but leaves no disinfectant residual.
+Engineers often combine methods and monitor turbidity, pH, conductivity, flow and disinfectant
 concentration continuously.
 
 Reverse osmosis is used for desalination. Pumps apply a pressure greater than the natural osmotic
@@ -41,19 +42,19 @@ pressure, forcing water through a semi-permeable membrane while most salts remai
 brine. The process produces high-quality water but requires energy, pretreatment and careful brine
 management.
 
-For a remote community, maintainability may be more important than maximum theoretical performance. Gravity
-flow, modular filters, solar pumping and simple sensors can reduce operating costs. A robust system
-must also include safe storage and prevent treated water from being contaminated again.
+For a remote community, maintainability may be more important than maximum theoretical performance.
+Gravity flow, modular filters, solar pumping and simple sensors can reduce operating costs. A robust
+system must also include safe storage and prevent treated water from being contaminated again.
 \end{ecarticle}
 
-\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
-Clear-looking water is not necessarily safe. Pathogenic microorganisms are invisible, so treatment
-performance must be verified by measurements and microbiological analysis.
+\begin{tcolorbox}[title=\sffamily\bfseries Engineering Insight,colback=yellow!10,colframe=ECOrange]
+Safe water depends on verified barriers, not on appearance. A clear sample may still contain
+pathogens, while a highly sophisticated plant may fail if reagents, spare parts or trained operators
+are unavailable. Treatment performance and maintainability must therefore be designed together.
 \end{tcolorbox}
 
 \begin{engineeringfocus}
 \textbf{Multi-barrier treatment chain}
-
 \begin{center}
 \resizebox{\linewidth}{!}{%
 \begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=3.5mm]
@@ -69,33 +70,30 @@ performance must be verified by measurements and microbiological analysis.
 \end{tikzpicture}%
 }
 \end{center}
-
 Each stage is a barrier. If one process performs less effectively, the remaining barriers reduce the
 risk of unsafe water reaching consumers.
 \end{engineeringfocus}
 
 \begin{keyfigures}
 \begin{tabularx}{\linewidth}{@{}Xr@{}}
-Typical raw-water turbidity & highly variable\\
+Raw-water quality & highly variable\\
 Filtered-water target & very low turbidity\\
 Reverse-osmosis driving force & high pressure\\
-Main maintenance issue & fouling\\
-Essential final step & safe storage
+Main membrane issue & fouling\\
+Essential final barrier & safe storage
 \end{tabularx}
 \end{keyfigures}
 
 \begin{tcolorbox}[title=\sffamily\bfseries Turbidity through the treatment chain,colback=white,colframe=ECBlue]
 \begin{center}
 \begin{tikzpicture}
-\begin{axis}[ybar,width=\linewidth,height=48mm,ylabel={Relative turbidity (a.u.)},ymin=0,ymax=20,
-symbolic x coords={Raw water,Coagulation,Sedimentation,Filtration,Final water},xtick=data,
-x tick label style={rotate=38,anchor=east,font=\scriptsize},yticklabel style={font=\scriptsize},grid=major]
+\begin{axis}[ybar,width=.96\linewidth,height=45mm,ylabel={Relative turbidity (a.u.)},ymin=0,ymax=20,symbolic x coords={Raw water,Coagulation,Sedimentation,Filtration,Final water},xtick=data,x tick label style={rotate=38,anchor=east,font=\scriptsize},yticklabel style={font=\scriptsize},grid=major]
 \addplot table[x=stage,y=turbidity,col sep=comma]{data/EC14/treatment_performance.csv};
 \end{axis}
 \end{tikzpicture}
 \end{center}
 \footnotesize Successive barriers progressively reduce suspended matter. The values are illustrative;
-actual performance depends on the source water and operating conditions.
+actual performance depends on source water and operating conditions.
 \end{tcolorbox}
 
 \begin{tcolorbox}[title=\sffamily\bfseries Reverse osmosis principle,colback=white,colframe=ECPurple]
@@ -131,11 +129,13 @@ brine & saumure
 \end{vocabulary}
 
 \begin{questions}
-\item Why does a plant use several treatment stages?
+\item Why does a plant use several treatment barriers?
 \item Explain the difference between coagulation and sedimentation.
 \item What additional function can activated carbon provide?
 \item Compare chlorine and ultraviolet disinfection.
+\item Use the graph to identify the stage with the largest apparent turbidity reduction.
 \item Why are pretreatment and maintenance important in reverse osmosis?
+\item Which measurements should trigger an automatic alarm or plant shutdown?
 \end{questions}
 
 \begin{applicationexercise}
@@ -143,21 +143,24 @@ A small plant treats 500 m$^3$ of water per day. Raw water has a turbidity of 18
 sedimentation, turbidity is reduced by 75\%, and the filter then removes 92\% of the remaining
 turbidity.
 \begin{enumerate}
-\item Calculate the turbidity after sedimentation.
-\item Calculate the turbidity after filtration.
-\item A target of 0.5 NTU is required. State whether the simplified treatment chain meets it.
+\item Calculate the turbidity after sedimentation and filtration.
+\item A target of 0.5 NTU is required. State whether the simplified chain meets it.
+\item Calculate the daily volume that must be reprocessed if 3\% of production is rejected.
+\item Explain why turbidity alone cannot prove microbiological safety.
 \end{enumerate}
 \end{applicationexercise}
 
 \begin{engineeringchallenge}
-Design a compact treatment system for a village beside a turbid river. Choose the treatment stages,
-energy source and monitoring sensors. Explain routine maintenance and the action taken when one
-measurement exceeds its safe limit.
+Design a compact treatment system for a village beside a turbid river. Characterise the hazards,
+choose the treatment barriers, energy source and monitoring sensors, and define acceptance limits.
+Describe routine maintenance, reagent and spare-part needs, sludge management, safe storage and the
+action taken when one measurement exceeds its limit. Compare a simple robust option with a more
+automated membrane-based option and justify your recommendation.
 \end{engineeringchallenge}
 
 \begin{speaking}
-Compare a central treatment plant with small local treatment units. Which solution is more suitable
-for a remote region, and under which conditions?
+Compare a central treatment plant with small local treatment units. Present a four-minute technical
+recommendation based on water quality, energy, maintenance, resilience, cost and operator skills.
 \end{speaking}
 \end{multicols}
 
