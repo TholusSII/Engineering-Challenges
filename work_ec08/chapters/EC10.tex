@@ -3,68 +3,43 @@
 
 \ECObjectives{
 \begin{itemize}
-\item Describe the measurement chain of a connected medical device.
-\item Explain the roles of calibration, biocompatibility and risk analysis.
-\item Design a safe monitoring system combining sensors, software and human supervision.
+\item Describe the complete measurement and decision chain of a connected medical device.
+\item Explain the roles of calibration, filtering, biocompatibility and risk analysis.
+\item Design and justify a safe monitoring system combining sensors, software and human supervision.
 \end{itemize}}
 
 \begin{multicols}{2}
 \begin{engineeringnews}
-Wearable sensors, robotic surgery, smart prostheses and remote monitoring are transforming
-healthcare. These systems can improve diagnosis and quality of life, but they must meet demanding
-requirements for safety, reliability, privacy and clinical usefulness.
+Wearable sensors, robotic surgery, smart prostheses and remote monitoring are transforming healthcare. These systems can improve diagnosis and quality of life, but they must meet demanding requirements for safety, reliability, privacy and clinical usefulness.
 \end{engineeringnews}
 
 \begin{ecarticle}
-Medical engineering combines electronics, mechanics, materials science, computer science and human
-physiology. A medical device may simply measure a quantity, such as body temperature, or it may act
-on the patient, as a pacemaker, insulin pump or powered prosthesis does. In every case, the design
-must begin with a clearly defined medical need and a careful analysis of possible hazards.
+Medical engineering combines electronics, mechanics, materials science, computer science and human physiology. A medical device may simply measure a quantity, such as body temperature, or it may act on the patient, as a pacemaker, insulin pump or powered prosthesis does. In every case, design must begin with a clearly defined medical need and a careful analysis of possible hazards.
 
-Most monitoring devices contain a measurement chain. A sensor converts a physiological quantity
-into an electrical signal. Because this signal is often weak and noisy, analogue electronics
-amplify and filter it before an analogue-to-digital converter sends numerical data to a processor.
-Software then calculates indicators, detects abnormal values and displays information to a patient
-or healthcare professional. Calibration links the electrical output to a trustworthy physical
-measurement.
+Most monitoring devices contain a measurement chain. A sensor converts a physiological quantity into an electrical signal. Because this signal is often weak and noisy, analogue electronics amplify and filter it before an analogue-to-digital converter sends numerical data to a processor. Software then calculates indicators, detects abnormal values and displays information to a patient or healthcare professional. Calibration links the electrical output to a trustworthy physical measurement.
 
-A pulse oximeter, for example, shines red and infrared light through a finger and measures how much
-light is absorbed. From the changing optical signals, the device estimates blood oxygen saturation
-and pulse rate. Movement, poor contact or ambient light can disturb the measurement, so the system
-must detect low-quality signals rather than display a misleading result.
+A pulse oximeter, for example, shines red and infrared light through a finger and measures how much light is absorbed. From the changing optical signals, the device estimates blood oxygen saturation and pulse rate. Movement, poor contact or ambient light can disturb the measurement, so the system must detect low-quality signals rather than display a misleading result.
 
-Implantable devices create additional constraints. Their materials must be biocompatible, their
-energy consumption must be extremely low and their enclosure must protect the electronics from
-body fluids. A pacemaker continuously monitors cardiac activity and delivers a controlled electrical
-pulse only when required. This is a closed-loop system: measurement, decision and action are linked.
+Implantable devices create additional constraints. Their materials must be biocompatible, their energy consumption must be extremely low and their enclosure must protect the electronics from body fluids. A pacemaker continuously monitors cardiac activity and delivers a controlled electrical pulse only when required. This is a closed-loop system: measurement, decision and action are linked.
 
-Connected devices can transmit measurements to a smartphone or hospital server. Remote monitoring
-may allow earlier intervention, but it also introduces cybersecurity and privacy risks. Engineers
-must protect communication, control software updates and ensure that a network failure cannot place
-the patient in danger. Clinical validation remains essential: a technically accurate sensor is only
-useful if its information supports an appropriate medical decision.
+Connected devices can transmit measurements to a smartphone or hospital server. Remote monitoring may allow earlier intervention, but it also introduces cybersecurity and privacy risks. Engineers must protect communication, control software updates and ensure that a network failure cannot place the patient in danger. Clinical validation remains essential: a technically accurate sensor is useful only if its information supports an appropriate medical decision.
 \end{ecarticle}
 
-\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
-A device can be precise without being accurate. Repeated measurements may be very similar to one
-another but all shifted away from the true value. Calibration is used to identify and correct this
-systematic error.
+\begin{tcolorbox}[title=\sffamily\bfseries Engineering Insight,colback=yellow!10,colframe=ECOrange]
+A device can be precise without being accurate. Repeated measurements may be very similar but all shifted away from the true value. Calibration identifies systematic error, while validation determines whether the complete device is suitable for its intended clinical use.
 \end{tcolorbox}
 
 \begin{engineeringfocus}
 \textbf{Connected patient-monitoring chain}
-
 \begin{center}
 \begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=4.5mm and 4.5mm]
-\tikzset{block/.style={draw=ECRed,fill=ECRed!7,rounded corners,align=center,
-minimum width=19mm,minimum height=10mm}}
+\tikzset{block/.style={draw=ECRed,fill=ECRed!7,rounded corners,align=center,minimum width=19mm,minimum height=10mm}}
 \node[block] (patient) {patient\\quantity};
 \node[block,right=of patient] (sensor) {sensor and\\conditioning};
 \node[block,right=of sensor] (processor) {processor\\and algorithm};
 \node[block,below=of processor] (display) {display or\\alarm};
 \node[block,left=of display] (network) {secure\\communication};
-\node[draw=ECGreen,fill=ECGreen!10,rounded corners,align=center,left=of network,
-minimum width=19mm,minimum height=10mm] (doctor) {healthcare\\professional};
+\node[draw=ECGreen,fill=ECGreen!10,rounded corners,align=center,left=of network,minimum width=19mm,minimum height=10mm] (doctor) {healthcare\\professional};
 \draw[->,thick,ECRed] (patient) -- (sensor);
 \draw[->,thick,ECRed] (sensor) -- (processor);
 \draw[->,thick,ECRed] (processor) -- (display);
@@ -73,9 +48,7 @@ minimum width=19mm,minimum height=10mm] (doctor) {healthcare\\professional};
 \draw[->,thick,ECGreen] (doctor.north) |- (patient.south);
 \end{tikzpicture}
 \end{center}
-
-The device provides information, but the complete system includes the patient, the user interface,
-communication network and medical decision. Each interface must be validated.
+The device provides information, but the complete system includes the patient, user interface, communication network and medical decision. Each interface must be validated.
 \end{engineeringfocus}
 
 \begin{keyfigures}
@@ -83,7 +56,7 @@ communication network and medical decision. Each interface must be validated.
 Sensor output & often millivolts or microvolts\\
 Implant operating life & several years\\
 Acceptable false alarm rate & application-dependent\\
-Software traceability & required throughout development\\
+Software traceability & throughout development\\
 Patient data & confidential
 \end{tabularx}
 \end{keyfigures}
@@ -91,21 +64,14 @@ Patient data & confidential
 \begin{tcolorbox}[title=\sffamily\bfseries Filtering a physiological signal,colback=white,colframe=ECRed]
 \begin{center}
 \begin{tikzpicture}
-\begin{axis}[
-width=\linewidth,height=45mm,
-xlabel={Time},ylabel={Normalised amplitude},
-ymin=0,ymax=1.2,
-xticklabel style={font=\scriptsize},yticklabel style={font=\scriptsize},
-grid=major,
-legend style={font=\scriptsize,at={(0.5,1.02)},anchor=south,legend columns=2}]
+\begin{axis}[width=.96\linewidth,height=44mm,xlabel={Time},ylabel={Normalised amplitude},ymin=0,ymax=1.2,xticklabel style={font=\scriptsize},yticklabel style={font=\scriptsize},grid=major,legend style={font=\scriptsize,at={(0.5,1.02)},anchor=south,legend columns=2}]
 \addplot[thin,mark=*] table[x=time,y=raw,col sep=comma]{data/EC10/pulse_signal.csv};
 \addplot[very thick] table[x=time,y=filtered,col sep=comma]{data/EC10/pulse_signal.csv};
 \legend{Raw signal,Filtered signal}
 \end{axis}
 \end{tikzpicture}
 \end{center}
-\footnotesize Illustrative data. Filtering reduces rapid variations, but excessive filtering may
-also delay or distort clinically important information.
+\footnotesize Illustrative data. Filtering reduces rapid variations, but excessive filtering may delay or distort clinically important information.
 \end{tcolorbox}
 
 \begin{tcolorbox}[title=\sffamily\bfseries Closed-loop pacemaker principle,colback=white,colframe=ECBlue]
@@ -121,8 +87,7 @@ also delay or distort clinically important information.
 \draw[->,thick] (pulse.west) -| (heart.south);
 \end{tikzpicture}
 \end{center}
-The controller stimulates the heart only when the measured rhythm does not satisfy the programmed
-criteria. A safe mode must remain available if a sensor or software fault is detected.
+The controller stimulates the heart only when the measured rhythm does not satisfy the programmed criteria. A safe mode must remain available if a sensor or software fault is detected.
 \end{tcolorbox}
 
 \begin{vocabulary}
@@ -142,29 +107,24 @@ closed-loop control & commande en boucle fermée
 
 \begin{questions}
 \item Why must a weak sensor signal be amplified and filtered?
-\item Distinguish precision from accuracy.
+\item Distinguish precision, accuracy and clinical validity.
 \item Give two possible disturbances affecting a pulse oximeter.
 \item Why must an implant consume very little energy?
 \item What makes a pacemaker a closed-loop system?
+\item Use the graph to explain one benefit and one risk of filtering.
+\item Why must a network failure not disable essential medical functions?
 \end{questions}
 
 \begin{engineeringchallenge}
-Design a connected device that monitors an elderly patient at home. Select two physiological or
-activity measurements, draw the information chain and define alarm conditions. Explain how the
-system detects poor-quality data, protects privacy, continues operating during a network failure
-and keeps a healthcare professional in the decision loop.
+Design a connected device that monitors an elderly patient at home. Select two physiological or activity measurements, draw the information chain and define alarm conditions. Explain how the system detects poor-quality data, limits false alarms, protects privacy, continues operating during a network failure and keeps a healthcare professional in the decision loop. Add a verification and validation plan covering calibration, software, cybersecurity and representative user tests.
 \end{engineeringchallenge}
 
 \begin{applicationexercise}
-A physiological sensor produces 2.4~mV for the measured condition. The acquisition system
-requires a 1.8~V signal at the analogue-to-digital converter input. Calculate the ideal
-amplifier gain. If an offset of 15~mV is also amplified, calculate its contribution at the
-output and explain why offset correction is necessary.
+A physiological sensor produces 2.4~mV for the measured condition. The acquisition system requires a 1.8~V signal at the analogue-to-digital converter input. Calculate the ideal amplifier gain. If an offset of 15~mV is also amplified, calculate its contribution at the output and explain why offset correction is necessary.
 \end{applicationexercise}
 
 \begin{speaking}
-Should a connected medical device automatically contact emergency services when it detects a
-critical event? Present the benefits, risks and safeguards in a four-minute design review.
+Should a connected medical device automatically contact emergency services when it detects a critical event? Present the benefits, risks and safeguards in a four-minute design review.
 \end{speaking}
 \end{multicols}
 
