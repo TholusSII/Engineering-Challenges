@@ -30,7 +30,7 @@ concurrency:
 jobs:
   compile:
     name: Compile main.pdf
-    if: github.event_name != 'push' || github.event.head_commit.message != 'chore: update compiled main.pdf'
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
 
     steps:
