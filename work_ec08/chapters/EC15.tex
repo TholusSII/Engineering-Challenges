@@ -3,16 +3,16 @@
 
 \ECObjectives{
 \begin{itemize}
-\item Compare transport modes using energy, capacity and infrastructure criteria.
+\item Compare transport modes using energy, capacity, space and infrastructure criteria.
 \item Explain the perception--decision--action chain of an autonomous vehicle.
-\item Evaluate a multimodal solution rather than a single vehicle technology.
+\item Design and justify a multimodal transport solution rather than a single vehicle technology.
 \end{itemize}}
 
 \begin{multicols}{2}
 \begin{engineeringnews}
-Battery buses, hydrogen trains, autonomous shuttles and electric aircraft are being tested around
-the world. The largest environmental gains, however, may come from combining efficient vehicles
-with public transport, active mobility and better use of existing infrastructure.
+Battery buses, hydrogen trains, autonomous shuttles and electric aircraft are being tested around the
+world. The largest environmental gains, however, may come from combining efficient vehicles with
+public transport, active mobility, higher occupancy and better use of existing infrastructure.
 \end{engineeringnews}
 
 \begin{ecarticle}
@@ -20,39 +20,39 @@ Transport engineering must move people and goods safely, reliably and with limit
 use. Because journey length, passenger capacity and infrastructure differ, no propulsion technology
 is ideal for every application.
 
-Battery-electric vehicles are efficient because electric motors convert a large proportion of the stored
+Battery-electric vehicles are efficient because electric motors convert a large proportion of stored
 energy into motion and can recover energy during braking. They are well suited to urban buses, cars
 and delivery vehicles that return regularly to a charging point. Long-distance freight requires
-larger batteries, faster charging or another energy carrier. Hydrogen fuel cells may reduce vehicle
-mass for some heavy applications, but producing, compressing and converting hydrogen introduces
-additional energy losses.
+larger batteries, faster charging or another energy carrier. Hydrogen fuel cells may reduce onboard
+storage mass in some heavy applications, but producing, compressing and converting hydrogen
+introduces additional energy losses.
 
 Rail carries many passengers or large freight loads with low rolling resistance. Electrified trains
 can use energy directly from the grid and do not need to carry a large energy store. High-speed rail
-can replace some short-haul flights when stations connect city centres and total door-to-door time
-is competitive.
+can replace some short-haul flights when stations connect city centres and total door-to-door time is
+competitive.
 
 Autonomous vehicles add a digital engineering challenge. Cameras provide detailed images, radar
 measures distance and relative speed, and lidar creates a three-dimensional representation. Sensor
-fusion combines these signals. Software then identifies objects, predicts their motion, plans a safe
+fusion combines these signals. Software identifies objects, predicts their motion, plans a safe
 trajectory and commands steering and braking. Adverse weather, unusual road layouts and human
 behaviour make validation difficult.
 
-Future mobility is therefore a system-level problem. A journey may combine walking, bicycle, train and an
-on-demand shuttle. Ticketing, timetables and physical interchanges must work together. Engineers
-must also consider accessibility, affordability, charging networks, vehicle manufacture and the
-carbon intensity of the energy supply. Replacing every conventional car with another type of car would not, by itself, eliminate congestion
-or the demand for parking space.
+Future mobility is therefore a system-level problem. A journey may combine walking, bicycle, train
+and an on-demand shuttle. Ticketing, timetables and physical interchanges must work together.
+Engineers must consider accessibility, affordability, charging networks, manufacture and the carbon
+intensity of the energy supply. Replacing every conventional car with another type of car would not,
+by itself, eliminate congestion, parking demand or unequal access to mobility.
 \end{ecarticle}
 
-\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
-The energy efficiency of a vehicle is only one part of transport efficiency. Occupancy is equally
-important: a nearly empty heavy vehicle may consume more energy per passenger than a fuller one.
+\begin{tcolorbox}[title=\sffamily\bfseries Engineering Insight,colback=yellow!10,colframe=ECOrange]
+Vehicle efficiency and transport efficiency are not identical. Occupancy, route, waiting time,
+vehicle mass and infrastructure use can matter as much as propulsion efficiency. The correct unit of
+comparison is often energy or emissions per passenger-kilometre or tonne-kilometre.
 \end{tcolorbox}
 
 \begin{engineeringfocus}
 \textbf{Autonomous driving control chain}
-
 \begin{center}
 \resizebox{\linewidth}{!}{%
 \begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=3.5mm]
@@ -66,17 +66,16 @@ important: a nearly empty heavy vehicle may consume more energy per passenger th
 \end{tikzpicture}%
 }
 \end{center}
-
-The loop must continue safely even when a sensor is degraded. Redundancy, plausibility checks and a
-minimum-risk manoeuvre are therefore central design features.
+The loop must continue safely when a sensor is degraded. Redundancy, plausibility checks, driver or
+remote supervision and a minimum-risk manoeuvre are central design features.
 \end{engineeringfocus}
 
 \begin{keyfigures}
 \begin{tabularx}{\linewidth}{@{}Xr@{}}
 Electric motor efficiency & high\\
 Rail rolling resistance & low\\
-Autonomous control cycle & repeated continuously\\
-Important system metric & passenger-km\\
+Autonomous control loop & continuous\\
+Useful comparison metric & passenger-km\\
 Main urban constraint & limited space
 \end{tabularx}
 \end{keyfigures}
@@ -84,9 +83,7 @@ Main urban constraint & limited space
 \begin{tcolorbox}[title=\sffamily\bfseries Illustrative operational emissions,colback=white,colframe=ECOrange]
 \begin{center}
 \begin{tikzpicture}
-\begin{axis}[xbar,width=.93\linewidth,height=53mm,xlabel={Relative emissions per passenger-km},xmin=0,xmax=135,
-symbolic y coords={Bicycle,Electric rail,Rail,Coach,Car},ytick=data,
-ticklabel style={font=\scriptsize},grid=major]
+\begin{axis}[xbar,width=.93\linewidth,height=50mm,xlabel={Relative emissions per passenger-km},xmin=0,xmax=135,symbolic y coords={Bicycle,Electric rail,Rail,Coach,Car},ytick=data,ticklabel style={font=\scriptsize},grid=major]
 \addplot table[x=emissions,y=mode,col sep=comma]{data/EC15/transport_emissions.csv};
 \end{axis}
 \end{tikzpicture}
@@ -108,7 +105,8 @@ energy source, route and lifecycle boundaries.
 \end{tikzpicture}%
 }
 \end{center}
-A successful system minimises waiting, transfer distance and uncertainty between modes.
+A successful system minimises waiting, transfer distance, uncertainty and barriers for people with
+reduced mobility.
 \end{tcolorbox}
 
 \begin{vocabulary}
@@ -126,35 +124,40 @@ passenger-kilometre & voyageur-kilomètre
 \end{tabularx}
 \end{vocabulary}
 
-
-\begin{applicationexercise}
-A class of 30 students travels 18 km to a science museum. Compare two options using the illustrative
-values in the graph: five cars carrying six students each, or one coach carrying all 30 students.
-\begin{enumerate}
-\item Calculate the total passenger-kilometres for the trip.
-\item Estimate the operational emissions for each option in relative units.
-\item By what factor does the coach reduce emissions compared with the cars?
-\item Give two reasons why a real engineering comparison should also include lifecycle emissions.
-\end{enumerate}
-\end{applicationexercise}
-
 \begin{questions}
 \item Why is no propulsion technology suitable for every journey?
 \item Give one advantage of electrified rail over battery vehicles.
 \item Describe the autonomous perception--decision--action loop.
+\item Why is validation difficult in adverse or unusual conditions?
+\item Use the graph to compare the highest- and lowest-emission motorised modes.
 \item Why is vehicle occupancy important when comparing transport modes?
-\item Which features make a multimodal journey attractive to users?
+\item Which features make a multimodal journey attractive and accessible?
 \end{questions}
 
+\begin{applicationexercise}
+A class of 30 students travels 18 km to a science museum. Compare five cars carrying six students
+each with one coach carrying all 30 students, using the illustrative values in the graph.
+\begin{enumerate}
+\item Calculate the total passenger-kilometres for the trip.
+\item Estimate the operational emissions for each option in relative units.
+\item By what factor does the coach reduce emissions compared with the cars?
+\item Recalculate the car option for an average occupancy of three students per car.
+\item Give two reasons why a real comparison should also include lifecycle and infrastructure effects.
+\end{enumerate}
+\end{applicationexercise}
+
 \begin{engineeringchallenge}
-Propose a low-carbon transport plan between a suburban school and a city centre. Compare at least
-three modes using capacity, journey time, energy, accessibility and infrastructure. Include one
-solution for the first and last kilometre.
+Propose a low-carbon transport plan between a suburban school and a city centre. Define demand and
+accessibility requirements; compare at least three modes using capacity, journey time, energy,
+emissions, land use, reliability and infrastructure; include first- and last-kilometre solutions;
+and identify one disruption scenario with a fallback plan. Present a weighted decision matrix and a
+justified recommendation.
 \end{engineeringchallenge}
 
 \begin{speaking}
-Should city centres restrict private cars? Defend a position using technical, environmental and
-social arguments, and propose one realistic alternative.
+Should city centres restrict private cars? Defend a position in a four-minute technical briefing
+using transport capacity, accessibility, energy, public space and social impact, and propose one
+realistic alternative package.
 \end{speaking}
 \end{multicols}
 
