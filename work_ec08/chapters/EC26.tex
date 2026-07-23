@@ -1,71 +1,74 @@
 \phantomsection\addcontentsline{toc}{section}{Biomedical Imaging}
-\ECchapter{26}{Biomedical Imaging}{Seeing inside the human body}{ECRed}
+\ECchapter{26}{Biomedical Imaging}{Turning physical signals into reliable clinical information}{ECRed}
 
 \ECObjectives{
 \begin{itemize}
-\item Explain the physical principles of the main imaging techniques.
-\item Interpret resolution, contrast, noise and acquisition trade-offs.
-\item Estimate simple imaging quantities and identify safety constraints.
+\item Explain the physical principles and complete signal chain of major imaging techniques.
+\item Analyse resolution, contrast, noise, artefacts and acquisition-time trade-offs.
+\item Calculate echo depth and define validation and safety requirements for a clinical protocol.
 \end{itemize}}
 
 \begin{multicols}{2}
 \begin{engineeringnews}
-Biomedical imaging allows clinicians to observe anatomy and function without surgery. Engineers combine
-wave physics, detectors, electronics, signal processing and reconstruction algorithms to produce clinically
-useful images while controlling acquisition time, cost and patient risk.
+Biomedical imaging allows clinicians to inspect anatomy and function without surgery. Engineers combine wave
+physics, detectors, analogue electronics, digital signal processing and inverse algorithms to obtain clinically
+useful information while controlling acquisition time, cost, uncertainty and patient risk.
 \end{engineeringnews}
 
 \begin{ecarticle}
-Biomedical imaging converts physical interactions inside the body into maps that clinicians can interpret.
-Different technologies measure different properties. X-ray radiography and computed tomography use the
-attenuation of ionising radiation. Ultrasound sends mechanical waves and analyses their echoes. Magnetic
-resonance imaging, or MRI, measures signals produced by hydrogen nuclei in a strong magnetic field. Nuclear
-medicine detects radiation emitted by a tracer introduced into the body.
+Biomedical imaging converts interactions inside the body into spatial maps. X-ray radiography and computed
+tomography measure the attenuation of ionising radiation. Ultrasound transmits mechanical waves and analyses
+their echoes. Magnetic resonance imaging, or MRI, detects radio-frequency signals produced by hydrogen nuclei
+in a strong magnetic field. Nuclear medicine detects radiation emitted by a tracer introduced into the body.
 
-Every imaging chain contains four main stages: excitation, interaction, detection and reconstruction. The
-detector rarely produces a ready-to-use picture. It records many noisy signals from different positions or
-times. A reconstruction algorithm estimates the spatial distribution that best explains these measurements.
-Increasing spatial resolution generally requires more samples, a stronger signal or a longer acquisition.
+Every imaging system contains four linked functions: excitation, interaction, detection and reconstruction.
+The detector does not usually deliver a ready-to-read image. It records many incomplete and noisy measurements
+from different positions or times. A reconstruction algorithm estimates the spatial distribution that is most
+consistent with these measurements and with the physical model of the system.
 
-Image quality is described by spatial resolution, contrast, signal-to-noise ratio and artefacts. Resolution
-determines the smallest visible detail. Contrast separates tissues with similar properties. Noise creates
-random variations, whereas artefacts create structured errors caused by motion, metal objects, calibration
-errors or incomplete measurements. Engineers must select acquisition parameters that balance these effects.
+Image quality cannot be reduced to one number. Spatial resolution determines the smallest visible detail,
+contrast separates tissues with similar properties, and signal-to-noise ratio indicates whether a weak feature
+can be distinguished from random fluctuations. Artefacts are structured errors caused by motion, metal,
+calibration defects, limited viewing angles or an incorrect model. Improving one criterion often degrades
+another: smaller voxels may increase acquisition time or radiation dose, while faster scans may reduce signal.
 
-In ultrasound, depth can be estimated from the echo round-trip time:
+In pulse-echo ultrasound, reflector depth is estimated from
 \[
 d=\frac{ct}{2},
 \]
-where $c$ is the speed of sound in tissue and $t$ is the measured delay. The factor two appears because the
-pulse travels to the reflector and back to the probe. Shorter pulses improve axial resolution, but reducing
-the transmitted energy may lower the signal-to-noise ratio.
+where $c$ is the speed of sound in tissue and $t$ is the round-trip delay. The factor two accounts for the outward
+and return paths. Axial resolution depends on pulse duration, whereas lateral resolution depends on beam width
+and focusing. A protocol must therefore specify both geometry and signal-processing parameters.
 
-Safety is equally important. X-ray dose must be kept as low as reasonably achievable. MRI avoids ionising
-radiation but requires strict control of magnetic objects, radio-frequency heating and acoustic noise.
-Ultrasound is portable and relatively inexpensive, yet image quality depends strongly on the operator and
-on acoustic access to the organ.
+Safety constraints depend on the technology. X-ray dose must be kept as low as reasonably achievable. MRI
+avoids ionising radiation but requires strict control of ferromagnetic objects, radio-frequency heating and
+acoustic noise. Ultrasound is portable and comparatively inexpensive, yet image quality depends strongly on
+operator technique and acoustic access.
 
-Artificial intelligence can assist segmentation, reconstruction and anomaly detection, but it must be
-validated on diverse patients and scanners. A convincing image is not necessarily an accurate one.
-Biomedical engineers therefore work closely with physicists, radiologists, clinicians and regulators.
+Artificial intelligence can assist segmentation, reconstruction and anomaly detection, but it must be validated
+on diverse patients, scanners and operating conditions. A plausible-looking image is not automatically a faithful
+representation of the measurements. Engineers must quantify uncertainty, failure modes and traceability before
+clinical deployment.
 \end{ecarticle}
 
-\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
-A high-performance prototype is not sufficient: engineers must demonstrate repeatability, safety and useful
-performance under realistic clinical conditions.
+\begin{tcolorbox}[title=\sffamily\bfseries Engineering insight,colback=yellow!10,colframe=ECOrange]
+A reconstructed image is an estimate, not a direct photograph. Its reliability depends on the measurement model,
+calibration, sampling geometry and regularisation assumptions.
 \end{tcolorbox}
 
 \begin{engineeringfocus}
-\textbf{From measurement to diagnosis}
+\textbf{From physical interaction to clinical decision}
 \begin{center}
 \resizebox{0.96\linewidth}{!}{%
-\begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=4mm]
-\node[draw=ECRed,fill=ECRed!10,rounded corners] (source) {energy source};
+\begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=3.5mm]
+\node[draw=ECRed,fill=ECRed!10,rounded corners] (source) {excitation};
 \node[draw=ECOrange,fill=ECOrange!10,rounded corners,right=of source] (body) {body interaction};
 \node[draw=ECBlue,fill=ECLightBlue,rounded corners,right=of body] (det) {detector};
 \node[draw=ECPurple,fill=ECPurple!10,rounded corners,below=of body] (alg) {reconstruction};
-\node[draw=ECGreen,fill=ECGreen!10,rounded corners,below=of det] (image) {clinical image};
-\draw[->,thick] (source)--(body); \draw[->,thick] (body)--(det); \draw[->,thick] (det)--(alg); \draw[->,thick] (alg)--(image);
+\node[draw=ECGreen,fill=ECGreen!10,rounded corners,below=of det] (image) {validated image};
+\draw[->,thick] (source)--(body); \draw[->,thick] (body)--(det);
+\draw[->,thick] (det)--(alg); \draw[->,thick] (alg)--(image);
+\draw[->,thick,dashed] (image) to[bend left=25] node[below]{quality feedback} (det);
 \end{tikzpicture}}
 \end{center}
 \end{engineeringfocus}
@@ -75,31 +78,32 @@ performance under realistic clinical conditions.
 X-ray / CT & attenuation\\
 Ultrasound & echo delay\\
 MRI & magnetic resonance\\
-Main trade-off & quality vs risk\\
-Critical step & validation
+Main trade-off & quality--time--risk\\
+Critical requirement & clinical validation
 \end{tabularx}
 \end{keyfigures}
 
 \begin{tcolorbox}[title=\sffamily\bfseries Resolution and acquisition time,colback=white,colframe=ECRed]
 \begin{center}
 \begin{tikzpicture}
-\begin{axis}[width=0.96\linewidth,height=46mm,xlabel={Voxel size (mm)},ylabel={Acquisition time (s)},
-grid=major,ticklabel style={font=\scriptsize},x dir=reverse]
+\begin{axis}[width=0.94\linewidth,height=45mm,xlabel={Voxel size (mm)},ylabel={Acquisition time (s)},
+grid=major,ticklabel style={font=\scriptsize},label style={font=\scriptsize},x dir=reverse]
 \addplot[thick,mark=*] table[x=resolution,y=time,col sep=comma]{data/EC26/imaging.csv};
 \end{axis}
 \end{tikzpicture}
 \end{center}
+\footnotesize Smaller voxels may improve geometric detail, but only if the signal-to-noise ratio remains sufficient.
 \end{tcolorbox}
 
-\begin{tcolorbox}[title=\sffamily\bfseries Quantitative application,colback=ECRed!4,colframe=ECRed]
-An ultrasound pulse returns from a tissue boundary after $130\,\mu\mathrm{s}$. Take the speed of sound in
-soft tissue as $1540\,\mathrm{m\,s^{-1}}$.
+\begin{applicationexercise}{Ultrasound depth and uncertainty}
+An echo returns from a tissue boundary after $130\,\mu\mathrm{s}$. Take $c=1540\,\mathrm{m\,s^{-1}}$.
 \begin{enumerate}
 \item Calculate the depth of the boundary.
 \item A second echo arrives $26\,\mu\mathrm{s}$ later. Estimate the distance between the two boundaries.
-\item Explain why using the full travel distance instead of half would give an incorrect result.
+\item If the assumed sound speed is uncertain by $\pm 20\,\mathrm{m\,s^{-1}}$, estimate the resulting uncertainty on the first depth.
+\item Explain why the full travel distance would give a physically incorrect result.
 \end{enumerate}
-\end{tcolorbox}
+\end{applicationexercise}
 
 \begin{vocabulary}
 \begin{tabularx}{\linewidth}{@{}lX@{}}
@@ -112,26 +116,27 @@ noise & bruit\\
 artefact & artefact\\
 reconstruction & reconstruction\\
 radiation dose & dose de rayonnement\\
-tracer & traceur
+traceability & traçabilité
 \end{tabularx}
 \end{vocabulary}
 
 \begin{questions}
-\item Why do different imaging technologies reveal different tissues?
-\item What is the role of reconstruction algorithms?
-\item Explain the difference between noise and an artefact.
-\item Why is higher spatial resolution not always the best choice?
+\item Why do different imaging technologies reveal different tissue properties?
+\item What assumptions are introduced by reconstruction algorithms?
+\item Distinguish random noise from a structured artefact.
+\item Why is the highest possible spatial resolution not always the best protocol?
 \item Give one safety constraint for CT and one for MRI.
 \end{questions}
 
 \begin{engineeringchallenge}
-Design an imaging protocol for a moving organ. Choose a technology, define the required resolution and
-acquisition time, identify one major artefact and propose a method to reduce it.
+Design an imaging protocol for a moving organ. Define the clinical requirement, choose a technology, specify
+spatial and temporal resolution, identify the dominant artefact, propose one correction method and build a
+validation matrix containing at least three tests, one acceptance threshold and one degraded operating case.
 \end{engineeringchallenge}
 
 \begin{speaking}
-Should AI-generated medical images be accepted when they improve visibility but modify the original
-measurements? Discuss accuracy, responsibility and patient safety.
+Should AI-enhanced medical images be accepted when visibility improves but the original measurements are
+modified? Discuss accuracy, traceability, responsibility and patient safety.
 \end{speaking}
 \end{multicols}
 

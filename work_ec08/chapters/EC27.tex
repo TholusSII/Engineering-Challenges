@@ -1,45 +1,71 @@
 \phantomsection\addcontentsline{toc}{section}{Nanotechnology}
-\ECchapter{27}{Nanotechnology}{Engineering at the nanoscale}{ECGreen}
+\ECchapter{27}{Nanotechnology}{Designing materials through scale effects}{ECGreen}
 
 \ECObjectives{
 \begin{itemize}
-\item Explain why surface and quantum effects become dominant at the nanoscale.
-\item Compare top-down and bottom-up manufacturing routes.
-\item Evaluate performance, measurement and exposure-control trade-offs.
+\item Explain why surface and quantum effects become dominant at nanometre scales.
+\item Compare top-down and bottom-up fabrication using accuracy, throughput and defect criteria.
+\item Quantify surface-area effects and define measurement, containment and lifecycle requirements.
 \end{itemize}}
 
 \begin{multicols}{2}
 \begin{engineeringnews}
-At dimensions below about one hundred nanometres, the ratio between surface area and volume rises sharply and quantum confinement can modify optical or electrical behaviour. Nanotechnology exploits these scale effects in electronics, coatings, sensors, medicine and energy systems.
+Below about one hundred nanometres, geometry and quantum physics can modify optical, electrical, chemical and
+mechanical behaviour. Nanotechnology uses these scale effects in electronics, coatings, catalysts, sensors,
+medicine and energy systems, but performance must be balanced against reproducibility and exposure risk.
 \end{engineeringnews}
 
 \begin{ecarticle}
-A nanometre is one billionth of a metre. A material at this scale may behave differently from the same substance in bulk form. The first reason is geometric: for similar particles, surface area varies with the square of size whereas volume varies with the cube. The surface-area-to-volume ratio therefore increases as the characteristic length decreases. Surface reactions, interfaces and adhesion can then dominate the behaviour of the whole object.
+A nanometre is one billionth of a metre. A nanoscale object may behave differently from the same material in bulk
+form. For geometrically similar particles, surface area varies with the square of size while volume varies with
+the cube. The surface-area-to-volume ratio therefore increases as characteristic length decreases. Interfaces,
+adhesion, oxidation and surface reactions can then dominate the behaviour of the complete object.
 
-The second reason is quantum confinement. When electrons are restricted to dimensions comparable with their characteristic wavelengths, allowed energy levels change. Quantum dots consequently emit different colours depending on particle size, and nanoscale conductors can show electrical properties that do not appear in larger components.
+For a spherical particle of diameter $d$,
+\[
+\frac{S}{V}=\frac{6}{d}.
+\]
+Halving the diameter doubles this ratio. This can increase catalytic activity or dissolution rate, but it may also
+increase chemical reactivity, agglomeration and biological exposure.
 
-Engineers use two broad manufacturing strategies. Top-down processes remove material from a larger structure by lithography, etching or precision machining. They provide accurate patterns and compatibility with semiconductor production, but become expensive as feature size decreases. Bottom-up processes assemble atoms, molecules or nanoparticles through chemical synthesis, deposition or self-organisation. They can create extremely small structures over large areas, although controlling defects, orientation and particle-size distribution is difficult.
+A second scale effect is quantum confinement. When charge carriers are restricted to dimensions comparable with
+their characteristic wavelengths, allowed energy levels change. Quantum dots can therefore emit different colours
+according to size, and nanoscale conductors may display transport properties absent from larger components.
 
-Nanomaterials include particles, tubes, wires, thin films and porous structures. Carbon nanotubes combine low density with high axial stiffness and electrical conductivity. Nanostructured catalysts expose many active sites, so less precious metal may be required. Thin coatings can alter friction, corrosion resistance, wettability or optical reflection without changing the bulk component.
+Top-down fabrication removes material from a larger structure using lithography, etching or precision machining.
+It provides accurate patterns and compatibility with semiconductor processes, but cost and defect sensitivity rise
+as dimensions decrease. Bottom-up fabrication assembles atoms, molecules or particles through synthesis,
+deposition or self-organisation. It can form very small structures over large areas, although controlling size
+distribution, orientation and contamination remains difficult.
 
-Measurement and quality control are major engineering challenges. Conventional optical microscopes cannot resolve features much smaller than the wavelength of visible light. Electron microscopy, atomic-force microscopy and spectroscopy are therefore used to measure dimensions, morphology and composition. Manufacturing must also limit agglomeration, contamination and variation between batches.
+Characterisation is part of the design loop. Conventional optical microscopy cannot resolve features far below the
+wavelength of visible light, so electron microscopy, atomic-force microscopy and spectroscopy are used to measure
+size, morphology, roughness and composition. A nominal particle diameter is insufficient if the batch contains a
+wide distribution or large agglomerates.
 
-Benefits must be assessed together with risks. Nanoparticles may enter organisms and ecosystems through pathways that are less important for larger particles. Toxicity depends on size, shape, surface chemistry and solubility, not only on total mass. Responsible design therefore includes containment, ventilation, exposure monitoring, recycling and end-of-life planning.
+Risk assessment must consider size, shape, surface chemistry, solubility and persistence rather than mass alone.
+Responsible engineering therefore includes closed handling, local extraction, exposure monitoring, waste control,
+recycling and end-of-life scenarios. A high-performance nanomaterial is not successful if its manufacture cannot be
+controlled or verified.
 \end{ecarticle}
 
-\begin{tcolorbox}[title=\sffamily\bfseries Did You Know?,colback=yellow!10,colframe=ECOrange]
-For a spherical particle of diameter $d$, the surface-area-to-volume ratio is $6/d$. Halving the diameter therefore doubles this ratio.
+\begin{tcolorbox}[title=\sffamily\bfseries Engineering insight,colback=yellow!10,colframe=ECOrange]
+At the nanoscale, manufacturing tolerance can be of the same order as the designed feature. Metrology and process
+capability are therefore as important as the nominal geometry.
 \end{tcolorbox}
 
 \begin{engineeringfocus}
-\textbf{From bulk material to nanoscale behaviour}
+\textbf{Scale, fabrication and verification}
 \begin{center}
 \resizebox{0.96\linewidth}{!}{%
-\begin{tikzpicture}[font=\scriptsize,>=Latex]
-\draw[thick,->] (0,0)--(7,0);
-\foreach \x/\lab in {0.5/1 m,2/1 mm,3.5/1 \textmu m,5/100 nm,6.5/1 nm}{\draw (\x,.12)--(\x,-.12) node[below]{\lab};}
-\node[draw=ECGreen,fill=ECGreen!10,rounded corners,align=center] at (5.8,1) {surface effects increase\\quantum effects may appear};
-\draw[->] (5.8,.65)--(5.8,.1);
+\begin{tikzpicture}[font=\scriptsize,>=Latex,node distance=4mm]
+\node[draw=ECBlue,fill=ECLightBlue,rounded corners] (req) {target property};
+\node[draw=ECGreen,fill=ECGreen!10,rounded corners,right=of req] (fab) {nano-fabrication};
+\node[draw=ECPurple,fill=ECPurple!10,rounded corners,right=of fab] (met) {metrology};
+\node[draw=ECOrange,fill=ECOrange!10,rounded corners,below=of fab] (risk) {exposure and lifecycle};
+\draw[->,thick] (req)--(fab); \draw[->,thick] (fab)--(met);
+\draw[->,thick] (met) to[bend left=25] node[above]{feedback} (req);
+\draw[->,thick,dashed] (fab)--(risk); \draw[->,thick,dashed] (risk)--(req);
 \end{tikzpicture}}
 \end{center}
 \end{engineeringfocus}
@@ -50,19 +76,31 @@ For a spherical particle of diameter $d$, the surface-area-to-volume ratio is $6
 Typical nanoparticle & 1--100 nm\\
 Top-down & material removal\\
 Bottom-up & assembly\\
-Critical control & exposure
+Critical controls & metrology and exposure
 \end{tabularx}
 \end{keyfigures}
 
 \begin{tcolorbox}[title=\sffamily\bfseries Surface area increases as size decreases,colback=white,colframe=ECGreen]
 \begin{center}
 \begin{tikzpicture}
-\begin{axis}[width=0.94\linewidth,height=45mm,xlabel={Particle diameter (nm)},ylabel={Relative surface area},grid=major,ticklabel style={font=\scriptsize},label style={font=\scriptsize},x dir=reverse]
+\begin{axis}[width=0.94\linewidth,height=45mm,xlabel={Particle diameter (nm)},ylabel={Relative surface area},
+grid=major,ticklabel style={font=\scriptsize},label style={font=\scriptsize},x dir=reverse]
 \addplot[thick,mark=*] table[x=diameter,y=area,col sep=comma]{data/EC27/surface.csv};
 \end{axis}
 \end{tikzpicture}
 \end{center}
+\footnotesize The curve illustrates a geometric scaling law; real performance also depends on accessible surface and agglomeration.
 \end{tcolorbox}
+
+\begin{applicationexercise}{Particle size and accessible surface}
+A coating is available with spherical particles of diameter $40\,\mathrm{nm}$ or $200\,\mathrm{nm}$.
+\begin{enumerate}
+\item Calculate $S/V=6/d$ for both sizes in $\mathrm{m^{-1}}$.
+\item Determine the ratio between the two values.
+\item If 30\% of the surface of the smaller particles is lost through agglomeration, calculate the effective gain.
+\item Explain one performance benefit and one exposure risk associated with the smaller particles.
+\end{enumerate}
+\end{applicationexercise}
 
 \begin{vocabulary}
 \begin{tabularx}{\linewidth}{@{}lX@{}}
@@ -75,30 +113,27 @@ self-assembly & auto-assemblage\\
 quantum dot & boîte quantique\\
 agglomeration & agglomération\\
 coating & revêtement\\
-exposure & exposition
+process capability & capabilité du procédé
 \end{tabularx}
 \end{vocabulary}
 
 \begin{questions}
-\item Why does the surface-area-to-volume ratio increase as particle size decreases?
+\item Why does the surface-area-to-volume ratio rise as size decreases?
 \item Compare one advantage and one limitation of top-down and bottom-up fabrication.
 \item Why are electron or atomic-force microscopes often required?
-\item Give two functions that can be improved by a nanostructured coating.
+\item Why can agglomeration reduce the expected performance of nanoparticles?
 \item Why is particle mass alone insufficient for evaluating health risk?
 \end{questions}
 
 \begin{engineeringchallenge}
-A coating contains spherical nanoparticles with a diameter of $40\,\mathrm{nm}$. The same material is also available as particles with a diameter of $200\,\mathrm{nm}$.
-\begin{enumerate}
-\item Calculate the surface-area-to-volume ratio $6/d$ for both particle sizes.
-\item Determine how many times larger the ratio is for the $40\,\mathrm{nm}$ particles.
-\item Explain how this change could improve catalytic activity but also increase exposure risk.
-\item Propose one measurement method and two exposure-control measures for production.
-\end{enumerate}
+Specify a nanostructured anti-corrosion coating for an aluminium component. Define the target property, particle
+size range, fabrication route, two measurable acceptance criteria, one sampling plan, two exposure controls and an
+end-of-life strategy. Include a short risk--benefit table and justify whether the nanoscale solution is necessary.
 \end{engineeringchallenge}
 
 \begin{speaking}
-Do the potential benefits of nanoparticles justify their use before all long-term environmental effects are known? Discuss evidence, precaution and lifecycle responsibility.
+Do the potential benefits of nanoparticles justify deployment before all long-term environmental effects are
+known? Discuss evidence, precaution, regulation and lifecycle responsibility.
 \end{speaking}
 \end{multicols}
 
